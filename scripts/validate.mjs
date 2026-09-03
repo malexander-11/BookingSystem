@@ -98,23 +98,40 @@ if (!EVIDENCE) {
   const w = "config/evidence.js";
   req(EVIDENCE, "title", "string", w);
   req(EVIDENCE, "period", "string", w);
-  req(EVIDENCE, "hypothesisUnderTest", "string", w);
-  req(EVIDENCE, "successMeasure.name", "string", w);
-  req(EVIDENCE, "successMeasure.target", "string", w);
-  req(EVIDENCE, "successMeasure.actual", "string", w);
-  const headline = req(EVIDENCE, "headline", "array", w) || [];
-  headline.forEach((h, i) => {
-    req(h, "label", "string", `${w} headline[${i}]`);
-    req(h, "value", "string", `${w} headline[${i}]`);
+  req(EVIDENCE, "setOutToDo.hypothesis", "string", w);
+  req(EVIDENCE, "setOutToDo.measure", "string", w);
+  req(EVIDENCE, "setOutToDo.target", "string", w);
+
+  const plan = req(EVIDENCE, "measurementPlan", "array", w) || [];
+  plan.forEach((r, i) => {
+    const pw = `${w} measurementPlan[${i}]`;
+    req(r, "question", "string", pw);
+    req(r, "metric", "string", pw);
+    req(r, "source", "string", pw);
+    req(r, "result", "string", pw);
   });
-  const charts = req(EVIDENCE, "charts", "array", w) || [];
+
+  const headline = req(EVIDENCE, "whatHappened", "array", w) || [];
+  headline.forEach((h, i) => {
+    req(h, "label", "string", `${w} whatHappened[${i}]`);
+    req(h, "value", "string", `${w} whatHappened[${i}]`);
+  });
+  const charts = req(EVIDENCE, "userBehaviour", "array", w) || [];
   charts.forEach((c, i) => {
-    req(c, "title", "string", `${w} charts[${i}]`);
-    const items = req(c, "items", "array", `${w} charts[${i}]`) || [];
+    req(c, "title", "string", `${w} userBehaviour[${i}]`);
+    const items = req(c, "items", "array", `${w} userBehaviour[${i}]`) || [];
     items.forEach((it, j) => {
-      req(it, "label", "string", `${w} charts[${i}].items[${j}]`);
-      req(it, "value", "number", `${w} charts[${i}].items[${j}]`);
+      req(it, "label", "string", `${w} userBehaviour[${i}].items[${j}]`);
+      req(it, "value", "number", `${w} userBehaviour[${i}].items[${j}]`);
     });
+  });
+
+  req(EVIDENCE, "impact.actual", "string", w);
+  req(EVIDENCE, "impact.targetMet", "string", w);
+  const caveats = req(EVIDENCE, "impact.caveats", "array", w) || [];
+  caveats.forEach((c, i) => {
+    req(c, "name", "string", `${w} impact.caveats[${i}]`);
+    req(c, "text", "string", `${w} impact.caveats[${i}]`);
   });
   const risks = req(EVIDENCE, "risks", "array", w) || [];
   const riskIds = risks.map((r) => r.id);
@@ -136,13 +153,93 @@ if (!EVIDENCE) {
   req(EVIDENCE, "decision.options", "array", w);
 }
 
+/* ---- config/discovery.js ------------------------------------------- */
+const { DISCOVERY } = load("config/discovery.js");
+if (!DISCOVERY) {
+  problems.push("config/discovery.js: must assign window.DISCOVERY");
+} else {
+  const w = "config/discovery.js";
+  req(DISCOVERY, "stage.title", "string", w);
+  req(DISCOVERY, "stage.question", "string", w);
+  req(DISCOVERY, "brief.askedFor", "string", w);
+  req(DISCOVERY, "brief.whoAsked", "string", w);
+  const sh = req(DISCOVERY, "stakeholders", "array", w) || [];
+  if (sh.length < 3) problems.push(`${w}: need at least 3 stakeholders`);
+  sh.forEach((s, i) => {
+    const sw = `${w} stakeholders[${i}]`;
+    req(s, "name", "string", sw);
+    if (!["high", "low"].includes(s.power)) problems.push(`${sw}: power must be "high" or "low"`);
+    if (!["high", "low"].includes(s.interest)) problems.push(`${sw}: interest must be "high" or "low"`);
+    req(s, "wants", "string", sw);
+  });
+  const sections = req(DISCOVERY, "interviewGuide.sections", "array", w) || [];
+  sections.forEach((s, i) => { req(s, "audience", "string", `${w} interviewGuide.sections[${i}]`); req(s, "questions", "array", `${w} interviewGuide.sections[${i}]`); });
+  req(DISCOVERY, "dataAnalysis.stats", "array", w);
+  const lanes = req(DISCOVERY, "asIsProcess.lanes", "array", w) || [];
+  const steps = req(DISCOVERY, "asIsProcess.steps", "array", w) || [];
+  steps.forEach((s, i) => {
+    req(s, "text", "string", `${w} asIsProcess.steps[${i}]`);
+    if (!lanes.includes(s.lane)) problems.push(`${w} asIsProcess.steps[${i}]: lane '${s.lane}' is not in asIsProcess.lanes`);
+  });
+  req(DISCOVERY, "assumptions", "array", w);
+  ["who", "needsTo", "because", "today", "resultsIn"].forEach((k) => req(DISCOVERY, `problemStatement.${k}`, "string", w));
+}
+
+/* ---- config/define.js ---------------------------------------------- */
+const { DEFINE } = load("config/define.js");
+if (!DEFINE) {
+  problems.push("config/define.js: must assign window.DEFINE");
+} else {
+  const w = "config/define.js";
+  req(DEFINE, "stage.title", "string", w);
+  req(DEFINE, "stage.endsWith", "array", w);
+  req(DEFINE, "problemStatement", "string", w);
+  const groups = req(DEFINE, "userGroups", "array", w) || [];
+  groups.forEach((g, i) => { req(g, "name", "string", `${w} userGroups[${i}]`); req(g, "who", "string", `${w} userGroups[${i}]`); });
+  if (groups.length && !groups.some((g) => g.primary)) problems.push(`${w}: one userGroup must have primary: true`);
+  req(DEFINE, "userNeeds", "array", w);
+  req(DEFINE, "businessNeeds", "array", w);
+  ["ifWe", "then", "because", "leadingTo", "measuredBy"].forEach((k) => req(DEFINE, `theoryOfChange.${k}`, "string", w));
+  req(DEFINE, "hypothesis", "string", w);
+  const tl = req(DEFINE, "toBeProcess.lanes", "array", w) || [];
+  const ts = req(DEFINE, "toBeProcess.steps", "array", w) || [];
+  ts.forEach((s, i) => {
+    req(s, "text", "string", `${w} toBeProcess.steps[${i}]`);
+    if (!tl.includes(s.lane)) problems.push(`${w} toBeProcess.steps[${i}]: lane '${s.lane}' is not in toBeProcess.lanes`);
+  });
+  const acts = req(DEFINE, "storyMap.activities", "array", w) || [];
+  const storyIds = new Set();
+  let mvpCount = 0;
+  acts.forEach((a, i) => {
+    const aw = `${w} storyMap.activities[${i}]`;
+    req(a, "name", "string", aw);
+    const stories = req(a, "stories", "array", aw) || [];
+    stories.forEach((s, j) => {
+      const sw = `${aw}.stories[${j}]`;
+      req(s, "id", "string", sw);
+      req(s, "title", "string", sw);
+      if (!["mvp", "later"].includes(s.release)) problems.push(`${sw}: release must be "mvp" or "later"`);
+      if (s.release === "mvp") mvpCount++;
+      if (s.id && storyIds.has(s.id)) problems.push(`${sw}: duplicate story id '${s.id}'`);
+      storyIds.add(s.id);
+      const acs = req(s, "acceptanceCriteria", "array", sw) || [];
+      acs.forEach((ac, k) => ["given", "when", "then"].forEach((f) => req(ac, f, "string", `${sw}.acceptanceCriteria[${k}]`)));
+    });
+  });
+  if (acts.length && !mvpCount) problems.push(`${w}: at least one story must have release "mvp"`);
+  const sm = req(DEFINE, "successMeasures", "array", w) || [];
+  sm.forEach((m, i) => { req(m, "name", "string", `${w} successMeasures[${i}]`); req(m, "target", "string", `${w} successMeasures[${i}]`); req(m, "source", "string", `${w} successMeasures[${i}]`); });
+}
+
 /* ---- report --------------------------------------------------------- */
 if (problems.length) {
   console.error(`Config validation failed with ${problems.length} problem(s):\n`);
   problems.forEach((p) => console.error("  - " + p));
   process.exit(1);
 } else {
-  console.log("config/mvp.js and config/evidence.js look good.");
-  if (MVP) console.log(`  ${MVP.facilities.length} facilities, ${MVP.mvp.process.length} process steps, ${MVP.mvp.acceptanceCriteria.length} acceptance criteria`);
-  if (EVIDENCE) console.log(`  ${EVIDENCE.headline.length} headline stats, ${EVIDENCE.charts.length} charts, ${EVIDENCE.risks.length} risks`);
+  console.log("All four config files look good.");
+  if (MVP) console.log(`  mvp.js: ${MVP.facilities.length} facilities, ${MVP.mvp.process.length} process steps, ${MVP.mvp.acceptanceCriteria.length} acceptance criteria`);
+  if (DISCOVERY) console.log(`  discovery.js: ${DISCOVERY.stakeholders.length} stakeholders, ${DISCOVERY.asIsProcess.steps.length} as-is steps, ${DISCOVERY.assumptions.length} assumptions`);
+  if (DEFINE) console.log(`  define.js: ${DEFINE.userGroups.length} user groups, ${DEFINE.storyMap.activities.reduce((n, a) => n + a.stories.length, 0)} stories, ${DEFINE.successMeasures.length} measures`);
+  if (EVIDENCE) console.log(`  evidence.js: ${EVIDENCE.measurementPlan.length} measurement plan rows, ${EVIDENCE.whatHappened.length} headline stats, ${EVIDENCE.userBehaviour.length} charts, ${EVIDENCE.risks.length} risks`);
 }

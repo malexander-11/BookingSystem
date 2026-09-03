@@ -2,13 +2,29 @@
    "AFTER BUILD" EVIDENCE PACK
    ------------------------------------------------------------------
    Fictional evaluation evidence from a six-week pilot of the MVP.
-   It is written to CHALLENGE the hypothesis in config/mvp.js, so when
-   the group's MVP changes, rewrite this so the evidence tests *their*
-   hypothesis and *their* measure of success.
+   The evidence page (evidence.html) renders this file under the same
+   headings as docs/3-evaluation-template.md.
 
-   Rules of thumb when editing:
+   In the workshop the group writes a MEASUREMENT PLAN (what they need
+   to know, which metric, which source). This file is then regenerated
+   so that every row of their plan gets a plausible, fictional result,
+   and the rest of the page (headline numbers, charts, risks) is built
+   from those results.
+
+   Rules of thumb when regenerating:
+   - One entry in `measurementPlan` per row the group wrote, with a
+     `result` for each. Do not invent metrics they did not ask for
+     unless a risk card would otherwise be empty.
+   - Present each result in the form its source implies:
+       analytics        -> a funnel or drop-off chart
+       SQL / service    -> new vs returning, splits by group or site
+       survey           -> self-reported shares
+       observation      -> findings and quotes
+       incident / ops   -> feasibility items
+       finance          -> viability items
+   - Make the measure of success ambiguous: near the target, not a
+     clear win or loss. Break at least one guard-rail.
    - Keep at least one "against" item under every product risk.
-   - Make the success measure come out ambiguous, not a clear win.
    - Numbers should be plausible for a borough of ~340,000 people.
    ================================================================== */
 
@@ -16,32 +32,47 @@ window.EVIDENCE = {
   title: "What happened after launch",
   period: "Six-week pilot, 11 May to 21 June",
   intro:
-    "The booking service went live at four sites. Here is what the data, user research and operations teams found. Use it to assess the MVP against the four product risks and decide what should happen next.",
+    "The booking service went live at four sites. This page follows the evaluation template: what we set out to do, what we measured, what happened, what users did, whether our impact changed, and what the four product risks now look like.",
 
-  hypothesisUnderTest:
-    "If residents can see availability and book online in under three minutes, more people who have never used our facilities will book, and overall facility use will go up.",
-
-  successMeasure: {
-    name: "Bookings made by people who have not used a Brent sports facility in the last 12 months",
+  /* 1. What we set out to do (copied from the requirements doc) */
+  setOutToDo: {
+    hypothesis:
+      "If residents can see availability and book online in under three minutes, more people who have never used our facilities will book, and overall facility use will go up.",
+    measure: "Bookings made by people who have not used a Brent sports facility in the last 12 months",
     target: "30% of all bookings in the first six weeks",
-    actual: "19% of bookings (self-reported at checkout)",
-    verdict: "Target not met, but the number is not zero. Is 19% a failure or a promising start?"
+    baseline: "Unknown; estimated 10 to 15% of phone bookings",
+    guardRail: "No-show rate must not rise above 15%"
   },
 
-  headline: [
+  /* 2. Measurement plan: the group's questions, with generated results */
+  measurementPlan: [
+    { question: "Are new people booking?", metric: "Share of bookings from first-time users (last 12 months)", source: "Checkout question + SQL on bookings table", owner: "BA", cadence: "Weekly", result: "19% (target 30%)" },
+    { question: "Is overall use going up?", metric: "Hours booked vs same six weeks last year", source: "Diary and bookings table", owner: "Ops manager", cadence: "End of pilot", result: "+4%" },
+    { question: "Where do people give up?", metric: "Drop-off at each step", source: "Web analytics events", owner: "BA", cadence: "Weekly", result: "Biggest loss between choosing a facility and picking a slot (39%)" },
+    { question: "Who is booking?", metric: "Bookings by prior channel and age group", source: "Checkout question + SQL", owner: "BA", cadence: "End of pilot", result: "81% existing users; 18 to 35s are 31% of bookings" },
+    { question: "Are people turning up?", metric: "No-show rate, online vs phone", source: "Duty manager logs", owner: "Duty managers", cadence: "Weekly", result: "22% online vs 9% phone (guard-rail 15%)" },
+    { question: "Has staff workload changed?", metric: "Reception call volume and reasons", source: "Contact centre report + call log sample", owner: "Reception lead", cadence: "Before and after", result: "Calls down 31%; 60% of remaining calls are about the website" },
+    { question: "Is it breaking anything?", metric: "Double bookings and diary sync incidents", source: "Incident log", owner: "Ops manager", cadence: "Weekly", result: "14 incidents at two sites" },
+    { question: "Why do non-users still not book?", metric: "Themes from interviews", source: "12 interviews", owner: "BA", cadence: "Once", result: "Cost, company and 'not for people like me'. Booking effort rarely mentioned." }
+  ],
+
+  /* 3. What happened: headline numbers */
+  whatHappened: [
     { label: "Online bookings made", value: "1,284", note: "vs 940 phone/walk-in bookings in the same six weeks last year", tone: "good" },
     { label: "Bookings by first-time users", value: "19%", note: "Target was 30%", tone: "bad" },
-    { label: "No-show rate", value: "22%", note: "Phone bookings last year: 9%", tone: "bad" },
+    { label: "No-show rate (online)", value: "22%", note: "Phone bookings last year: 9%. Guard-rail: 15%", tone: "bad" },
     { label: "Median time to book", value: "2m 40s", note: "Target under 3 minutes", tone: "good" },
     { label: "Overall facility use", value: "+4%", note: "Hours booked vs same period last year", tone: "neutral" },
     { label: "Reception phone calls", value: "-31%", note: "But 60% of remaining calls are about the website", tone: "neutral" }
   ],
 
-  charts: [
+  /* 4. What users did: charts */
+  userBehaviour: [
     {
       title: "Where people dropped out",
       subtitle: "Of 4,900 people who opened the service",
       unit: "people",
+      source: "Web analytics",
       highlightLast: false,
       items: [
         { label: "Opened the service", value: 4900 },
@@ -56,6 +87,7 @@ window.EVIDENCE = {
       title: "Who made the bookings",
       subtitle: "Share of the 1,284 completed bookings",
       unit: "%",
+      source: "Checkout question, SQL",
       highlightLast: true,
       items: [
         { label: "Existing users, already booking by phone", value: 58 },
@@ -68,6 +100,7 @@ window.EVIDENCE = {
       title: "Bookings by age group",
       subtitle: "Share of completed bookings, self-reported",
       unit: "%",
+      source: "Checkout question",
       highlightLast: false,
       items: [
         { label: "Under 18 (via parent)", value: 6 },
@@ -79,6 +112,21 @@ window.EVIDENCE = {
     }
   ],
 
+  /* 5. Did it change our impact? */
+  impact: {
+    actual: "19% of bookings from first-time users (self-reported at checkout)",
+    targetMet: "No. But 19% is above the estimated baseline of 10 to 15%.",
+    guardRailHeld: "No. No-shows rose to 22%, above the 15% limit.",
+    verdict: "Target not met, but the number is not zero. Is 19% a failure or a promising start?",
+    caveats: [
+      { name: "Substitution", text: "Most of the 1,284 bookings replaced phone and walk-in bookings. Net new activity is closer to +4% hours than +37% bookings." },
+      { name: "Counterfactual", text: "The pilot ran May to June, when outdoor use rises anyway. Last year's same-period figure controls for some of that, not all." },
+      { name: "Novelty", text: "Weeks 1 and 2 were the highest. Weeks 5 and 6 were flat. Unknown whether it holds." },
+      { name: "Self-report", text: "'First time in 12 months' is self-reported at checkout. Some regulars may have said 'no' to get through faster." }
+    ]
+  },
+
+  /* 6. The four product risks */
   risks: [
     {
       id: "value",
@@ -126,6 +174,13 @@ window.EVIDENCE = {
     }
   ],
 
+  /* 7. What surprised us */
+  surprises: [
+    "The biggest drop-off was not in the form. It was people looking at availability, finding evenings full, and leaving. The tool made the capacity problem visible; it did not solve it.",
+    "A third of first-time users booked the free tennis court. Price may matter more than convenience.",
+    "Reception calls fell, but the calls that remained were harder and longer."
+  ],
+
   quotes: [
     { text: "It was easy enough to book. I was booking anyway, I just used to ring up.", who: "Resident, 44, regular badminton player" },
     { text: "I looked, but every evening slot at Vale Farm was gone. I gave up.", who: "Resident, 27, tried to book football" },
@@ -133,6 +188,7 @@ window.EVIDENCE = {
     { text: "Honestly? I did not know the council even had sports centres.", who: "Resident, 22, non-user interview" }
   ],
 
+  /* 8. Decision */
   decision: {
     prompt: "Given this evidence, what should the council do next with the booking platform, and what would you need to find out before you could be confident?",
     options: [

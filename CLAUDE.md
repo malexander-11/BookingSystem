@@ -1,42 +1,92 @@
 # Booking System sandbox: instructions for Claude
 
-This repo is a static, faux-Brent-Council sports-facility booking site used in a
-Business Analysis training workshop. During the session the facilitator will
-paste the group's MVP definition into chat and expect the live site to reflect
-it within a few minutes. There is no build step and no server.
+This repo is a static, faux-Brent-Council site used in a Business Analysis
+training workshop. It has four workshop stage pages (Discover, Define, Build,
+Evaluate) plus an evidence page. During the session the facilitator pastes the
+group's hand-ins into chat and expects the live site to reflect them within a
+few minutes. There is no build step and no server.
 
 ## What lives where
 
 | File | Purpose | Edit during the workshop? |
 |---|---|---|
-| `config/mvp.js` | The group's MVP definition, facilities, form fields and copy. Assigns `window.MVP`. | **Yes, this is the main one** |
-| `config/evidence.js` | Fictional post-launch evidence for the "after build" stage. Assigns `window.EVIDENCE`. | **Yes, re-target it to the group's hypothesis** |
-| `index.html`, `assets/app.js` | Booking flow, rendered entirely from `window.MVP`. | Only if the group asks for a feature the config cannot express |
-| `evidence.html`, `assets/evidence.js` | Evidence page, rendered from `window.EVIDENCE`. | Rarely |
+| `config/discovery.js` | Discover page content: brief, stakeholders, interview guide, data, as-is process, assumptions, **problem statement**. Assigns `window.DISCOVERY`. | **Yes**: `problemStatement` after Discover |
+| `config/define.js` | Define page content: problem statement, user groups, needs, theory of change, to-be process, story map with acceptance criteria, success measures. Assigns `window.DEFINE`. | **Yes**: after Define |
+| `config/mvp.js` | The booking site: the six MVP fields, facilities, form fields, copy. Assigns `window.MVP`. | **Yes**: after Define |
+| `config/evidence.js` | Fictional post-launch evidence, generated from the group's measurement plan. Assigns `window.EVIDENCE`. | **Yes**: after Evaluate |
+| `discover.html`, `define.html`, `evaluate.html`, `evidence.html`, `index.html` | The pages. Each renders entirely from its config. | Only if the group asks for something the config cannot express |
+| `assets/render.js` | Shared renderers (stat tiles, bar charts, tables, process flow, hand-in panel). | Rarely |
+| `assets/discover.js`, `assets/define.js`, `assets/evaluate.js`, `assets/evidence.js`, `assets/app.js` | Page logic. | Rarely |
 | `assets/brent.css`, `assets/logo.svg` | Faux-Brent branding. | Rarely |
-| `scripts/validate.mjs` | Checks both configs have every required field. | No |
-| `docs/mvp-template.md` | The six-field template the group fills in. | No |
+| `scripts/validate.mjs` | Checks all four configs have every required field. | No |
+| `docs/README.md`, `docs/hand-in-templates.md` | How the pages connect; the plain-text hand-in templates. | No |
 | `.github/workflows/pages.yml` | Deploys the repo root to GitHub Pages on every push to any branch. | No |
 
-## When the facilitator gives you an MVP definition
+## The three hand-ins
 
-1. Map the six fields into `config/mvp.js`:
-   - target user → `mvp.targetUser`
-   - user need → `mvp.userNeed`
-   - hypothesis → `mvp.hypothesis`
-   - simple process → `mvp.process` (these become the progress-bar labels; keep 3 to 5 short steps, the flow itself is always facility → slot → details → confirmation)
-   - acceptance criteria → `mvp.acceptanceCriteria`
-   - measure of success → `mvp.successMeasure.name` and `.target`
-2. Adjust the rest of `config/mvp.js` so the build honours their choices:
-   - facilities: add, remove or rename to match the sites and activities they chose
-   - `bookingForm.fields`: only ask for what their process needs; add custom fields as objects
-   - `bookingForm.requireBrentPostcode`: `true` if they said residents only
-   - `bookingForm.askFirstTimeUser`: `true` if their success measure depends on new vs existing users
-   - `brand.service` and `copy.*`: match their wording
-3. Rewrite `config/evidence.js` so the evidence tests **their** hypothesis and **their** measure of success. Keep it plausible and make the outcome ambiguous rather than a clear win or loss. Keep at least one `against` item under each of the four risks (value, usability, feasibility, viability). Keep the shape of the file identical.
-4. Run `node scripts/validate.mjs`. Fix anything it reports.
-5. Optionally preview: `python3 -m http.server 8080` then open `http://localhost:8080/`.
-6. Commit with a clear message and `git push -u origin <current branch>`. GitHub Pages redeploys in one to two minutes at https://malexander-11.github.io/BookingSystem/.
+The group hands in three things during the session. Each arrives as pasted text using the labels in `docs/hand-in-templates.md` (the same text is in the "Hand this in" panel on the Discover and Define pages, and the plan builder on the Evaluate page).
+
+### Hand-in 1: problem statement (end of Discover)
+
+```
+PROBLEM STATEMENT
+Who: ... / Needs to: ... / Because: ... / Today they: ... / Which results in: ...
+```
+
+1. `config/discovery.js` → `problemStatement.who`, `.needsTo`, `.because`, `.today`, `.resultsIn`. Rewrite `.note` to point at what their statement leaves open (one or two sentences, no praise).
+2. `config/define.js` → `problemStatement`: the same five parts joined into one paragraph.
+3. Leave the rest of the Discover example as it is unless they pasted more findings and asked for them to replace the example.
+
+### Hand-in 2: the MVP definition (end of Define)
+
+`USERS`, `USER STORIES` (with `AC:` lines), `NEW PROCESS FLOW`, `HYPOTHESIS FOR CHANGE`, `SUCCESS MEASURES`, optional `BUILD CHOICES`.
+
+Update three files:
+
+**`config/define.js`**
+- `userGroups`: one per USERS line; the "Primary" one gets `primary: true`. Fill `who` and `today` from the line; `needs` from the stories for that user.
+- `userNeeds`: one per story, as / need / soThat.
+- `businessNeeds`: keep the example unless they gave business needs.
+- `theoryOfChange`: the five HYPOTHESIS FOR CHANGE lines. `hypothesis`: one sentence combining If we / then.
+- `toBeProcess`: lanes from the "(who does it)" parts; one step per line.
+- `storyMap.activities`: one activity per process step (name it after the step), plus "Manage my booking" and "Run the service" only if they have stories for them. Put each story under the activity it belongs to. `release` is "mvp" or "later" from the story line. Each `AC:` line becomes `{given, when, then}`. Ids S1, S2, … in the order given.
+- `successMeasures`: one per SUCCESS MEASURES line; a Guard-rail value goes in `guardRail`.
+- `buildChoices`: from BUILD CHOICES if given, otherwise leave.
+
+**`config/mvp.js`** (the booking site)
+- `mvp.targetUser` ← the Primary user's "who".
+- `mvp.userNeed` ← the first MVP story as one sentence "As a …, I need …, so that …".
+- `mvp.hypothesis` ← `hypothesis` above.
+- `mvp.process` ← the NEW PROCESS FLOW step names, shortened to 2 to 4 words each; keep 3 to 5 steps. The site's flow is always facility → slot → details → confirmation; the labels are what change.
+- `mvp.acceptanceCriteria` ← every MVP story's ACs as plain sentences ("A resident can …").
+- `mvp.successMeasure.name` and `.target` ← the first success measure.
+- `facilities`, `bookingForm.fields`, `bookingForm.requireBrentPostcode`, `bookingForm.askFirstTimeUser`, `brand.service`, `copy.*` ← from BUILD CHOICES if given, otherwise from what the stories imply (a story about paying online is still "later", so no payment; a measure about first-time users means `askFirstTimeUser: true`).
+
+**`config/evidence.js`** → `setOutToDo`: `hypothesis`, `measure`, `target`, `baseline`, `guardRail` from the Define hand-in, so the evidence page shows their words before the Evaluate stage.
+
+### Hand-in 3: measurement plan (end of Evaluate)
+
+```
+MEASUREMENT PLAN
+1. Question: ... | Metric: ... | Source: ... | Would change our mind: ...
+```
+
+Regenerate `config/evidence.js`:
+1. `measurementPlan`: one row per line, in their order, with `question`, `metric`, `source`, `changeMind` and a short fictional `result`. Do not add metrics they did not ask for, unless a risk card would otherwise have no evidence.
+2. Present each result in the form its source implies: analytics → funnel or drop-off chart in `userBehaviour`; service data / SQL → splits (new vs returning, by group, by site) in `userBehaviour` and a tile in `whatHappened`; survey → self-reported shares; observation / interviews → `risks[].evidence`, `surprises`, `quotes`; incident or ops logs → feasibility evidence; finance → viability evidence.
+3. `whatHappened`: four to six headline tiles from the results, `tone` good / bad / neutral.
+4. `impact`: compare their measure of success with their target and baseline. Make it **ambiguous**: near the target, not a clear win or loss. Break at least one guard-rail if they set one. Fill all four caveats (substitution, counterfactual, novelty, self-report) with something specific to their metrics. Use their "would change our mind" lines: at least one of them should be hit.
+5. `risks`: keep the four ids (`value`, `usability`, `feasibility`, `viability`). At least one `against` item under every risk.
+6. `surprises`, `quotes`, `decision`: rewrite to fit their scenario. Keep the five decision options.
+7. Keep numbers plausible for a borough of about 340,000 people and a pilot of a few sites over a few weeks. Keep the file's shape and header comment.
+
+If a hand-in is partial, fill what they gave and leave the example for the rest, re-worded to match their problem statement.
+
+## After every hand-in
+
+1. `node scripts/validate.mjs`. Fix anything it reports.
+2. Commit with a clear message and `git push -u origin <current branch>`. GitHub Pages redeploys in one to two minutes at https://malexander-11.github.io/BookingSystem/.
+3. Tell the facilitator which pages changed.
 
 ## Rules
 

@@ -1,41 +1,39 @@
 # Brent sports-facility booking sandbox
 
-A small, faux-Brent-Council booking website used in an *Introduction to
-Business Analysis* workshop. Participants define an MVP for a sports-facility
-booking platform, this site is reshaped to match their definition, and an
-"after build" evidence page gives them fictional pilot results to assess
-against the four product risks.
+A small, faux-Brent-Council website used in an *Introduction to Business
+Analysis* workshop. It walks a group through the BA lifecycle on a fictional
+scenario: Brent wants more residents using its sports facilities, and a senior
+stakeholder has proposed a digital booking platform.
 
 **This is a training sandbox. It is not a Brent Council service, and every
-number on the evidence page is made up.**
+number on it is made up.**
 
 ## Pages
 
-| Page | What it is |
-|---|---|
-| `index.html` | Citizen-facing booking flow: choose a facility, pick a slot, enter details, get a reference. Bookings are stored in the browser's localStorage. Includes a collapsible "About this MVP" panel showing the group's definition. |
-| `evidence.html` | "What happened after launch": headline numbers, charts, evidence for and against under each product risk, quotes, and the continue / iterate / expand / pivot / stop prompt. |
+| Stage | Page | What it shows | The group hands in |
+|---|---|---|---|
+| 1 Discover | `discover.html` | Stakeholder map, interview guide, data analysis output, as-is process map with pain points, key assumptions, problem statement | A problem statement |
+| 2 Define | `define.html` | User groups, user and business needs, theory of change, to-be process map, user story map with acceptance criteria, success measures | Users, stories with acceptance criteria, new process, hypothesis, success measures |
+| 3 Build | `index.html` | The booking site, built from the Define hand-in: choose a facility, pick a slot, enter details, get a reference. Bookings live in the browser. | Nothing; they test it against their acceptance criteria |
+| 4 Evaluate | `evaluate.html` | The question chain, the theory-of-change links to test, a measurement plan builder, a guide to data sources | A measurement plan |
+| Evidence | `evidence.html` | Fictional pilot results generated from the measurement plan: what we set out to do, what happened, what users did, impact, the four product risks, surprises, decision | A decision: continue, iterate, expand, pivot or stop |
 
-## Changing it
-
-Everything the workshop changes lives in two files:
-
-- `config/mvp.js` holds the MVP definition (target user, user need, hypothesis, process, acceptance criteria, measure of success), the facilities, the booking-form fields and the copy.
-- `config/evidence.js` holds the fictional evaluation evidence.
-
-Edit them, run `node scripts/validate.mjs`, and push. See `CLAUDE.md` for the
-step-by-step playbook and `docs/mvp-template.md` for the template the group
-fills in.
+Each page renders from a config file in `config/`. When the facilitator pastes
+a hand-in into Claude, Claude updates the config and pushes; the site
+redeploys in a minute or two. `CLAUDE.md` has the exact mapping and
+`docs/hand-in-templates.md` the plain-text templates.
 
 ## Running locally
 
-No build step and no dependencies. Either open `index.html` directly in a
+No build step and no dependencies. Either open any `.html` file directly in a
 browser, or serve the folder:
 
 ```sh
 python3 -m http.server 8080
-# then open http://localhost:8080/
+# then open http://localhost:8080/discover.html
 ```
+
+`node scripts/validate.mjs` checks all four config files.
 
 ## Deployment
 

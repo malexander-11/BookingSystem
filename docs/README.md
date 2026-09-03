@@ -1,0 +1,46 @@
+# The workshop pages and the golden thread
+
+The method lives on the site as four stage pages plus the evidence page. Each
+page shows a worked example for the sports-facilities scenario, structured
+around the tools for that stage, and ends with what the group must hand in.
+
+| Stage | Page | Tools shown | The group hands in |
+|---|---|---|---|
+| **1 Discover** (before build) | `discover.html` | Stakeholder map, interview guide, data analysis output, as-is process map with pain points, key assumptions | A **problem statement** |
+| **2 Define** (during build) | `define.html` | User groups, user needs, business needs, theory of change, to-be process map, user story map, acceptance criteria per story, success measures | **Users, user stories with acceptance criteria, new process flow, hypothesis for change, success measures** |
+| **3 Build** | `index.html` | The booking site itself, rendered from the Define hand-in | Nothing; they test it against their acceptance criteria |
+| **4 Evaluate** (after build) | `evaluate.html` | The question chain, theory-of-change links, a measurement plan builder, a source guide | A **measurement plan** (copied from the builder) |
+| Evidence | `evidence.html` | Fictional pilot results generated from the measurement plan, under the evaluation headings | A decision: continue, iterate, expand, pivot or stop |
+
+## The golden thread
+
+```mermaid
+flowchart LR
+  A[Problem statement] --> B[Theory of change and hypothesis]
+  B --> C[Success measures]
+  C --> D[Measurement plan]
+  D --> E[Evidence]
+  E --> F[Decision]
+  F -.-> A
+```
+
+- The problem statement from Discover is carried, unchanged, to the top of Define.
+- The hypothesis and success measures from Define are carried to the top of the evidence page.
+- The measurement plan from Evaluate says what data to generate.
+- The decision at the end restarts discovery. That is why BA is continuous.
+
+## How the hand-ins reach the site
+
+Every page renders from a config file. When the facilitator pastes a hand-in
+into Claude, Claude updates the config and pushes; GitHub Pages redeploys in a
+minute or two. The plain-text templates for the hand-ins are in
+`hand-in-templates.md` and are also shown, with a copy button, at the bottom of
+the Discover and Define pages.
+
+| Hand-in | Config files updated |
+|---|---|
+| Problem statement | `config/discovery.js`, `config/define.js` |
+| Define outputs | `config/define.js`, `config/mvp.js` (drives the booking site), `config/evidence.js` (the "set out to do" section) |
+| Measurement plan | `config/evidence.js` (results generated for each row) |
+
+See `CLAUDE.md` for the exact mapping.

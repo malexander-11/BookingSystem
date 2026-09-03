@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>After build: evidence | Brent Council (training sandbox)</title>
+  <title>2 Define | Brent Council (training sandbox)</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
-  <div class="sandbox-banner" id="sandbox-banner">Training sandbox: fictional service and fictional data</div>
+  <div class="sandbox-banner" id="sandbox-banner">Training sandbox: fictional service</div>
 
   <header class="site-header">
     <div class="container header-inner">
@@ -50,24 +50,27 @@
     <div class="container">
       <span class="workshop-nav__label">Workshop</span>
       <a href="discover.html">1 Discover</a>
-      <a href="define.html">2 Define</a>
+      <a href="define.html" aria-current="page">2 Define</a>
       <a href="index.html">3 Build</a>
       <a href="evaluate.html">4 Evaluate</a>
-      <a href="evidence.html" aria-current="page">Evidence</a>
+      <a href="evidence.html">Evidence</a>
     </div>
   </nav>
 
   <section class="hero">
     <div class="container">
-      <p class="eyebrow" id="evidence-period"></p>
-      <h1 id="evidence-title">What happened after launch</h1>
-      <p id="evidence-intro"></p>
+      <p class="eyebrow" id="stage-eyebrow"></p>
+      <h1 id="stage-title">Define</h1>
+      <p id="stage-question"></p>
     </div>
   </section>
 
   <main id="main" class="page">
-    <div class="container" id="evidence">
-      <noscript><p class="notice">This sandbox needs JavaScript turned on.</p></noscript>
+    <div class="container">
+      <div id="stage">
+        <noscript><p class="notice">This sandbox needs JavaScript turned on.</p></noscript>
+      </div>
+      <div id="hand-in-panel"></div>
     </div>
   </main>
 
@@ -83,8 +86,8 @@
   </footer>
 
   <script src="config/mvp.js"></script>
-  <script src="config/evidence.js"></script>
+  <script src="config/define.js"></script>
   <script src="assets/render.js"></script>
-  <script src="assets/evidence.js"></script>
+  <script src="assets/define.js"></script>
 </body>
 </html>
