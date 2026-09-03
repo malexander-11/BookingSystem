@@ -37,20 +37,21 @@ window.DEFINE = {
   problemStatement:
     "All residents who want to play sport need to be able to easily access and book sports pitches, because they need to stay healthy, fit and included, while ensuring Brent Council is sustainable. Today they often don't book and stay unfit, which results in public health costs and unbooked pitches leading to revenue shortfalls.",
 
-  /* The user groups, as defined by the UX colleague. Shown as fixed content. */
+  /* The user groups, as defined by the UX colleague. The group ranks them on
+     the Define page; the order here is only the starting order. */
   userGroups: [
-    { name: "Casual players who do not use council facilities", primary: true,
-      who: "Brent residents aged 18 to 35 who play, or would like to play, sport casually with friends. Comfortable on a phone. Not in a club.",
-      today: "Use a commercial five-a-side venue, play in a park, or do not play at all. Have never phoned a council leisure centre.",
-      needs: ["See what is free tonight or this week without asking anyone", "Book without creating an account", "Know it is definitely theirs"] },
-    { name: "Regular bookers", primary: false,
-      who: "Residents who already book by phone or at the desk, often weekly. Skew older.",
-      today: "Ring on Monday for Thursday. Know the staff by name.",
-      needs: ["Keep their usual slot", "Not be forced online", "A quicker way if it exists"] },
-    { name: "Reception and duty staff", primary: false,
-      who: "The people who take bookings and run the buildings.",
-      today: "Paper diary per site, reconciled with the till nightly.",
-      needs: ["One record of bookings", "Fewer 'is anything free' calls", "People who booked actually turning up"] }
+    { name: "Regular bookers", primary: true,
+      who: "Residents who already book by phone or at the desk, often weekly. Many are in clubs or informal groups. Skew older.",
+      today: "Ring on Monday for Thursday, or walk in. Know the staff by name.",
+      needs: ["Keep their usual slot", "Not be forced online", "A quicker way to book if one exists"] },
+    { name: "Other residents", primary: false,
+      who: "Residents who do not currently use council sports facilities: casual players, families with children, the over-50s, people who have never been in the building.",
+      today: "Play in the park, use a commercial venue, or do not play at all. Have never phoned a leisure centre.",
+      needs: ["Find out what exists, where it is and what it costs", "See what is free without having to ask anyone", "Feel that the facilities are for people like them"] },
+    { name: "Reception staff", primary: false,
+      who: "The people who take bookings, answer the phone and run the buildings, alongside unlocking gates and first aid.",
+      today: "Paper diary per site, reconciled with the till nightly. About 350 booking calls a week across the borough.",
+      needs: ["One record of bookings", "Fewer 'is anything free tonight' calls", "People who booked actually turning up", "To keep helping the residents who need to phone"] }
   ],
 
   userNeeds: [
