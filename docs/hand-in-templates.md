@@ -29,9 +29,15 @@ WATCH OUT FOR
 ## End of Define: the MVP definition
 
 Copied from the "Copy what we've written" section of the Define page. The
-user groups are given by the UX colleague, so they are not part of the hand-in.
+user groups are given by the UX colleague; the group ranks them and adds one
+need to each.
 
 ```
+USER GROUP PRIORITY
+1. <group> | Added need: <...>
+2. <group> | Added need: <...>
+3. <group> | Added need: <...>
+
 BUSINESS NEED PRIORITY
 1. <need>
 2. <need>

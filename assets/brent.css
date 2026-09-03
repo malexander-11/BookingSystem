@@ -875,6 +875,14 @@ a:hover { color: var(--brent-blue-dark); }
 .rank-list button { font: inherit; background: #fff; border: 2px solid var(--brent-blue); color: var(--brent-blue); border-radius: var(--radius); width: 2.2rem; height: 2.2rem; cursor: pointer; }
 .rank-list button:disabled { opacity: 0.3; cursor: default; }
 
+/* Ranked user group cards */
+.rank-cards { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.rank-cards__head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; }
+.rank-cards__btns { margin-left: auto; display: flex; gap: 0.3rem; }
+.rank-cards__btns button { font: inherit; background: #fff; border: 2px solid var(--brent-blue); color: var(--brent-blue); border-radius: var(--radius); width: 2.2rem; height: 2.2rem; cursor: pointer; }
+.rank-cards__btns button:disabled { opacity: 0.3; cursor: default; }
+.rank-cards .group-card h3 { margin-top: 0.25rem; }
+
 /* Blank user group cards */
 .group-card .form-group { margin-bottom: 0.6rem; }
 .group-card .form-input { max-width: none; }

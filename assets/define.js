@@ -41,13 +41,10 @@
       '<dl class="summary-list">' + (dps.agreement ? "<dt>Agreement</dt><dd>" + esc(dps.agreement) + "</dd>" : "") + (dps.sizeOfPrize ? "<dt>Size of the prize</dt><dd>" + esc(dps.sizeOfPrize) + "</dd>" : "") + (dps.watchOuts ? "<dt>Watch out for</dt><dd>" + esc(dps.watchOuts) + "</dd>" : "") + "</dl>";
   }
 
-  /* ---- 2. User groups (fixed) -------------------------------------------- */
-  html += h2(2, "User groups") + "<p>Your UX colleague has already defined the users. The primary user is who the MVP is designed around. The rest of this page is yours.</p><div class=\"group-grid\">";
-  (D.userGroups || []).forEach(function (g) {
-    html += '<div class="group-card' + (g.primary ? " is-primary" : "") + '">' + (g.primary ? '<span class="tag tag--primary">Primary user</span>' : '<span class="tag tag--secondary">Secondary</span>') +
-      "<h3>" + esc(g.name) + "</h3><dl><dt>Who</dt><dd>" + esc(g.who) + "</dd><dt>Today</dt><dd>" + esc(g.today) + "</dd><dt>Needs</dt><dd><ul>" + (g.needs || []).map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul></dd></dl></div>";
-  });
-  html += "</div>";
+  /* ---- 2. User groups: prioritise, and add one need to each -------------- */
+  html += h2(2, "User groups") +
+    "<p>Your UX colleague has defined three user groups. Put them in priority order: the MVP is designed around whoever is first. Then add one need to each that the UX colleague missed.</p>" +
+    '<div id="group-rank"></div>';
 
   /* ---- 3. Business needs, prioritise ------------------------------------ */
   html += h2(3, "Business needs: put them in order") +
@@ -134,12 +131,43 @@
     { id: "source", label: "Source (where the number comes from)", placeholder: "e.g. checkout question plus SQL on the bookings table" }
   ], { min: 1, legend: "Your measure", addLabel: "Add a measure", onChange: function () { copy.update(); } });
 
+  /* ---- user group priority ------------------------------------------------------ */
+  var groups = D.userGroups || [];
+  function gorder() {
+    var o = st.get("groupPriority", null);
+    if (!Array.isArray(o) || o.length !== groups.length) {
+      o = groups.map(function (_, i) { return i; }).sort(function (a, b) { return (groups[b].primary ? 1 : 0) - (groups[a].primary ? 1 : 0); });
+    }
+    return o;
+  }
+  function renderGroups() {
+    var o = gorder(), el = document.getElementById("group-rank"), out = '<ol class="rank-cards">';
+    o.forEach(function (idx, pos) {
+      var g = groups[idx];
+      out += '<li class="group-card' + (pos === 0 ? " is-primary" : "") + '"><div class="rank-cards__head"><span class="rank-list__n">' + (pos + 1) + "</span>" +
+        (pos === 0 ? '<span class="tag tag--primary">Primary user</span>' : '<span class="tag tag--secondary">Secondary</span>') +
+        '<span class="rank-cards__btns"><button type="button" data-gup="' + pos + '" aria-label="Move ' + esc(g.name) + ' up"' + (pos === 0 ? " disabled" : "") + ">▲</button>" +
+        '<button type="button" data-gdown="' + pos + '" aria-label="Move ' + esc(g.name) + ' down"' + (pos === o.length - 1 ? " disabled" : "") + ">▼</button></span></div>" +
+        "<h3>" + esc(g.name) + "</h3><dl><dt>Who</dt><dd>" + esc(g.who) + "</dd><dt>Today</dt><dd>" + esc(g.today) + "</dd><dt>Needs</dt><dd><ul>" + (g.needs || []).map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul></dd></dl>" +
+        '<div class="form-group"><label class="form-label" for="groupNeed.' + idx + '">Add a need this group has</label><input class="form-input" id="groupNeed.' + idx + '" data-key="groupNeed.' + idx + '" placeholder="What did the UX colleague miss?"></div></li>';
+    });
+    el.innerHTML = out + "</ol>";
+    R.bind(el, st, function () { if (copy) copy.update(); });
+    el.querySelectorAll("[data-gup]").forEach(function (b) { b.addEventListener("click", function () { gmove(+b.dataset.gup, -1); }); });
+    el.querySelectorAll("[data-gdown]").forEach(function (b) { b.addEventListener("click", function () { gmove(+b.dataset.gdown, 1); }); });
+  }
+  function gmove(pos, d) {
+    var o = gorder(), j = pos + d; if (j < 0 || j >= o.length) return;
+    var tmp = o[pos]; o[pos] = o[j]; o[j] = tmp; st.set("groupPriority", o); renderGroups(); copy.update();
+  }
+
   /* ---- compile ------------------------------------------------------------------- */
   var copy = R.copyBox(document.getElementById("define-copy"), {
-    id: "define-output", label: "Hand this in: your Define outputs as text", button: "Copy Define hand-in", rows: 16,
+    id: "define-output", label: "Hand this in: your Define outputs as text", button: "Copy Define hand-in", rows: 18,
     text: function () {
-      var o = order();
-      var out = "BUSINESS NEED PRIORITY\n" + o.map(function (idx, i) { return (i + 1) + ". " + items[idx].need; }).join("\n") + "\nWhy, and who disagrees: " + v("priority.why") + "\n\n";
+      var o = order(), go = gorder();
+      var out = "USER GROUP PRIORITY\n" + go.map(function (idx, i) { return (i + 1) + ". " + groups[idx].name + " | Added need: " + (v("groupNeed." + idx) || "(none)"); }).join("\n") + "\n\n";
+      out += "BUSINESS NEED PRIORITY\n" + o.map(function (idx, i) { return (i + 1) + ". " + items[idx].need; }).join("\n") + "\nWhy, and who disagrees: " + v("priority.why") + "\n\n";
       out += "THEORY OF CHANGE\nIf we: " + v("toc.ifWe") + "\nThen: " + v("toc.then") + "\nBecause: " + v("toc.because") + "\nLeading to: " + v("toc.leadingTo") + "\nMeasured by: " + v("toc.measuredBy") + "\n\n";
       out += "PROCESS FEEDBACK\n" + (v("feedback.process") || "(none)") + "\n\n";
       out += "STORY MAP FEEDBACK\n" + (v("feedback.stories") || "(none)") + "\n\n";
@@ -149,4 +177,5 @@
     }
   });
   root.querySelectorAll("[data-key]").forEach(function (el) { el.addEventListener("input", copy.update); });
+  renderGroups();
 })();

@@ -42,12 +42,13 @@ AGREEMENT ...  SIZE OF THE PRIZE ...  WATCH OUT FOR ...
 
 ### Hand-in 2: the MVP definition (end of Define)
 
-`BUSINESS NEED PRIORITY`, `THEORY OF CHANGE`, `PROCESS FEEDBACK`, `STORY MAP FEEDBACK`, `SUCCESS MEASURES` (name and source only), optional `BUILD CHOICES`. The user groups are fixed content from the UX colleague and are not in the hand-in.
+`USER GROUP PRIORITY`, `BUSINESS NEED PRIORITY`, `THEORY OF CHANGE`, `PROCESS FEEDBACK`, `STORY MAP FEEDBACK`, `SUCCESS MEASURES` (name and source only), optional `BUILD CHOICES`. The user groups themselves are fixed content from the UX colleague; the group ranks them and adds one need to each.
 
 Update three files:
 
 **`config/define.js`**
-- `userGroups`, `userNeeds`: leave as they are.
+- `userGroups`: reorder to match USER GROUP PRIORITY, set `primary: true` on the first only, and append each "Added need" to that group's `needs`.
+- `userNeeds`: add one entry per added need (as = the group name).
 - `businessNeeds`: reorder to match BUSINESS NEED PRIORITY (top three first), and put the "who disagrees" answer into the `why` of the need that loses.
 - `theoryOfChange`: the five THEORY OF CHANGE lines. `hypothesis`: one sentence combining If we / then.
 - `toBeProcess`: apply PROCESS FEEDBACK (add, remove, rename or re-lane steps). Keep 5 to 8 steps.
@@ -56,7 +57,7 @@ Update three files:
 - `buildChoices`: from BUILD CHOICES if given, otherwise leave.
 
 **`config/mvp.js`** (the booking site)
-- `mvp.targetUser`, `mvp.userNeed`: leave as they are unless the theory of change names a different user.
+- `mvp.targetUser` ← the first group's `who`. `mvp.userNeed` ← "As a <first group>, I need <its added need, or its first need>, so that <outcome from the problem statement>".
 - `mvp.hypothesis` ← `hypothesis` above.
 - `mvp.process` ← the resident's steps in the updated `toBeProcess`, shortened to 2 to 4 words each; keep 3 to 5 steps. The site's flow is always facility → slot → details → confirmation; the labels are what change.
 - `mvp.acceptanceCriteria` ← every MVP story's ACs as plain sentences ("A resident can …"), after the story-map feedback is applied.
