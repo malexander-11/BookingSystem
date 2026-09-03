@@ -4,15 +4,15 @@
    Rendered by define.html. Everything here is fictional and matches
    the seed booking site in config/mvp.js.
 
-   Participants see: the problem statement, two blank user group cards
-   (one need given, two to add), five business needs to prioritise, a
-   blank theory of change, the to-be process and story map (with space
-   for feedback), the example success measures (with space to add
-   their own), and a "copy what we've written" box that compiles the
-   hand-in.
+   Participants see: the problem statement, the three user groups (as
+   defined by the UX colleague), five business needs to prioritise, a
+   blank theory of change, the UX colleague's to-be process and the
+   PM's story map (each with a feedback box), the example success
+   measures (with space to add their own, name and source only), and a
+   "copy what we've written" box that compiles the hand-in.
 
-   Facilitator view (?facilitator=1) also shows the example user
-   groups, the tension note and the example theory of change.
+   Facilitator view (?facilitator=1) also shows the tension note and
+   the example theory of change.
 
    When the facilitator pastes the Define hand-in, replace the matching
    sections here AND update config/mvp.js (the booking site) and
@@ -37,13 +37,7 @@ window.DEFINE = {
   problemStatement:
     "Brent residents who want to play sport casually need to find a free slot and secure it with confidence, because they will only play if it is easy and predictable. Today they phone during office hours or turn up and hope, which results in residents being turned away from full evening slots while daytime slots sit at 30% occupancy, flat facility use, lost income from no-shows, and around 40 staff hours a week spent on the phone and the diary.",
 
-  /* One need is given for each blank card; the group adds two more. */
-  starterNeeds: {
-    primary: "See what is free tonight or this week without having to ask anyone",
-    secondary: "Keep the way they book today working while the new one is tried"
-  },
-
-  /* Example user groups, facilitator-only until the group's own replace them. */
+  /* The user groups, as defined by the UX colleague. Shown as fixed content. */
   userGroups: [
     { name: "Casual players who do not use council facilities", primary: true,
       who: "Brent residents aged 18 to 35 who play, or would like to play, sport casually with friends. Comfortable on a phone. Not in a club.",
@@ -52,7 +46,11 @@ window.DEFINE = {
     { name: "Regular bookers", primary: false,
       who: "Residents who already book by phone or at the desk, often weekly. Skew older.",
       today: "Ring on Monday for Thursday. Know the staff by name.",
-      needs: ["Keep their usual slot", "Not be forced online", "A quicker way if it exists"] }
+      needs: ["Keep their usual slot", "Not be forced online", "A quicker way if it exists"] },
+    { name: "Reception and duty staff", primary: false,
+      who: "The people who take bookings and run the buildings.",
+      today: "Paper diary per site, reconciled with the till nightly.",
+      needs: ["One record of bookings", "Fewer 'is anything free' calls", "People who booked actually turning up"] }
   ],
 
   userNeeds: [

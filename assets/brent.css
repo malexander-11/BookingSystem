@@ -788,6 +788,16 @@ a:hover { color: var(--brent-blue-dark); }
 .chip-tray .chip--draggable { margin-bottom: 0.35rem; }
 .map-hint { font-size: 0.85rem; color: var(--text-muted); margin: 0.25rem 0 0; }
 
+.brief-quote { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; }
+.colleague-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.colleague-card { border-top: 6px solid var(--brent-green); font-size: 0.95rem; }
+.colleague-card h3 { font-size: 1.05rem; margin: 0.4rem 0 0.1rem; }
+.colleague-card__notes { font-style: italic; }
+.tag--by { background: #d9efe3; color: var(--success); }
+.result-list { margin: 0 0 1rem; padding-left: 1.2rem; }
+.result-list li { margin-bottom: 0.5rem; }
+.result-but { color: var(--error); }
+
 /* Interviews */
 .interview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 1.25rem; }
 .interview-card { border-top: 6px solid var(--brent-blue-dark); }

@@ -34,6 +34,25 @@ window.EVIDENCE = {
   intro:
     "The booking service went live at four sites. This page follows the evaluation template: what we set out to do, what we measured, what happened, what users did, whether our impact changed, and what the four product risks now look like.",
 
+  /* Rules the Evaluate page uses to show a fake pilot result for each measure
+     the group defined. The first rule whose keywords match the measure wins.
+     Keep every result ambiguous: near a plausible target, never a clean win. */
+  measureResults: [
+    { match: ["no-show", "no show", "turn up", "attend"], value: "22%", detail: "no-show rate on online bookings, against 9% for phone bookings last year", tone: "bad", but: "Nobody pays at booking, so a click costs nothing to abandon." },
+    { match: ["first-time", "first time", "new user", "new people", "never used", "not used", "new resident", "new booker"], value: "19%", detail: "of bookings were from people who said they had not used a facility in the last 12 months", tone: "neutral", but: "Self-reported at checkout. Some regulars may have said 'no' to get through faster." },
+    { match: ["call", "phone", "reception", "staff time", "staff hours", "workload"], value: "-31%", detail: "reception phone calls compared with the same six weeks last year", tone: "good", but: "60% of the remaining calls are about the website, and they take longer." },
+    { match: ["complaint"], value: "24", detail: "complaints in six weeks, down from 31 in the same period last year", tone: "neutral", but: "Nine of the 24 are about the website or a double booking." },
+    { match: ["time to book", "minutes", "under three", "quick", "speed"], value: "2m 40s", detail: "median time from opening the service to a confirmed booking", tone: "good", but: "A quarter of people who picked a slot never finished." },
+    { match: ["revenue", "income", "takings"], value: "+£6,200", detail: "income from casual bookings over six weeks compared with last year", tone: "neutral", but: "Most of it is bookings that used to come in by phone. Net new income is closer to £900." },
+    { match: ["cost", "saving", "cheaper", "efficien"], value: "£3,100", detail: "of reception time freed over six weeks, at cost", tone: "neutral", but: "About £2,400 of floodlit-pitch hours went unused because of no-shows in the same period." },
+    { match: ["child", "young", "under 18", "kids", "school"], value: "6%", detail: "of bookings were for under-18s, made by a parent", tone: "bad", but: "There is no way to know whether these children were already playing somewhere else." },
+    { match: ["over-50", "over 50", "older", "elderly", "retired", "senior"], value: "19%", detail: "of bookings were by people over 50", tone: "neutral", but: "Almost all of them still booked by phone. Online bookings by the over-50s were 4%." },
+    { match: ["inclusion", "inclusive", "deprived", "postcode", "ward", "diverse", "community", "reach"], value: "11%", detail: "of bookings came from the three most deprived wards, down from 14% by phone last year", tone: "bad", but: "The wards with the most bookings are the ones with the most cars." },
+    { match: ["occupancy", "utilisation", "empty", "daytime", "off-peak"], value: "+3 pts", detail: "weekday daytime occupancy, from 30% to 33%", tone: "neutral", but: "Evening occupancy is unchanged at 92%. The platform cannot create evening capacity." },
+    { match: ["booking", "hours booked", "use", "usage", "visits", "attendance", "active", "participation"], value: "1,284", detail: "online bookings in six weeks; total hours booked up 4% on last year", tone: "good", but: "81% of those bookings came from people who were already booking by phone or at the desk." }
+  ],
+  measureResultDefault: { value: "+{n}%", detail: "change over the six-week pilot compared with the same period last year", tone: "neutral", but: "The source you named cannot yet separate the platform from the season, the weather or the school holidays." },
+
   /* 1. What we set out to do (copied from the requirements doc) */
   setOutToDo: {
     hypothesis:

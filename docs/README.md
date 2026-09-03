@@ -9,7 +9,7 @@ around the tools for that stage, and ends with what the group must hand in.
 | **1 Discover** (before build) | `discover.html` | Stakeholder map, interview guide, data analysis output, as-is process map with pain points, key assumptions | A **problem statement** |
 | **2 Define** (during build) | `define.html` | User groups, user needs, business needs, theory of change, to-be process map, user story map, acceptance criteria per story, success measures | **Users, user stories with acceptance criteria, new process flow, hypothesis for change, success measures** |
 | **3 Build** | `index.html` | The booking site itself, rendered from the Define hand-in | Nothing; they test it against their acceptance criteria |
-| **4 Evaluate** (after build) | `evaluate.html` | The question chain, theory-of-change links, a measurement plan builder, a source guide | A **measurement plan** (copied from the builder) |
+| **4 Evaluate** (after build) | `evaluate.html` | The question chain, theory-of-change links, fake pilot results against the group's measures, a builder for additional data needed, a source guide | **Pilot results and additional data needed** (copied from the page) |
 | Evidence | `evidence.html` | Fictional pilot results generated from the measurement plan, under the evaluation headings | A decision: continue, iterate, expand, pivot or stop |
 
 ## The golden thread
@@ -39,9 +39,9 @@ with `?facilitator=1` (turn off with `?facilitator=0`).
 
 | Page | What the group does |
 |---|---|
-| Discover | Fill in the brief; drag stakeholders onto the grid; prepare, run and record two interviews (CFO, reception staff); read the data and take a true/false quiz; annotate the as-is process with pain points; add an assumption; compose the problem statement with agreement, size of prize and watch-outs; copy it |
-| Define | Name the primary and secondary users and their needs; rank five business needs and say who disagrees; write the theory of change; give feedback on the to-be process and the story map; add success measures; copy the compiled hand-in |
-| Evaluate | Build the measurement plan and copy it |
+| Discover | Drag stakeholders onto the grid; read what PM and UX colleagues already heard; run and record two interviews (CFO, reception staff); read the data and take a true/false quiz; annotate the as-is process with pain points; add an assumption; compose the problem statement with agreement, size of prize and watch-outs; copy it |
+| Define | Rank five business needs and say who disagrees; write the theory of change; give feedback on the UX colleague's to-be map and the PM's story map; name success measures and their sources; copy the compiled hand-in |
+| Evaluate | See fake pilot results against their own measures; build the list of additional data needed; copy both |
 
 ## How the hand-ins reach the site
 
@@ -55,6 +55,6 @@ the Discover and Define pages.
 |---|---|
 | Problem statement | `config/discovery.js`, `config/define.js` |
 | Define outputs | `config/define.js`, `config/mvp.js` (drives the booking site), `config/evidence.js` (the "set out to do" section) |
-| Measurement plan | `config/evidence.js` (results generated for each row) |
+| Pilot results and additional data needed | `config/evidence.js` (evidence generated for each row, consistent with the results shown) |
 
 See `CLAUDE.md` for the exact mapping.

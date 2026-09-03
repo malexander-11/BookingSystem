@@ -41,25 +41,13 @@
       '<dl class="summary-list">' + (dps.agreement ? "<dt>Agreement</dt><dd>" + esc(dps.agreement) + "</dd>" : "") + (dps.sizeOfPrize ? "<dt>Size of the prize</dt><dd>" + esc(dps.sizeOfPrize) + "</dd>" : "") + (dps.watchOuts ? "<dt>Watch out for</dt><dd>" + esc(dps.watchOuts) + "</dd>" : "") + "</dl>";
   }
 
-  /* ---- 2. User groups ---------------------------------------------------- */
-  var sn = D.starterNeeds || {};
-  function groupCard(id, label, given) {
-    return '<div class="group-card' + (id === "primary" ? " is-primary" : "") + '"><span class="tag tag--' + id + '">' + esc(label) + "</span>" +
-      '<div class="form-group"><label class="form-label" for="users.' + id + '.name">Name this group</label><input class="form-input" id="users.' + id + '.name" data-key="users.' + id + '.name" placeholder="e.g. casual players who have never booked"></div>' +
-      ta("users." + id + ".who", "Who they are", "Age, situation, how they play sport now. Specific enough to find ten of them tomorrow.", 2) +
-      ta("users." + id + ".today", "What they do today", "Instead of using this, what do they do?", 2) +
-      '<p class="form-label">Their needs</p><div class="given-need"><strong>Given:</strong> ' + esc(given) + "</div>" +
-      '<div class="form-group"><label class="visually-hidden" for="users.' + id + '.need1">Second need</label><input class="form-input" id="users.' + id + '.need1" data-key="users.' + id + '.need1" placeholder="Add a need"></div>' +
-      '<div class="form-group"><label class="visually-hidden" for="users.' + id + '.need2">Third need</label><input class="form-input" id="users.' + id + '.need2" data-key="users.' + id + '.need2" placeholder="Add another need"></div></div>';
-  }
-  html += h2(2, "User groups") + "<p>Who is this for, and who else is affected? Name the primary user first: the MVP is designed around them. One need is given for each; add two more.</p>" +
-    '<div class="group-grid">' + groupCard("primary", "Primary user", sn.primary) + groupCard("secondary", "Secondary user", sn.secondary) + "</div>";
-  var gcards = "";
+  /* ---- 2. User groups (fixed) -------------------------------------------- */
+  html += h2(2, "User groups") + "<p>Your UX colleague has already defined the users. The primary user is who the MVP is designed around. The rest of this page is yours.</p><div class=\"group-grid\">";
   (D.userGroups || []).forEach(function (g) {
-    gcards += '<div class="group-card' + (g.primary ? " is-primary" : "") + '">' + (g.primary ? '<span class="tag tag--primary">Primary user</span>' : '<span class="tag tag--secondary">Secondary</span>') +
+    html += '<div class="group-card' + (g.primary ? " is-primary" : "") + '">' + (g.primary ? '<span class="tag tag--primary">Primary user</span>' : '<span class="tag tag--secondary">Secondary</span>') +
       "<h3>" + esc(g.name) + "</h3><dl><dt>Who</dt><dd>" + esc(g.who) + "</dd><dt>Today</dt><dd>" + esc(g.today) + "</dd><dt>Needs</dt><dd><ul>" + (g.needs || []).map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul></dd></dl></div>";
   });
-  html += fac("example user groups", '<div class="group-grid">' + gcards + "</div>");
+  html += "</div>";
 
   /* ---- 3. Business needs, prioritise ------------------------------------ */
   html += h2(3, "Business needs: put them in order") +
@@ -77,14 +65,14 @@
     '<ol class="chain chain--editable">' + chainBox("ifWe", "If we", th.ifWe) + chainBox("then", "then", th.then) + chainBox("because", "because", th.because) + chainBox("leadingTo", "leading to", th.leadingTo) + chainBox("measuredBy", "measured by", th.measuredBy) + "</ol>" +
     fac("example theory of change", '<ol class="chain"><li><span class="chain__label">If we</span>' + esc(t.ifWe) + '</li><li><span class="chain__label">then</span>' + esc(t.then) + '</li><li><span class="chain__label">because</span>' + esc(t.because) + '</li><li><span class="chain__label">leading to</span>' + esc(t.leadingTo) + '</li><li><span class="chain__label">measured by</span>' + esc(t.measuredBy) + "</li></ol><p><strong>In one line:</strong> " + esc(D.hypothesis) + "</p>");
 
-  /* ---- 5. To-be process ------------------------------------------------------ */
+  /* ---- 5. To-be process (from UX) ------------------------------------------ */
   var p = D.toBeProcess || { lanes: [], steps: [] };
-  html += h2(5, "The new process (to-be)") + "<p>A first draft of the process once the MVP exists. The resident's steps become the booking site's progress bar.</p>" + R.flow(p.lanes, p.steps) +
-    '<div class="feedback-box">' + ta("feedback.process", "Your feedback on this process", "What would you change, add or remove? Which step would your primary user struggle with? Which step does reception need?", 4) + "</div>";
+  html += h2(5, "The to-be process (from your UX colleague)") + "<p>Your UX colleague's first draft of the process once the MVP exists. The resident's steps become the booking site's progress bar.</p>" + R.flow(p.lanes, p.steps) +
+    '<div class="feedback-box">' + ta("feedback.process", "Your feedback on your UX colleague's to-be map", "What would you change, add or remove? Which step would the primary user struggle with? Which step does reception need?", 4) + "</div>";
 
-  /* ---- 6. Story map ----------------------------------------------------------- */
+  /* ---- 6. Story map (from PM) ----------------------------------------------- */
   var acts = (D.storyMap && D.storyMap.activities) || [];
-  html += h2(6, "User story map") + "<p>Activities along the top follow the new process. Stories underneath, in priority order. Everything above the line is the MVP. Open a story to see its acceptance criteria.</p>";
+  html += h2(6, "User story map (from your PM)") + "<p>Your PM's story map. Activities along the top follow the new process. Stories underneath, in priority order. Everything above the line is the MVP. Open a story to see its acceptance criteria.</p>";
   function storyCard(s) {
     var c = '<details class="story-card"><summary><span class="story-card__id">' + esc(s.id) + "</span> " + esc(s.title) + "</summary>" +
       '<p class="story-card__story">As a <strong>' + esc(s.as) + "</strong>, I need " + esc(s.need) + ", so that " + esc(s.soThat) + ".</p>" +
@@ -100,11 +88,11 @@
   html += '<div class="story-map__line"><span>MVP line: everything above is release 1</span></div>';
   acts.forEach(function (a) { html += '<div class="story-map__cell story-map__cell--later">' + (a.stories || []).filter(function (s) { return s.release !== "mvp"; }).map(storyCard).join("") + "</div>"; });
   html += "</div></div>" +
-    '<div class="feedback-box">' + ta("feedback.stories", "Your feedback on the story map", "Which stories are wrong, missing, or on the wrong side of the MVP line? Which acceptance criteria could not be tested?", 4) + "</div>";
+    '<div class="feedback-box">' + ta("feedback.stories", "Your feedback on the PM's user story map", "Which stories are wrong, missing, or on the wrong side of the MVP line? Which acceptance criteria could not be tested?", 4) + "</div>";
 
   /* ---- 7. Success measures ---------------------------------------------------- */
-  html += h2(7, "Success measures") + "<p>Examples first. Then add your own: one number each, with a target, a baseline and a source. A guard-rail is a number that must not get worse.</p>" +
-    R.dataTable(["Measure", "Target", "Baseline", "Source", "Guard-rail"], (D.successMeasures || []).map(function (m) { return [m.name, m.target, m.baseline, m.source, m.guardRail || "—"]; })) +
+  html += h2(7, "Success measures") + "<p>What will we count, and where will the number come from? Examples first, then add your own. Targets, baselines and guard-rails are added later, once we know what the numbers look like today.</p>" +
+    R.dataTable(["Measure", "Source"], (D.successMeasures || []).map(function (m) { return [m.name, m.source]; })) +
     '<div id="measure-rows"></div>';
 
   /* ---- 8. Compile the hand-in ------------------------------------------------ */
@@ -143,28 +131,20 @@
   /* ---- measure rows ------------------------------------------------------------ */
   var measures = R.editableRows(document.getElementById("measure-rows"), st, "measures", [
     { id: "name", label: "Measure (what we count)", placeholder: "e.g. bookings by people who have not booked before" },
-    { id: "target", label: "Target (number and time window)", placeholder: "e.g. 30% of bookings in six weeks" },
-    { id: "baseline", label: "Baseline (the number today)", placeholder: "e.g. unknown, estimated 10 to 15%" },
-    { id: "source", label: "Source (where the number comes from)", placeholder: "e.g. checkout question plus SQL" },
-    { id: "guardRail", label: "Guard-rail (must not get worse)", placeholder: "e.g. no-shows must not rise above 15%" }
+    { id: "source", label: "Source (where the number comes from)", placeholder: "e.g. checkout question plus SQL on the bookings table" }
   ], { min: 1, legend: "Your measure", addLabel: "Add a measure", onChange: function () { copy.update(); } });
 
   /* ---- compile ------------------------------------------------------------------- */
-  function groupText(id, label, given) {
-    var needs = [given, v("users." + id + ".need1"), v("users." + id + ".need2")].filter(Boolean);
-    return "- " + label + ": " + (v("users." + id + ".name") || "(not named)") + " | Who: " + v("users." + id + ".who") + " | Today: " + v("users." + id + ".today") + "\n  Needs: " + needs.join("; ");
-  }
   var copy = R.copyBox(document.getElementById("define-copy"), {
-    id: "define-output", label: "Hand this in: your Define outputs as text", button: "Copy Define hand-in", rows: 18,
+    id: "define-output", label: "Hand this in: your Define outputs as text", button: "Copy Define hand-in", rows: 16,
     text: function () {
       var o = order();
-      var out = "USERS\n" + groupText("primary", "Primary", sn.primary) + "\n" + groupText("secondary", "Secondary", sn.secondary) + "\n\n";
-      out += "BUSINESS NEED PRIORITY\n" + o.map(function (idx, i) { return (i + 1) + ". " + items[idx].need; }).join("\n") + "\nWhy, and who disagrees: " + v("priority.why") + "\n\n";
+      var out = "BUSINESS NEED PRIORITY\n" + o.map(function (idx, i) { return (i + 1) + ". " + items[idx].need; }).join("\n") + "\nWhy, and who disagrees: " + v("priority.why") + "\n\n";
       out += "THEORY OF CHANGE\nIf we: " + v("toc.ifWe") + "\nThen: " + v("toc.then") + "\nBecause: " + v("toc.because") + "\nLeading to: " + v("toc.leadingTo") + "\nMeasured by: " + v("toc.measuredBy") + "\n\n";
       out += "PROCESS FEEDBACK\n" + (v("feedback.process") || "(none)") + "\n\n";
       out += "STORY MAP FEEDBACK\n" + (v("feedback.stories") || "(none)") + "\n\n";
       var ms = measures.rows().filter(function (m) { return (m.name || "").trim(); });
-      out += "SUCCESS MEASURES\n" + (ms.length ? ms.map(function (m) { return "- Name: " + (m.name || "") + " | Target: " + (m.target || "") + " | Baseline: " + (m.baseline || "") + " | Source: " + (m.source || "") + " | Guard-rail: " + (m.guardRail || ""); }).join("\n") : "(none added; use the examples)") + "\n";
+      out += "SUCCESS MEASURES\n" + (ms.length ? ms.map(function (m) { return "- Name: " + (m.name || "") + " | Source: " + (m.source || ""); }).join("\n") : "(none added; use the examples)") + "\n";
       return out;
     }
   });

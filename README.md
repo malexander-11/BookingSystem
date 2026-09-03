@@ -15,7 +15,7 @@ number on it is made up.**
 | 1 Discover | `discover.html` | Stakeholder map, interview guide, data analysis output, as-is process map with pain points, key assumptions, problem statement | A problem statement |
 | 2 Define | `define.html` | User groups, user and business needs, theory of change, to-be process map, user story map with acceptance criteria, success measures | Users, stories with acceptance criteria, new process, hypothesis, success measures |
 | 3 Build | `index.html` | The booking site, built from the Define hand-in: choose a facility, pick a slot, enter details, get a reference. Bookings live in the browser. | Nothing; they test it against their acceptance criteria |
-| 4 Evaluate | `evaluate.html` | The question chain, the theory-of-change links to test, a measurement plan builder, a guide to data sources | A measurement plan |
+| 4 Evaluate | `evaluate.html` | The question chain, the group's theory of change with the question each link raises, fake pilot results against the group's measures, a builder for the additional data needed, a guide to data sources | Pilot results plus the additional data needed |
 | Evidence | `evidence.html` | Fictional pilot results generated from the measurement plan: what we set out to do, what happened, what users did, impact, the four product risks, surprises, decision | A decision: continue, iterate, expand, pivot or stop |
 
 Each page renders from a config file in `config/`. When the facilitator pastes
@@ -23,12 +23,14 @@ a hand-in into Claude, Claude updates the config and pushes; the site
 redeploys in a minute or two. `CLAUDE.md` has the exact mapping and
 `docs/hand-in-templates.md` the plain-text templates.
 
-The Discover and Define pages are interactive: the group fills in the brief,
-drags stakeholders onto the power/interest grid, prepares and records two
-interviews, takes a true/false quiz on the data, annotates the as-is process
-with pain points, adds assumptions, composes the problem statement, names the
-users, ranks the business needs, writes the theory of change, comments on the
-process and story map, and adds success measures. Everything typed is saved
+The Discover, Define and Evaluate pages are interactive: the group drags
+stakeholders onto the power/interest grid, reads what PM and UX colleagues
+heard, records two interviews, takes a true/false quiz on the data, annotates
+the as-is process with pain points, adds assumptions, composes the problem
+statement, ranks the business needs, writes the theory of change, comments on
+the UX colleague's to-be map and the PM's story map, and names success
+measures. The Evaluate page then shows fake pilot results against those
+measures and asks what additional data is needed. Everything typed is saved
 in that browser; "Reset this page" clears it. Model answers and the interview
 scripts appear only in **facilitator view**: open any page with
 `?facilitator=1` (and `?facilitator=0` to turn it off).

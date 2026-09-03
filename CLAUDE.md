@@ -42,46 +42,49 @@ AGREEMENT ...  SIZE OF THE PRIZE ...  WATCH OUT FOR ...
 
 ### Hand-in 2: the MVP definition (end of Define)
 
-`USERS`, `BUSINESS NEED PRIORITY`, `THEORY OF CHANGE`, `PROCESS FEEDBACK`, `STORY MAP FEEDBACK`, `SUCCESS MEASURES`, optional `BUILD CHOICES`.
+`BUSINESS NEED PRIORITY`, `THEORY OF CHANGE`, `PROCESS FEEDBACK`, `STORY MAP FEEDBACK`, `SUCCESS MEASURES` (name and source only), optional `BUILD CHOICES`. The user groups are fixed content from the UX colleague and are not in the hand-in.
 
 Update three files:
 
 **`config/define.js`**
-- `userGroups`: two entries from USERS; Primary gets `primary: true`. `name`, `who`, `today`, `needs` from the line (needs are the "Needs:" list, including the given one).
-- `userNeeds`: one per need, written as as / need / soThat (as = the group name; soThat inferred from the problem statement if not given).
+- `userGroups`, `userNeeds`: leave as they are.
 - `businessNeeds`: reorder to match BUSINESS NEED PRIORITY (top three first), and put the "who disagrees" answer into the `why` of the need that loses.
 - `theoryOfChange`: the five THEORY OF CHANGE lines. `hypothesis`: one sentence combining If we / then.
 - `toBeProcess`: apply PROCESS FEEDBACK (add, remove, rename or re-lane steps). Keep 5 to 8 steps.
 - `storyMap.activities`: apply STORY MAP FEEDBACK (move stories across the MVP line, add missing stories with at least one Given/When/Then each, drop stories they called wrong). Keep ids unique; new ones continue the S-numbering.
-- `successMeasures`: append the SUCCESS MEASURES lines to the examples, group's first; a Guard-rail value goes in `guardRail`.
+- `successMeasures`: the group's SUCCESS MEASURES lines first, then the examples. They give only `name` and `source`; **you add** a plausible `target` (number and time window), `baseline` (today's number or "unknown, estimated …") and, for at least one measure, a `guardRail`.
 - `buildChoices`: from BUILD CHOICES if given, otherwise leave.
 
 **`config/mvp.js`** (the booking site)
-- `mvp.targetUser` ← the Primary user's "Who".
-- `mvp.userNeed` ← the Primary user's first need as "As a <group>, I need <need>, so that <outcome from the problem statement>".
+- `mvp.targetUser`, `mvp.userNeed`: leave as they are unless the theory of change names a different user.
 - `mvp.hypothesis` ← `hypothesis` above.
 - `mvp.process` ← the resident's steps in the updated `toBeProcess`, shortened to 2 to 4 words each; keep 3 to 5 steps. The site's flow is always facility → slot → details → confirmation; the labels are what change.
 - `mvp.acceptanceCriteria` ← every MVP story's ACs as plain sentences ("A resident can …"), after the story-map feedback is applied.
-- `mvp.successMeasure.name` and `.target` ← the group's first success measure (or the first example if they added none).
+- `mvp.successMeasure.name` and `.target` ← the group's first success measure with the target you added (or the first example if they added none).
 - `facilities`, `bookingForm.fields`, `bookingForm.requireBrentPostcode`, `bookingForm.askFirstTimeUser`, `brand.service`, `copy.*` ← from BUILD CHOICES if given, otherwise from what the feedback and measures imply (a story about paying online is still "later", so no payment; a measure about first-time users means `askFirstTimeUser: true`).
 
 **`config/evidence.js`** → `setOutToDo`: `hypothesis`, `measure`, `target`, `baseline`, `guardRail` from the Define hand-in, so the evidence page shows their words before the Evaluate stage.
 
-### Hand-in 3: measurement plan (end of Evaluate)
+### Hand-in 3: pilot results and additional data needed (end of Evaluate)
 
 ```
-MEASUREMENT PLAN
+MEASURES AND PILOT RESULTS
+- Name: ... | Source: ... | Result: ... | But: ...
+ADDITIONAL DATA NEEDED
 1. Question: ... | Metric: ... | Source: ... | Would change our mind: ...
 ```
 
+The Evaluate page has already shown the group a fake result for each of their measures (generated from `measureResults` in `config/evidence.js`). The evidence you write must be consistent with those numbers.
+
 Regenerate `config/evidence.js`:
-1. `measurementPlan`: one row per line, in their order, with `question`, `metric`, `source`, `changeMind` and a short fictional `result`. Do not add metrics they did not ask for, unless a risk card would otherwise have no evidence.
-2. Present each result in the form its source implies: analytics → funnel or drop-off chart in `userBehaviour`; service data / SQL → splits (new vs returning, by group, by site) in `userBehaviour` and a tile in `whatHappened`; survey → self-reported shares; observation / interviews → `risks[].evidence`, `surprises`, `quotes`; incident or ops logs → feasibility evidence; finance → viability evidence.
-3. `whatHappened`: four to six headline tiles from the results, `tone` good / bad / neutral.
-4. `impact`: compare their measure of success with their target and baseline. Make it **ambiguous**: near the target, not a clear win or loss. Break at least one guard-rail if they set one. Fill all four caveats (substitution, counterfactual, novelty, self-report) with something specific to their metrics. Use their "would change our mind" lines: at least one of them should be hit.
-5. `risks`: keep the four ids (`value`, `usability`, `feasibility`, `viability`). At least one `against` item under every risk.
-6. `surprises`, `quotes`, `decision`: rewrite to fit their scenario. Keep the five decision options.
-7. Keep numbers plausible for a borough of about 340,000 people and a pilot of a few sites over a few weeks. Keep the file's shape and header comment.
+1. `setOutToDo`: their hypothesis and first measure, with the target and baseline you added at hand-in 2.
+2. `whatHappened`: one tile per MEASURES AND PILOT RESULTS line, using the exact `Result` value shown, plus one or two more if needed for the story. `tone` good / bad / neutral.
+3. `measurementPlan`: one row per ADDITIONAL DATA NEEDED line, in their order, with `question`, `metric`, `source`, `changeMind` and a short fictional `result`. Do not add rows they did not ask for, unless a risk card would otherwise have no evidence.
+4. Present each additional-data result in the form its source implies: analytics → funnel or drop-off chart in `userBehaviour`; service data / SQL → splits (new vs returning, by group, by site) in `userBehaviour`; survey → self-reported shares; observation / interviews → `risks[].evidence`, `surprises`, `quotes`; incident or ops logs → feasibility evidence; finance → viability evidence.
+5. `impact`: compare their first measure with its target and baseline. Keep it **ambiguous**: near the target, not a clear win or loss. Break at least one guard-rail. Fill all four caveats (substitution, counterfactual, novelty, self-report) with something specific to their metrics. Use their "would change our mind" lines: at least one of them should be hit.
+6. `risks`: keep the four ids (`value`, `usability`, `feasibility`, `viability`). At least one `against` item under every risk.
+7. `surprises`, `quotes`, `decision`: rewrite to fit their scenario. Keep the five decision options.
+8. Keep numbers plausible for a borough of about 340,000 people and a pilot of a few sites over a few weeks. Keep the file's shape, the `measureResults` rules and the header comment.
 
 If a hand-in is partial, fill what they gave and leave the example for the rest, re-worded to match their problem statement.
 

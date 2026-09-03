@@ -25,14 +25,9 @@
   var html = '<div class="notice"><strong>This stage ends with:</strong> ' + esc(D.stage.endsWith) + "</div>";
 
   /* ---- 1. The brief ------------------------------------------------------- */
-  var b = D.brief || {}, bh = b.hints || {};
-  html += h2(1, "The brief") + '<div class="panel"><dl class="summary-list"><dt>What was asked for</dt><dd>' + esc(b.askedFor) + "</dd></dl>" +
-    "<p>Fill in what you find out. If you do not know yet, write the question you would ask.</p>" +
-    ta("brief.whoAsked", "Who asked", bh.whoAsked, 2) +
-    ta("brief.whyNow", "Why now", bh.whyNow, 2) +
-    ta("brief.hopedOutcome", "Hoped-for outcome", bh.hopedOutcome, 2) +
-    (b.note ? '<p class="callout">' + esc(b.note) + "</p>" : "") + "</div>" +
-    fac("example answers for the brief", '<dl class="summary-list"><dt>Who asked</dt><dd>' + esc(b.whoAsked) + "</dd><dt>Why now</dt><dd>" + esc(b.whyNow) + "</dd><dt>Hoped-for outcome</dt><dd>" + esc(b.hopedOutcome) + "</dd></dl>");
+  var b = D.brief || {};
+  html += h2(1, "The brief") + '<div class="panel"><p class="eyebrow">What was asked for</p><p class="brief-quote">' + esc(b.askedFor) + "</p>" +
+    "<p>" + esc(b.why || "Before anything is built we need to understand why this should happen and what people want to achieve.") + "</p></div>";
 
   /* ---- 2. Stakeholder map (drag and drop) -------------------------------- */
   html += h2(2, "Stakeholder map") +
@@ -46,7 +41,7 @@
   });
   html += fac("intended placement and what each stakeholder will say", '<div class="stakeholder-grid">' + cards + "</div>");
 
-  /* ---- 3. Interview guide, then interviews ------------------------------- */
+  /* ---- 3. Interview guide ------------------------------------------------- */
   var g = D.interviewGuide || {};
   html += h2(3, "Interview guide") + "<p>Read this before the interviews. Pick your questions from it, or write better ones.</p><div class=\"guide\">" +
     '<div class="panel"><p class="eyebrow">Opening</p><p>' + esc(g.opening) + "</p>";
@@ -63,8 +58,20 @@
   }
   html += "</div>";
 
-  html += h2(4, "Interviews") +
-    "<p>Two interviews, ten minutes each. Your facilitator will play the interviewee. Prepare three questions before each one, take notes during it, and write down what you learned straight after. Listen for what each person wants that the other does not.</p>" +
+  /* ---- 4. What colleagues have already heard ---------------------------- */
+  html += h2(4, "What colleagues have already heard") +
+    "<p>Your PM and UX colleagues have already spoken to some of the stakeholders. Read their notes before your own interviews. Notice where what people want does not line up.</p>" +
+    '<div class="colleague-grid">';
+  (D.colleagueInterviews || []).forEach(function (c) {
+    html += '<div class="panel colleague-card"><span class="tag tag--by">Interviewed by ' + esc(c.by) + '</span><h3>' + esc(c.who) + '</h3><p class="interview-card__role">' + esc(c.role) + "</p>" +
+      '<p class="eyebrow">Notes</p><p class="colleague-card__notes">' + esc(c.notes) + "</p>" +
+      '<p class="eyebrow">What they learnt</p><p>' + esc(c.learnt) + "</p></div>";
+  });
+  html += "</div>" + (D.colleagueTension ? fac("the competing demands", "<p>" + esc(D.colleagueTension) + "</p>") : "");
+
+  /* ---- 5. Your interviews --------------------------------------------------- */
+  html += h2(5, "Your interviews") +
+    "<p>Two interviews, ten minutes each. Your facilitator will play the interviewee. Take notes during it, then write down what you learned straight after. Listen for what each person wants that the others do not.</p>" +
     '<div class="interview-grid">';
   (D.interviews || []).forEach(function (iv) {
     var sc = iv.script || {};
@@ -73,41 +80,38 @@
     script += "</ul>" + (sc.pushBack ? "<p><strong>Push back:</strong> " + esc(sc.pushBack) + "</p>" : "") + (sc.tension ? '<p class="callout">' + esc(sc.tension) + "</p>" : "");
     html += '<div class="panel interview-card"><h3>' + esc(iv.who) + '</h3><p class="interview-card__role">' + esc(iv.role) + "</p>" +
       "<p><strong>Before you walk in:</strong> " + esc(iv.brief) + "</p>" +
-      ta("interview." + iv.id + ".prep", "Your three questions", "Choose from the guide or write your own. What do you most need to find out from this person?", 3) +
-      ta("interview." + iv.id + ".notes", "What they said", "Exact words where you can.", 5) +
-      ta("interview." + iv.id + ".learned", "What we learned", "One or two sentences. What does this person want, and what do they fear?", 2) +
+      ta("interview." + iv.id + ".notes", "Notes", "Exact words where you can.", 6) +
+      ta("interview." + iv.id + ".learned", "What we learned", "One or two sentences. What does this person want, and what do they fear?", 3) +
       fac("script for " + iv.who, script) + "</div>";
   });
   html += "</div>";
 
-  /* ---- 5. Data, then quiz --------------------------------------------------- */
+  /* ---- 6. Data, then quiz --------------------------------------------------- */
   var da = D.dataAnalysis || {};
-  html += h2(5, "Data analysis output") + (da.summary ? "<p>" + esc(da.summary) + "</p>" : "") + R.statTiles(da.stats);
+  html += h2(6, "Data analysis output") + (da.summary ? "<p>" + esc(da.summary) + "</p>" : "") + R.statTiles(da.stats);
   if (da.charts && da.charts.length) {
     html += '<div class="chart-grid">';
     da.charts.forEach(function (c, i) { html += R.barChart(c, "d" + i); });
     html += "</div>";
   }
-  if (da.known && da.known.length) html += "<h3>What we know</h3>" + R.dataTable(["We know that", "Source", "Confidence"], da.known.map(function (k) { return [k.text, k.source, k.confidence]; }));
-  if (da.unknown && da.unknown.length) html += "<h3>What we do not know yet</h3>" + R.dataTable(["We do not know", "How we could find out", "Effort"], da.unknown.map(function (u) { return [u.text, u.howToFindOut, u.effort]; }));
   html += "<h3>True or false?</h3><p>Answer from the data above, not from what you expect to be true.</p><div id=\"quiz\"></div>";
 
-  /* ---- 6. As-is process, annotate ------------------------------------------ */
+  /* ---- 7. As-is process, annotate ------------------------------------------ */
   var p = D.asIsProcess || { lanes: [], steps: [] };
-  html += h2(6, "How it works today (as-is process)") +
+  html += h2(7, "How it works today (as-is process)") +
     "<p>The current process end to end. Under each step, write where it hurts and for whom. Use what the interviews and the data told you.</p>" +
     '<div id="flow">' + R.flow(p.lanes, p.steps, { editable: { st: st, prefix: "pain" }, hidePain: true }) + "</div>" +
     fac("pain points staff reported", '<ul class="pain-list">' + p.steps.filter(function (s) { return s.painPoint; }).map(function (s) { return "<li><strong>" + esc(s.text) + ":</strong> " + esc(s.painPoint) + "</li>"; }).join("") + "</ul>");
 
-  /* ---- 7. Assumptions --------------------------------------------------------- */
-  html += h2(7, "Key assumptions") +
+  /* ---- 8. Assumptions --------------------------------------------------------- */
+  html += h2(8, "Key assumptions") +
     "<p>Every proposal rests on assumptions. Writing them down lets them be tested rather than discovered the hard way. Add at least one of your own.</p>" +
     R.dataTable(["Assumption", "If it is wrong", "How we would test it", "Status"], (D.assumptions || []).map(function (a) { return [a.assumption, a.ifWrong, a.howToTest, a.status]; })) +
     '<div id="assumption-rows"></div>';
 
-  /* ---- 8. Problem statement composer ------------------------------------ */
+  /* ---- 9. Problem statement composer ------------------------------------ */
   var hints = D.problemStatementHints || {};
-  html += h2(8, "Output: the problem statement") +
+  html += h2(9, "Output: the problem statement") +
     "<p>This is what you hand in. Four parts: the shared problem in one paragraph, then whether there is agreement, the size of the prize, and the accidental impacts to watch. If any part is blank, discovery is not finished. If it names a solution, it is not a problem statement.</p>" +
     '<div class="compose">' +
     '<div class="compose__part compose__part--wide"><h3>The shared problem</h3><span class="form-hint">' + esc(hints.shared) + '</span><div class="ps-inline">' +

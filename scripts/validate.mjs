@@ -126,6 +126,15 @@ if (!EVIDENCE) {
     });
   });
 
+  const mr = req(EVIDENCE, "measureResults", "array", w) || [];
+  if (mr.length < 5) problems.push(`${w}: need at least 5 measureResults rules`);
+  mr.forEach((r, i) => {
+    req(r, "match", "array", `${w} measureResults[${i}]`);
+    req(r, "value", "string", `${w} measureResults[${i}]`);
+    req(r, "detail", "string", `${w} measureResults[${i}]`);
+    req(r, "but", "string", `${w} measureResults[${i}]`);
+  });
+  req(EVIDENCE, "measureResultDefault.value", "string", w);
   req(EVIDENCE, "impact.actual", "string", w);
   req(EVIDENCE, "impact.targetMet", "string", w);
   const caveats = req(EVIDENCE, "impact.caveats", "array", w) || [];
@@ -162,7 +171,7 @@ if (!DISCOVERY) {
   req(DISCOVERY, "stage.title", "string", w);
   req(DISCOVERY, "stage.question", "string", w);
   req(DISCOVERY, "brief.askedFor", "string", w);
-  req(DISCOVERY, "brief.whoAsked", "string", w);
+  req(DISCOVERY, "brief.why", "string", w);
   const sh = req(DISCOVERY, "stakeholders", "array", w) || [];
   if (sh.length < 3) problems.push(`${w}: need at least 3 stakeholders`);
   sh.forEach((s, i) => {
@@ -192,7 +201,9 @@ if (!DISCOVERY) {
     req(q, "why", "string", `${w} quiz[${i}]`);
   });
   ["shared", "agreement", "sizeOfPrize", "watchOuts"].forEach((k) => req(DISCOVERY, `problemStatementHints.${k}`, "string", w));
-  req(DISCOVERY, "brief.hints.whoAsked", "string", w);
+  const ci = req(DISCOVERY, "colleagueInterviews", "array", w) || [];
+  if (ci.length < 3) problems.push(`${w}: need at least 3 colleagueInterviews`);
+  ci.forEach((c, i) => ["who", "by", "notes", "learnt"].forEach((k) => req(c, k, "string", `${w} colleagueInterviews[${i}]`)));
   const sections = req(DISCOVERY, "interviewGuide.sections", "array", w) || [];
   sections.forEach((s, i) => { req(s, "audience", "string", `${w} interviewGuide.sections[${i}]`); req(s, "questions", "array", `${w} interviewGuide.sections[${i}]`); });
   req(DISCOVERY, "dataAnalysis.stats", "array", w);
@@ -220,8 +231,6 @@ if (!DEFINE) {
   if (groups.length && !groups.some((g) => g.primary)) problems.push(`${w}: one userGroup must have primary: true`);
   req(DEFINE, "userNeeds", "array", w);
   req(DEFINE, "businessNeeds", "array", w);
-  req(DEFINE, "starterNeeds.primary", "string", w);
-  req(DEFINE, "starterNeeds.secondary", "string", w);
   const bp = req(DEFINE, "businessPriorities", "array", w) || [];
   if (bp.length !== 5) problems.push(`${w}: businessPriorities must have exactly 5 entries`);
   bp.forEach((b, i) => req(b, "need", "string", `${w} businessPriorities[${i}]`));

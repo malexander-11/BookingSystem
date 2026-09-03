@@ -28,15 +28,10 @@ WATCH OUT FOR
 
 ## End of Define: the MVP definition
 
-Copied from the "Copy what we've written" section of the Define page.
+Copied from the "Copy what we've written" section of the Define page. The
+user groups are given by the UX colleague, so they are not part of the hand-in.
 
 ```
-USERS
-- Primary: <name> | Who: <who they are> | Today: <what they do now>
-  Needs: <need>; <need>; <need>
-- Secondary: <name> | Who: <who they are> | Today: <what they do now>
-  Needs: <need>; <need>; <need>
-
 BUSINESS NEED PRIORITY
 1. <need>
 2. <need>
@@ -53,14 +48,17 @@ Leading to:
 Measured by: 
 
 PROCESS FEEDBACK
-<what to change, add or remove in the to-be process>
+<what to change, add or remove in the UX colleague's to-be process>
 
 STORY MAP FEEDBACK
-<which stories are wrong, missing or on the wrong side of the MVP line>
+<which stories in the PM's map are wrong, missing or on the wrong side of the MVP line>
 
 SUCCESS MEASURES
-- Name: <what we count> | Target: <number and window> | Baseline: <today> | Source: <where from> | Guard-rail: <must not get worse>
+- Name: <what we count> | Source: <where the number comes from>
 ```
+
+Targets, baselines and guard-rails are not asked for; Claude adds plausible
+ones when it builds the site.
 
 Optional build choices, if the group decided them:
 
@@ -72,12 +70,17 @@ Residents only: yes / no
 Ask if first visit: yes / no
 ```
 
-## End of Evaluate: measurement plan
+## End of Evaluate: pilot results and additional data needed
 
-Copied from the plan builder on the Evaluate page ("Copy plan").
+Copied from the Evaluate page ("Copy results and additional data needed").
+The first block is the fake pilot results the page showed for the group's
+measures; the second is what the group says it still needs to know.
 
 ```
-MEASUREMENT PLAN
+MEASURES AND PILOT RESULTS
+- Name: <measure> | Source: <source> | Result: <value and detail> | But: <caveat>
+
+ADDITIONAL DATA NEEDED
 1. Question: <...> | Metric: <...> | Source: <...> | Would change our mind: <...>
 2. Question: <...> | Metric: <...> | Source: <...> | Would change our mind: <...>
 ```

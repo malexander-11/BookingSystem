@@ -3,15 +3,17 @@
    ------------------------------------------------------------------
    Rendered by discover.html. Everything here is fictional.
 
-   Participants see: the brief (with blanks), stakeholder chips to place
-   on the power/interest grid, the interview guide, two interviews to
-   run (CFO and reception staff) with note boxes, the data and a
-   true/false quiz, the as-is process to annotate with pain points, the
-   assumptions (plus a blank row), and a guided problem statement.
+   Participants see: the brief, stakeholder chips to place on the
+   power/interest grid, the interview guide, what PM and UX colleagues
+   have already heard, two interviews to run (CFO and reception staff)
+   with note boxes, the data and a true/false quiz, the as-is process to
+   annotate with pain points, the assumptions (plus a blank row), and a
+   guided problem statement.
 
    Facilitator view (open any page with ?facilitator=1) also shows the
-   example answers, the intended stakeholder placement, the full
-   stakeholder cards and the interview scripts.
+   intended stakeholder placement, the full stakeholder cards, the
+   competing-demands note, the interview scripts, the staff-reported
+   pain points and the example problem statement.
 
    The group hands in ONE thing from this stage: the problem statement
    (with agreement, size of the prize and watch-outs). When the
@@ -29,16 +31,7 @@ window.DISCOVERY = {
 
   brief: {
     askedFor: "\"A new digital booking platform for our sports facilities.\"",
-    /* Example answers, shown to the facilitator only. Participants fill these in. */
-    whoAsked: "The Cabinet Member for Leisure, after visiting a neighbouring borough that launched a booking app.",
-    whyNow: "Facility use has been flat for three years. A budget review has asked every service to show income growth or savings.",
-    hopedOutcome: "More residents using the facilities. Secondary: more income, less staff time on the phone.",
-    note: "The request arrived as a solution. Nobody has yet written down the problem it solves. Discovery starts by finding that out.",
-    hints: {
-      whoAsked: "Who wants this, and what is their position? Who else is behind them?",
-      whyNow: "What has changed? A budget, a complaint, an election, a neighbour's app?",
-      hopedOutcome: "If this works, what will be different in a year? Say it as an outcome, not a feature."
-    }
+    why: "Before anything is built we need to understand why this should happen and what people want to achieve."
   },
 
   /* power and interest are the intended placement ("high" or "low"), shown to the
@@ -135,6 +128,30 @@ window.DISCOVERY = {
     ]
   },
 
+  /* Interviews already done by the PM and UX colleagues. Shown before the
+     group's own interviews so the competing demands are visible early. */
+  colleagueInterviews: [
+    { who: "Chief Digital and Information Officer (CDIO)", role: "Runs digital and IT for the council", by: "PM",
+      notes: "\"This is the perfect showcase. Self-service is how we take cost out of every service, and leisure is the easiest place to prove it. If residents book themselves, we need fewer people answering phones. I want it live in a quarter and I want the numbers on a slide.\"",
+      learnt: "The CDIO sees the platform as a cost-reduction showcase for the whole council, not a leisure project. Success for the CDIO is fewer staff hours and a story to tell." },
+    { who: "Cabinet Member for Leisure", role: "Elected politician who proposed the platform", by: "PM",
+      notes: "\"The borough next door did it in six months. I want more residents active, especially kids who are sat at home. And I want something I can announce.\"",
+      learnt: "Wants a visible headline and more active residents, especially children. Has not said how a booking tool reaches children who are not already playing." },
+    { who: "Public Health lead", role: "Funds outreach; worried about inactive residents", by: "UX",
+      notes: "\"Our inactive residents are mostly over 50 and mostly not online for this kind of thing. The people who need this most have never been in the building. A booking website helps the people who already come.\"",
+      learnt: "Wants inclusion for the over-50s and non-users. Doubts a digital channel reaches them at all. This pulls against the CDIO's self-service goal." },
+    { who: "Leisure Operations Manager", role: "Runs the 11 sites", by: "UX",
+      notes: "\"Evenings are full, daytime is empty. Booking is not what stops people. Make it easy to see what's free and you'll get fewer angry phone calls, but you won't fill Tuesday at 2pm.\"",
+      learnt: "Sees a capacity problem at peak and a demand problem off-peak. Expects a booking tool to reduce friction, not increase use." },
+    { who: "Resident who does not use council facilities", role: "Aged 24, works shifts, plays football in the park", by: "UX",
+      notes: "\"I didn't know the council had pitches. Where are they? Forty quid for an hour? I'd need five mates and a car. We just go to the park.\"",
+      learnt: "Awareness, price and company are the barriers, not booking. Nothing in the brief addresses any of them." },
+    { who: "Sports club secretary", role: "Runs a Tuesday-night league at Bridge Park", by: "PM",
+      notes: "\"We've had the hall on Tuesdays for nine years. If a website lets anyone grab it, we lose the league and forty people stop playing. Don't break what works.\"",
+      learnt: "Existing organised users fear losing block bookings. An inclusive-sounding change could exclude the people already active." }
+  ],
+  colleagueTension: "The CDIO and the CFO want cost out and see self-service as the proof. The Cabinet Member wants a headline and active children. Public Health and reception want inclusion for people who are not online. The Ops Manager thinks booking is not the problem at all. The club wants nothing to change. A problem statement that only one of these would sign is not shared.",
+
   /* The two interviews the group runs. The facilitator plays each role.
      `script` is facilitator-only. */
   interviews: [
@@ -179,14 +196,14 @@ window.DISCOVERY = {
   ],
 
   dataAnalysis: {
-    summary: "Four weeks of paper diaries from four sites were typed up and counted. Read the data first, then take the quiz.",
+    summary: "Four weeks of paper diaries from four sites, typed up and counted.",
     stats: [
       { label: "Average occupancy of bookable hours", value: "58%", note: "Four-site diary sample, four weeks", tone: "neutral" },
-      { label: "Weekday evening occupancy", value: "92%", note: "Most 'no' answers on the phone are for these slots", tone: "bad" },
-      { label: "Weekday daytime occupancy", value: "30%", note: "Two thirds of the estate sits empty in the day", tone: "bad" },
+      { label: "Weekday evening occupancy", value: "92%", note: "Same sample, 5pm to 10pm", tone: "neutral" },
+      { label: "Weekday daytime occupancy", value: "30%", note: "Same sample, 9am to 5pm", tone: "neutral" },
       { label: "Booking calls per week", value: "~350", note: "Across 11 sites, office hours only", tone: "neutral" },
-      { label: "Provisional bookings never used", value: "12%", note: "No payment taken at booking", tone: "bad" },
-      { label: "Complaints in 12 months", value: "31", note: "'Turned away', 'could not get through', 'double booked'", tone: "neutral" }
+      { label: "Provisional bookings never used", value: "12%", note: "Duty manager logs; no payment taken at booking", tone: "neutral" },
+      { label: "Complaints in 12 months", value: "31", note: "Complaints register, category 'leisure bookings'", tone: "neutral" }
     ],
     charts: [
       { title: "Occupancy by time of week", subtitle: "Share of bookable hours that were booked", unit: "%", source: "Diary sample",
@@ -195,35 +212,25 @@ window.DISCOVERY = {
           { label: "Weekday evening", value: 92 },
           { label: "Weekend daytime", value: 65 },
           { label: "Weekend evening", value: 70 }
-        ],
-        note: "The problem is not one problem. Evenings need capacity or demand management. Daytime needs demand." },
+        ] },
       { title: "How bookings are made today", subtitle: "Share of bookings by channel", unit: "%", source: "Diary sample",
         items: [
           { label: "Phone", value: 60 },
           { label: "Walk in", value: 40 },
           { label: "Online", value: 0 }
-        ],
-        note: "Every booking passes through a person and a paper diary." },
+        ] },
       { title: "Who books daytime slots", subtitle: "Share of weekday daytime bookings", unit: "%", source: "Diary sample, names matched by hand",
         items: [
           { label: "Retired residents and clubs", value: 61 },
           { label: "Shift workers", value: 22 },
           { label: "Parents with pre-school children", value: 11 },
           { label: "Other", value: 6 }
-        ],
-        note: "Daytime demand comes from people who are not at work in the day." }
-    ],
-    known: [
-      { text: "Roughly 40% of regular bookers account for 75% of bookings.", source: "Diary sample (hand-written names, hard to match)", confidence: "Low" },
-      { text: "Adults aged 18 to 35 in Brent are less active than the London average. So are the over-50s.", source: "Public Health annual report (fictional)", confidence: "High" },
-      { text: "Double bookings happen about twice a month per site.", source: "Duty manager logs", confidence: "Medium" },
-      { text: "Reception spends about 40 hours a week across the borough on booking calls.", source: "Estimate from call counts", confidence: "Medium" }
-    ],
-    unknown: [
-      { text: "Why residents who do not use facilities do not use them.", howToFindOut: "10 to 15 interviews on the high street and at community centres.", effort: "2 days" },
-      { text: "Whether people who are turned away go elsewhere or give up.", howToFindOut: "Ask reception to log the outcome of every 'no' for two weeks.", effort: "Small" },
-      { text: "What a no-show actually costs.", howToFindOut: "Finance to cost a floodlit hour and a staffed hall hour.", effort: "Half a day" },
-      { text: "Whether the neighbouring borough's app increased use or just moved bookings online.", howToFindOut: "Ask them for their evaluation.", effort: "An email" }
+        ] },
+      { title: "Who makes the bookings", subtitle: "Share of all bookings in the sample", unit: "%", source: "Diary sample, names matched by hand",
+        items: [
+          { label: "Regular bookers (40% of people)", value: 75 },
+          { label: "Everyone else", value: 25 }
+        ] }
     ]
   },
 
@@ -233,9 +240,9 @@ window.DISCOVERY = {
     { statement: "Weekday evenings are nearly full.", answer: true, why: "92% occupancy. Most of the 'no' answers on the phone are for these slots." },
     { statement: "About one in eight provisional bookings is never used.", answer: true, why: "12% of holds are never used, because nothing is paid at booking." },
     { statement: "Daytime slots are empty because people cannot find out about them.", answer: false, why: "The data does not say why they are empty. Who books daytime now suggests it is people who are not at work. A booking tool does not change that." },
-    { statement: "We know why residents who do not use the facilities stay away.", answer: false, why: "Nobody has asked them. It is the biggest gap in the evidence." },
+    { statement: "We know why residents who do not use the facilities stay away.", answer: false, why: "One resident interview is not evidence. Nobody has asked them properly. It is the biggest gap." },
     { statement: "Making booking easier will increase overall facility use.", answer: false, why: "That is the Cabinet Member's assumption, not a finding. The data shows a capacity problem at peak and a demand problem off-peak. It cannot tell us what easier booking would do." },
-    { statement: "Reception time on booking calls is roughly one full-time post.", answer: true, why: "About 40 hours a week across the borough. Two minutes a call, 350 calls, plus the diary." }
+    { statement: "Reception time on booking calls is roughly one full-time post.", answer: true, why: "About 350 calls a week at two to three minutes each, plus the diary, is around 40 hours across the borough." }
   ],
 
   /* Participants annotate this with pain points. The painPoint fields here are
