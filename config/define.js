@@ -33,9 +33,9 @@ window.DEFINE = {
     ]
   },
 
-  /* Carried over from Discover. Replaced by the group's own statement when handed in. */
+  /* The group's problem statement, carried over from Discover. */
   problemStatement:
-    "Brent residents who want to play sport casually need to find a free slot and secure it with confidence, because they will only play if it is easy and predictable. Today they phone during office hours or turn up and hope, which results in residents being turned away from full evening slots while daytime slots sit at 30% occupancy, flat facility use, lost income from no-shows, and around 40 staff hours a week spent on the phone and the diary.",
+    "All residents who want to play sport need to be able to easily access and book sports pitches, because they need to stay healthy, fit and included, while ensuring Brent Council is sustainable. Today they often don't book and stay unfit, which results in public health costs and unbooked pitches leading to revenue shortfalls.",
 
   /* The user groups, as defined by the UX colleague. Shown as fixed content. */
   userGroups: [

@@ -277,15 +277,16 @@ window.DISCOVERY = {
 
   /* The hand-in. Example values are shown to the facilitator only until the
      group's own statement replaces them. */
+  /* The group's problem statement (Discover hand-in). */
   problemStatement: {
-    who: "Brent residents who want to play sport casually",
-    needsTo: "find a free slot and secure it with confidence",
-    because: "they will only play if it is easy and predictable",
-    today: "phone during office hours or turn up and hope",
-    resultsIn: "residents being turned away from full evening slots while daytime slots sit at 30% occupancy, flat facility use, lost income from no-shows, and around 40 staff hours a week spent on the phone and the diary",
-    agreement: "The Ops Manager and reception agree the phone-and-diary process wastes time. The CFO agrees only if the fix removes cost; reception and Public Health want the fix to reach people who never come in. There is no agreement yet on whether the goal is savings or inclusion, and the Cabinet Member wants both.",
-    sizeOfPrize: "Roughly 40 staff hours a week on booking calls; 12% of holds never used, at about £40 per empty floodlit hour; daytime occupancy at 30% across 11 sites; 31 complaints a year. Income from casual bookings is small, so the prize is mostly staff time, wasted capacity and reputation.",
-    watchOuts: "Older and non-English-speaking residents who rely on the phone; clubs losing block bookings to one-off online users; no-shows rising if nobody pays at booking; staff morale if the platform is seen as job cuts; and the risk that the platform serves existing users while the non-users it was meant to reach never hear of it.",
-    note: "Notice what this does not say. It does not say 'residents need an app'. It also does not yet explain why people who never book are not booking. That gap matters for the Cabinet Member's outcome, and it is the first thing Define has to face."
+    who: "All residents who want to play sport",
+    needsTo: "be able to easily access and book sports pitches",
+    because: "they need to stay healthy, fit and included, while ensuring Brent Council is sustainable",
+    today: "often don't book and stay unfit",
+    resultsIn: "public health costs and unbooked pitches leading to revenue shortfalls",
+    agreement: "The CFO has a more laser-focused view. Reception would worry about her job; perhaps we make it clear that residents can still ring up.",
+    sizeOfPrize: "Reduced cost, increased revenue.",
+    watchOuts: "Reception may also do other tasks, like unlocking gates or being the first-aider on hand.",
+    note: "What this leaves open: it names all residents, so it does not yet say who the MVP is for first. It says residents often don't book without saying why, and the data cannot answer that. The size of the prize has no numbers against it, although occupancy, no-shows and staff hours are known. And 'included' is in the because line, but neither the prize nor the watch-outs mention the people who never come in."
   }
 };
