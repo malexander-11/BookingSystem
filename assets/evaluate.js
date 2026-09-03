@@ -52,7 +52,7 @@
     '<li><span class="chain__label">1</span>What did we set out to do? <span class="muted-line">The theory of change and the measures from Define.</span></li>' +
     '<li><span class="chain__label">2</span>What do the numbers say? <span class="muted-line">The pilot results against the measures you chose.</span></li>' +
     '<li><span class="chain__label">3</span>What do the numbers not tell us? <span class="muted-line">One question per link in the theory of change.</span></li>' +
-    '<li><span class="chain__label">4</span>What additional data do we need, and what would change our mind? <span class="muted-line">Decide before you see it, or the data will decide for you.</span></li>' +
+    '<li><span class="chain__label">4</span>So was it a success? <span class="muted-line">Decide what success meant before you answer, or the data will decide for you.</span></li>' +
     "</ol>";
 
   /* 2. Theory-of-change links */
@@ -76,8 +76,29 @@
     }).join("") + "</ul>" +
     '<p class="callout">Headline numbers rarely answer the theory of change on their own. Which links above do these results settle, and which do they leave open?</p>';
 
-  /* 4. Additional data needed: the plan builder */
-  html += h2(4, "What additional data do you need?") +
+  /* 4. So was it a success? The closing discussion. */
+  var items = D.businessPriorities || [];
+  var ord = def.get("priority", null);
+  if (!Array.isArray(ord) || ord.length !== items.length) ord = items.map(function (_, i) { return i; });
+  var firstNeed = items[ord[0]] ? items[ord[0]].need : "", lastNeed = items[ord[ord.length - 1]] ? items[ord[ord.length - 1]].need : "";
+  var so = E.setOutToDo || {};
+  html += h2(4, "So was it a success?") +
+    '<div class="panel verdict"><p class="verdict__question">So was it a success?</p>' +
+    '<div class="verdict__choices" role="group" aria-label="Your verdict">' +
+    '<button type="button" class="pill" data-verdict="yes">Yes</button>' +
+    '<button type="button" class="pill" data-verdict="no">No</button>' +
+    '<button type="button" class="pill" data-verdict="unsure">We cannot tell yet</button></div>' +
+    '<label class="form-label" for="verdict-why">Because</label>' +
+    '<textarea class="form-input" id="verdict-why" data-key="why" rows="4" placeholder="Say who it was a success for, against which number, and what you would need to be sure."></textarea>' +
+    '<ul class="verdict__prompts">' +
+    "<li><strong>Success for whom?</strong> You put <em>" + esc(firstNeed) + "</em> first and <em>" + esc(lastNeed) + "</em> last. Which of them is this a success for?</li>" +
+    "<li><strong>Success against what?</strong> The target was <em>" + esc(so.target) + "</em>. The baseline is <em>" + esc(so.baseline) + "</em>. The guard-rail was <em>" + esc(so.guardRail) + "</em>.</li>" +
+    "<li><strong>What would you have needed to decide before seeing the numbers?</strong> A number that would have counted as failure, agreed by the CFO and by reception.</li>" +
+    "</ul></div>";
+
+  /* If there is time: the additional data builder, source guide and what comes back. */
+  html += '<details class="if-time"><summary>If there is time: what additional data would you need?</summary><div>' +
+    "<h3>What additional data do you need?</h3>" +
     "<p>For each link in the theory of change that the numbers above do not settle: what would you need to know, where would it come from, and what result would change your mind? Three to six rows. When you are done, press <strong>Copy</strong> and hand the text to the facilitator: the evidence page is generated from it.</p>" +
     '<div class="panel plan-builder" id="plan-builder"><div id="plan-rows"></div>' +
     '<div class="btn-row"><button class="btn btn--secondary" type="button" data-add>Add a row</button>' +
@@ -87,17 +108,34 @@
     '<label class="form-label" for="plan-output" style="margin-top:1rem">As text (this is what gets pasted to Claude)</label>' +
     '<textarea class="hand-in__text" id="plan-output" rows="10" readonly></textarea></div>';
 
-  /* 5. Source guide */
-  html += h2(5, "Where numbers come from") +
+  /* Source guide */
+  html += "<h3>Where numbers come from</h3>" +
     "<p>Different questions need different tools. Mixing them is the point: numbers say what happened, observation says why.</p>" +
     R.dataTable(["Source", "Good for", "Watch out for"], SOURCES.map(function (s) { return [s.name, s.goodFor, s.watchOut]; }));
 
-  /* 6. What comes back */
-  html += h2(6, "What comes back") +
+  /* What comes back */
+  html += "<h3>What comes back</h3>" +
     '<div class="panel"><p>Once the additional data needed is handed in, the fictional evidence for each row appears on the <a href="evidence.html">evidence page</a>, alongside the results above, under the same headings: what we set out to do, the measurement plan with results, what happened, what users did, whether impact changed, the four product risks, what surprised us, and the decision.</p>' +
-    "<p>Then the discussion: for each of the four product risks (value, usability, feasibility, viability), what does the evidence say for and against what you assumed? And what should the council do next: continue, iterate, expand, pivot or stop?</p></div>";
+    "<p>Then the discussion: for each of the four product risks (value, usability, feasibility, viability), what does the evidence say for and against what you assumed? And what should the council do next: continue, iterate, expand, pivot or stop?</p></div>" +
+    "</div></details>";
 
   root.innerHTML = html;
+
+  /* ---- verdict behaviour ------------------------------------------------ */
+  var vst = R.store("brent-sandbox-verdict");
+  R.bind(root, vst);
+  function paintVerdict() {
+    var c = vst.get("choice", "");
+    root.querySelectorAll("[data-verdict]").forEach(function (b) {
+      var on = b.getAttribute("data-verdict") === c;
+      b.classList.toggle("is-selected", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+  root.querySelectorAll("[data-verdict]").forEach(function (b) {
+    b.addEventListener("click", function () { var v = b.getAttribute("data-verdict"); vst.set("choice", vst.get("choice", "") === v ? "" : v); paintVerdict(); });
+  });
+  paintVerdict();
 
   /* ---- plan builder behaviour ---------------------------------------- */
   var rows = [];

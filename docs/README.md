@@ -41,7 +41,7 @@ with `?facilitator=1` (turn off with `?facilitator=0`).
 |---|---|
 | Discover | Drag stakeholders onto the grid; read what PM and UX colleagues already heard; run and record two interviews (CFO, reception staff); read the data and take a true/false quiz; annotate the as-is process with pain points; add an assumption; compose the problem statement with agreement, size of prize and watch-outs; copy it |
 | Define | Rank five business needs and say who disagrees; write the theory of change; give feedback on the UX colleague's to-be map and the PM's story map; name success measures and their sources; copy the compiled hand-in |
-| Evaluate | See fake pilot results against their own measures; build the list of additional data needed; copy both |
+| Evaluate | See fake pilot results against their own measures; answer "So was it a success?" (yes, no, cannot tell yet, and why). If there is time, build the list of additional data needed and copy it |
 
 ## How the hand-ins reach the site
 

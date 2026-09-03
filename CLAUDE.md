@@ -65,7 +65,9 @@ Update three files:
 
 **`config/evidence.js`** → `setOutToDo`: `hypothesis`, `measure`, `target`, `baseline`, `guardRail` from the Define hand-in, so the evidence page shows their words before the Evaluate stage.
 
-### Hand-in 3: pilot results and additional data needed (end of Evaluate)
+### Hand-in 3: pilot results and additional data needed (end of Evaluate, optional)
+
+The session normally ends at the Evaluate page's section 4, "So was it a success?", which is a discussion with no hand-in. The additional-data builder sits under "If there is time" on that page; this hand-in only arrives if the facilitator uses it.
 
 ```
 MEASURES AND PILOT RESULTS

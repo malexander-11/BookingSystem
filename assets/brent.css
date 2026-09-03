@@ -882,6 +882,22 @@ a:hover { color: var(--brent-blue-dark); }
 .chain--editable li { padding-bottom: 0.6rem; }
 .chain--editable textarea { width: 100%; font: 0.9rem/1.4 var(--font-body); padding: 0.4rem 0.5rem; border: 1px solid var(--border); border-radius: 4px; resize: vertical; }
 
+/* Closing verdict and the optional block */
+.verdict { border-left: 6px solid var(--brent-yellow); }
+.verdict__question { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; margin: 0 0 0.75rem; }
+.verdict__choices { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.verdict__choices .pill { font-size: 1rem; padding: 0.55rem 1rem; }
+.verdict .form-input { max-width: none; margin-bottom: 1rem; }
+.verdict__prompts { margin: 0; padding-left: 1.25rem; }
+.verdict__prompts li { margin-bottom: 0.6rem; }
+.if-time {
+  margin: 2rem 0 1rem; padding: 0.6rem 1rem;
+  background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius);
+}
+.if-time > summary { cursor: pointer; font-family: var(--font-heading); font-weight: 600; color: var(--brent-blue-dark); }
+.if-time > div { margin-top: 0.75rem; }
+.if-time h3 { margin-top: 1.5rem; }
+
 /* ---- Hand-in and plan builder ---------------------------------------- */
 .hand-in { border: 2px dashed var(--brent-blue-light); }
 .hand-in__text {
