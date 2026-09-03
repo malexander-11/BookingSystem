@@ -60,35 +60,36 @@ window.DEFINE = {
     { as: "regular booker", need: "the phone line to keep working", soThat: "I am not forced to change how I book" }
   ],
 
-  /* The five business needs the group ranks. Order here is the starting order. */
+  /* The five business needs the group ranks. Order here is the group's order (Define hand-in). */
   businessPriorities: [
-    { need: "Increased revenue", owner: "CFO, Cabinet Member" },
-    { need: "Decreased costs", owner: "CFO" },
-    { need: "Healthier children", owner: "Cabinet Member, Public Health" },
     { need: "More inclusion for the community", owner: "Reception staff, Public Health" },
-    { need: "Support public health for the over-50s", owner: "Public Health" }
+    { need: "Healthier children", owner: "Cabinet Member, Public Health" },
+    { need: "Support public health for the over-50s", owner: "Public Health" },
+    { need: "Increased revenue", owner: "CFO, Cabinet Member" },
+    { need: "Decreased costs", owner: "CFO" }
   ],
   businessTension:
     "Two of these are the CFO's (revenue up, costs down) and three are inclusion needs from reception, Public Health and the Cabinet Member. Whatever order the group picks, someone in the room loses. The point is to make the trade-off explicit and say who will disagree, not to find an order everyone likes. A booking platform on its own mainly serves cost reduction; inclusion needs pricing, outreach or staffed help, which cost money.",
 
-  /* Kept for the config-driven rebuild; not shown on the page as a list. */
+  /* The group's priority order, with their reasoning and who disagrees. */
   businessNeeds: [
-    { need: "One record of bookings across online and phone", owner: "Leisure Operations Manager", why: "Double bookings are the biggest source of complaints" },
-    { need: "No rise in no-shows", owner: "CFO", why: "An empty floodlit hour costs about £40 and blocks a paying user" },
-    { need: "Evidence of new users, not just moved bookings", owner: "Cabinet Member, Public Health", why: "The stated outcome is more residents active, not more clicks" },
-    { need: "Reception time freed for people who need help", owner: "Reception lead", why: "About 40 hours a week currently go on booking calls" }
+    { need: "More inclusion for the community", owner: "Reception staff, Public Health", why: "Ranked first by the group: this is the main bulk of the issue and the core mission." },
+    { need: "Healthier children", owner: "Cabinet Member, Public Health", why: "Ranked second: part of the core mission the group will not veer from." },
+    { need: "Support public health for the over-50s", owner: "Public Health", why: "Ranked third: the theory of change leads to healthier older people." },
+    { need: "Increased revenue", owner: "CFO, Cabinet Member", why: "Ranked fourth. The group's words: helpful, but we can't veer from our core mission. The CFO and the CDIO, who put cost first, will disagree." },
+    { need: "Decreased costs", owner: "CFO, CDIO", why: "Ranked fifth. Same reasoning. This is the order the CFO and CDIO will push back on hardest: the platform was sold to them as a cost-reduction showcase." }
   ],
 
-  /* Example theory of change, facilitator-only until the group's own replaces it. */
+  /* The group's theory of change (Define hand-in). */
   theoryOfChange: {
-    ifWe: "let residents see availability and book online in under three minutes, without an account",
-    then: "casual players, including people who have never used a council facility, will book a slot instead of giving up",
-    because: "we believe the effort of phoning in office hours, and the uncertainty of turning up, is what stops them",
-    leadingTo: "more residents, and more new residents, using the facilities; better daytime occupancy; less reception time on the phone",
-    measuredBy: "share of bookings from first-time users (target 30% in six weeks), hours booked against last year, and the no-show rate as a guard-rail"
+    ifWe: "build an inclusive, helpful service",
+    then: "people will be more likely to use sports pitches",
+    because: "it is easier to do so",
+    leadingTo: "healthier older people and a more inclusive borough",
+    measuredBy: "active participants, and whether those who take part get healthier over time"
   },
   hypothesis:
-    "If residents can see availability and book online in under three minutes, more people who have never used our facilities will book, and overall facility use will go up.",
+    "If we build an inclusive, helpful booking service, more residents, especially the over-50s and children, will use our sports pitches because it is easier to do so, leading to healthier older people and a more inclusive borough.",
   theoryOfChangeHints: {
     ifWe: "What will we build or change? Be concrete.",
     then: "What will people do differently? Who?",
@@ -105,6 +106,7 @@ window.DEFINE = {
       { lane: "Resident", text: "Picks a date and time" },
       { lane: "Resident", text: "Enters name, email and postcode" },
       { lane: "Booking service", text: "Confirms on screen with a reference; holds the slot" },
+      { lane: "Booking service", text: "Offers to repeat the same slot every week, to build the habit" },
       { lane: "Reception", text: "Sees the booking in the same diary as phone bookings" },
       { lane: "Resident", text: "Turns up, shows the reference, pays at the desk" }
     ]
@@ -132,6 +134,12 @@ window.DEFINE = {
           acceptanceCriteria: [
             { given: "a resident has chosen a facility", when: "they view a day", then: "free and booked slots are shown differently and booked slots cannot be selected" },
             { given: "a slot has already been booked", when: "another resident views that day", then: "the slot is shown as unavailable" }
+          ] },
+        { id: "S13", title: "Book a midday over-50s session", release: "mvp",
+          as: "resident over 50", need: "to see and book low-cost midday sessions run for people my age", soThat: "I can try a facility at a quiet time with people like me",
+          acceptanceCriteria: [
+            { given: "a resident viewing a weekday", when: "they look at slots between 10am and 2pm", then: "over-50s sessions are shown with their low price and can be booked like any other slot" },
+            { given: "a resident who prefers to phone", when: "they ring reception", then: "the same midday sessions can be booked over the phone" }
           ] },
         { id: "S4", title: "Join a waiting list for a full slot", release: "later",
           as: "resident", need: "to be told if a full slot becomes free", soThat: "I do not have to keep checking",
@@ -171,6 +179,12 @@ window.DEFINE = {
           acceptanceCriteria: [
             { given: "a resident with a booking", when: "they cancel it", then: "the slot is available again and the booking is gone from their list" }
           ] },
+        { id: "S14", title: "Repeat my booking every week", release: "mvp",
+          as: "resident", need: "to book the same slot again next week with one tap", soThat: "playing becomes a habit rather than a one-off",
+          acceptanceCriteria: [
+            { given: "a resident on the confirmation page", when: "they choose to repeat the booking", then: "the same facility and time seven days later is booked and a second reference is shown" },
+            { given: "the same slot next week is already taken", when: "they choose to repeat", then: "they are told it is taken and offered the slot picker instead" }
+          ] },
         { id: "S10", title: "Change my booking", release: "later",
           as: "resident", need: "to move my booking to another slot", soThat: "I do not have to cancel and rebook",
           acceptanceCriteria: [
@@ -192,7 +206,12 @@ window.DEFINE = {
     ]
   },
 
+  /* The group's measures first (name and source from the hand-in; target,
+     baseline and guard-rail added), then the examples. */
   successMeasures: [
+    { name: "Participants over 50 and under 18", target: "25% of all participants in the first six weeks", baseline: "Unknown; the paper diary never recorded age. Estimated 15 to 20% from names matched by hand", source: "SQL on the age band captured at booking", guardRail: "" },
+    { name: "Total revenue", target: "Up 5% on the same six weeks last year", baseline: "About £48,000 over six weeks last year (fictional)", source: "SQL on the finance table", guardRail: "" },
+    { name: "Total costs", target: "No increase", baseline: "About £62,000 over six weeks last year (fictional)", source: "Finance spreadsheet", guardRail: "Costs must not rise above last year's for the same period" },
     { name: "Bookings made by people who have not used a Brent sports facility in the last 12 months", target: "30% of all bookings in the first six weeks", baseline: "Unknown; estimated 10 to 15% of phone bookings", source: "Checkout question plus SQL on the bookings table", guardRail: "" },
     { name: "Hours booked", target: "Up 10% on the same six weeks last year", baseline: "Diary sample", source: "Bookings table and diaries", guardRail: "" },
     { name: "Reception time on booking calls", target: "Down by a quarter", baseline: "About 40 hours a week", source: "Contact centre report plus a two-week call reason sample", guardRail: "" },
@@ -201,9 +220,10 @@ window.DEFINE = {
 
   /* Optional build choices the group may hand in. These mirror config/mvp.js. */
   buildChoices: {
-    facilities: "Vale Farm 3G pitch, Willesden badminton court, Bridge Park sports hall, King Edward VII Park tennis court",
-    detailsCollected: "Name, email, phone (optional), postcode",
+    facilities: "Vale Farm 3G pitch, Willesden badminton court, Bridge Park sports hall, King Edward VII Park tennis court, plus a midday over-50s session at Willesden (from the story map feedback)",
+    detailsCollected: "Name, email, phone (optional), postcode, age group (so participants over 50 and under 18 can be counted)",
     residentsOnly: "No",
-    askFirstVisit: "Yes, because the measure of success depends on it"
+    askFirstVisit: "No; the age group question replaces it",
+    repeatBooking: "Yes: one tap on the confirmation page books the same slot next week (from the process feedback)"
   }
 };

@@ -38,6 +38,8 @@ window.EVIDENCE = {
      the group defined. The first rule whose keywords match the measure wins.
      Keep every result ambiguous: near a plausible target, never a clean win. */
   measureResults: [
+    { match: ["over 50 and under 18", "under 18 and over 50", "over-50 and under-18", "over 50s and under 18s"], value: "23%", detail: "of participants were over 50 or under 18: 19% over 50 (almost all booked by phone) and 4% under 18 (booked by a parent)", tone: "neutral", but: "The paper diary never recorded age, so there is no baseline to say whether 23% is up, down or the same." },
+    { match: ["total cost", "total costs", "running cost", "costs"], value: "-£700", detail: "total running cost over six weeks compared with last year, after £3,100 of reception time freed and £2,400 of floodlit hours lost to no-shows", tone: "neutral", but: "The platform's licence and support cost of about £1,500 a quarter is not yet in the finance spreadsheet." },
     { match: ["no-show", "no show", "turn up", "attend"], value: "22%", detail: "no-show rate on online bookings, against 9% for phone bookings last year", tone: "bad", but: "Nobody pays at booking, so a click costs nothing to abandon." },
     { match: ["first-time", "first time", "new user", "new people", "never used", "not used", "new resident", "new booker"], value: "19%", detail: "of bookings were from people who said they had not used a facility in the last 12 months", tone: "neutral", but: "Self-reported at checkout. Some regulars may have said 'no' to get through faster." },
     { match: ["call", "phone", "reception", "staff time", "staff hours", "workload"], value: "-31%", detail: "reception phone calls compared with the same six weeks last year", tone: "good", but: "60% of the remaining calls are about the website, and they take longer." },
@@ -56,11 +58,11 @@ window.EVIDENCE = {
   /* 1. What we set out to do (copied from the requirements doc) */
   setOutToDo: {
     hypothesis:
-      "If residents can see availability and book online in under three minutes, more people who have never used our facilities will book, and overall facility use will go up.",
-    measure: "Bookings made by people who have not used a Brent sports facility in the last 12 months",
-    target: "30% of all bookings in the first six weeks",
-    baseline: "Unknown; estimated 10 to 15% of phone bookings",
-    guardRail: "No-show rate must not rise above 15%"
+      "If we build an inclusive, helpful booking service, more residents, especially the over-50s and children, will use our sports pitches because it is easier to do so, leading to healthier older people and a more inclusive borough.",
+    measure: "Participants over 50 and under 18",
+    target: "25% of all participants in the first six weeks",
+    baseline: "Unknown; the paper diary never recorded age. Estimated 15 to 20% from names matched by hand",
+    guardRail: "Total costs must not rise above last year's for the same period"
   },
 
   /* 2. Measurement plan: the group's questions, with generated results */

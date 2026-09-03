@@ -195,6 +195,11 @@ a:hover { color: var(--brent-blue-dark); }
   margin: 0.25rem 0 0.5rem;
 }
 
+.repeat-panel { border-left: 6px solid var(--brent-green); }
+.repeat-panel h3 { margin-bottom: 0.25rem; }
+.repeat-ok { color: var(--success); font-weight: 600; margin: 0; }
+.repeat-taken { margin: 0; }
+
 /* ---- Progress steps ------------------------------------------------- */
 .steps {
   display: flex;

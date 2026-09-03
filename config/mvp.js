@@ -21,28 +21,33 @@ window.MVP = {
 
   mvp: {
     targetUser:
-      "Brent residents aged 18 to 35 who do not currently use council sports facilities.",
+      "Brent residents who do not currently use council sports facilities, especially the over-50s and families with children.",
     userNeed:
-      "As a resident who wants to play sport casually, I need to see what is free and book it quickly, so that I do not have to phone the centre or turn up and be turned away.",
+      "As a resident who has never used the council's facilities, I need booking to be easy and welcoming, so that trying a session feels possible rather than daunting.",
     hypothesis:
-      "If residents can see availability and book online in under three minutes, more people who have never used our facilities will book, and overall facility use will go up.",
+      "If we build an inclusive, helpful booking service, more residents, especially the over-50s and children, will use our sports pitches because it is easier to do so, leading to healthier older people and a more inclusive borough.",
     process: [
-      "Choose a facility",
+      "Choose a session",
       "Pick a date and time",
       "Enter your details",
-      "Get confirmation"
+      "Confirm and repeat"
     ],
     acceptanceCriteria: [
-      "A resident can see which slots are free for the next 14 days without logging in.",
-      "A booking can be completed on a mobile phone in under three minutes.",
-      "The resident receives a booking reference on screen immediately.",
-      "A slot cannot be booked twice.",
-      "The resident can cancel their own booking."
+      "A resident can see every bookable facility with its site, activity and price without logging in.",
+      "A resident can see which slots are free for the next 14 days, and booked slots cannot be selected.",
+      "A resident can book by giving only their name, email, postcode and age group, in under three minutes on a phone.",
+      "A resident who leaves a required field empty sees a specific error next to the field and at the top of the page.",
+      "The resident receives a unique booking reference on screen immediately.",
+      "A resident can see and book low-cost midday over-50s sessions like any other slot, and can also book them by phone.",
+      "A resident can book the same slot again next week with one tap from the confirmation page, and is told if it is taken.",
+      "The resident can cancel their own booking and the slot becomes available again.",
+      "Reception sees online bookings in the same diary as phone bookings."
     ],
     successMeasure: {
-      name: "Bookings made by people who have not used a Brent sports facility in the last 12 months",
-      target: "30% of all bookings in the first six weeks"
-    }
+      name: "Participants over 50 and under 18",
+      target: "25% of all participants in the first six weeks"
+    },
+    repeatBooking: true
   },
 
   /* Fictional facilities. Names are loosely inspired by real Brent
@@ -85,6 +90,18 @@ window.MVP = {
       busyPercent: 45
     },
     {
+      id: "willesden-over-50s",
+      name: "Over-50s midday session",
+      site: "Willesden Sports Centre, Donnington Road",
+      activity: "Walking football and badminton, over-50s",
+      description: "A relaxed midday session for the over-50s. No experience needed, equipment provided, tea afterwards. Also bookable by phone.",
+      pricePence: 300,
+      slotMinutes: 60,
+      openingHours: { start: "10:00", end: "14:00" },
+      daysBookableAhead: 14,
+      busyPercent: 15
+    },
+    {
       id: "king-edward-tennis",
       name: "Tennis court",
       site: "King Edward VII Park, Wembley",
@@ -103,15 +120,21 @@ window.MVP = {
        { id: "players", label: "Number of players", hint: "...", required: true, type: "number" }
      Standard fields can also be objects to override their label or hint. */
   bookingForm: {
-    fields: ["name", "email", "phone", "postcode"],
+    fields: [
+      "name", "email", "phone", "postcode",
+      { id: "ageBand", type: "radio", required: true, label: "Which age group are you in?",
+        hint: "We use this to check the service is reaching everyone in Brent.",
+        options: [{ value: "under18", label: "Under 18" }, { value: "18to49", label: "18 to 49" }, { value: "50plus", label: "50 and over" }] }
+    ],
     requireBrentPostcode: false,
     brentPostcodePrefixes: ["NW2", "NW6", "NW9", "NW10", "HA0", "HA3", "HA9", "W3", "W10", "NW3"],
-    askFirstTimeUser: true
+    askFirstTimeUser: false
   },
 
   copy: {
-    intro: "Choose a facility to see what is free over the next two weeks. You do not need an account.",
+    intro: "Choose a session to see what is free over the next two weeks. You do not need an account. Look out for the low-cost midday over-50s sessions, and once you have booked you can repeat the same slot every week.",
     confirmation: "Your booking is confirmed. Show this reference at reception when you arrive.",
+    repeatButton: "Book this slot again next week",
     firstTimeQuestion: "Have you used a Brent Council sports facility in the last 12 months?"
   }
 };

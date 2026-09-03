@@ -264,9 +264,33 @@
     if (b.details.name) html += "<dt>Name</dt><dd>" + esc(b.details.name) + "</dd>";
     if (b.details.email) html += "<dt>Email</dt><dd>" + esc(b.details.email) + "</dd>";
     html += "</dl></div>";
+    if (MVP.mvp.repeatBooking) {
+      html += '<div class="panel repeat-panel"><h3>Make it a habit</h3>';
+      if (state.repeatResult) {
+        html += state.repeatResult.ok
+          ? '<p class="repeat-ok">Booked again for <strong>' + esc(fmtDate(state.repeatResult.date)) + " at " + state.repeatResult.time + "</strong>. Reference <strong>" + esc(state.repeatResult.ref) + "</strong>.</p>"
+          : '<p class="repeat-taken">That slot is already taken next week. <button class="btn btn--link" type="button" data-repeat-pick>Pick a different time</button></p>';
+      } else {
+        html += "<p>Same time next week? One tap books the same slot seven days later.</p>" +
+          '<button class="btn" type="button" data-repeat>' + esc((MVP.copy && MVP.copy.repeatButton) || "Book this slot again next week") + "</button>";
+      }
+      html += "</div>";
+    }
     html += '<div class="btn-row"><button class="btn" type="button" data-restart>Book another slot</button>' +
       '<a class="btn btn--secondary" href="evidence.html">See what happened after launch</a></div>';
     return html;
+  }
+
+  function repeatBooking() {
+    var b = state.lastBooking, f = facility(b.facilityId);
+    var d = fromISO(b.date); d.setDate(d.getDate() + 7);
+    var iso = toISO(d);
+    var free = slotsFor(f, iso).some(function (s) { return s.time === b.time && !s.taken; });
+    if (!free) { state.repeatResult = { ok: false }; render(); return; }
+    var nb = { ref: makeRef(), facilityId: f.id, facilityName: f.name, site: f.site, pricePence: f.pricePence, date: iso, time: b.time, details: b.details, createdAt: new Date().toISOString(), repeatOf: b.ref };
+    var all = loadBookings(); all.push(nb); saveBookings(all);
+    state.repeatResult = { ok: true, ref: nb.ref, date: iso, time: b.time };
+    render();
   }
 
   function renderBookings() {
@@ -319,7 +343,14 @@
     if (form) form.addEventListener("submit", onSubmit);
     var restart = $("[data-restart]", app);
     if (restart) restart.addEventListener("click", function () {
-      state.step = 0; state.facilityId = null; state.date = null; state.time = null; state.details = {}; state.errors = {}; render();
+      state.step = 0; state.facilityId = null; state.date = null; state.time = null; state.details = {}; state.errors = {}; state.repeatResult = null; render();
+    });
+    var rep = $("[data-repeat]", app);
+    if (rep) rep.addEventListener("click", repeatBooking);
+    var pick = $("[data-repeat-pick]", app);
+    if (pick) pick.addEventListener("click", function () {
+      var b = state.lastBooking, d = fromISO(b.date); d.setDate(d.getDate() + 7);
+      state.facilityId = b.facilityId; state.date = toISO(d); state.time = null; state.step = 1; state.repeatResult = null; render();
     });
   }
 
@@ -343,7 +374,7 @@
       date: state.date, time: state.time, details: values, createdAt: new Date().toISOString()
     };
     var all = loadBookings(); all.push(booking); saveBookings(all);
-    state.lastBooking = booking; state.step = 3; render();
+    state.lastBooking = booking; state.repeatResult = null; state.step = 3; render();
   }
 
   document.addEventListener("click", function (e) {
