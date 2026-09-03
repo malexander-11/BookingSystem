@@ -68,7 +68,7 @@ Update three files:
 
 ### Hand-in 3: pilot results and additional data needed (end of Evaluate, optional)
 
-The session normally ends at the Evaluate page's section 4, "So was it a success?", which is a discussion with no hand-in. The additional-data builder sits under "If there is time" on that page; this hand-in only arrives if the facilitator uses it.
+The session normally ends at the Evaluate page's section 4, "So what next?" (invest, iterate, pause, pivot or stop), which is a discussion with no hand-in. The additional-data builder sits under "If there is time" on that page; this hand-in only arrives if the facilitator uses it.
 
 ```
 MEASURES AND PILOT RESULTS

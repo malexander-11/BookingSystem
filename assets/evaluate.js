@@ -52,7 +52,7 @@
     '<li><span class="chain__label">1</span>What did we set out to do? <span class="muted-line">The theory of change and the measures from Define.</span></li>' +
     '<li><span class="chain__label">2</span>What do the numbers say? <span class="muted-line">The pilot results against the measures you chose.</span></li>' +
     '<li><span class="chain__label">3</span>What do the numbers not tell us? <span class="muted-line">One question per link in the theory of change.</span></li>' +
-    '<li><span class="chain__label">4</span>So was it a success? <span class="muted-line">Decide what success meant before you answer, or the data will decide for you.</span></li>' +
+    '<li><span class="chain__label">4</span>So what next? <span class="muted-line">Invest, iterate, pause, pivot or stop. Decide what success meant before you answer, or the data will decide for you.</span></li>' +
     "</ol>";
 
   /* 2. Theory-of-change links */
@@ -82,18 +82,26 @@
   if (!Array.isArray(ord) || ord.length !== items.length) ord = items.map(function (_, i) { return i; });
   var firstNeed = items[ord[0]] ? items[ord[0]].need : "", lastNeed = items[ord[ord.length - 1]] ? items[ord[ord.length - 1]].need : "";
   var so = E.setOutToDo || {};
-  html += h2(4, "So was it a success?") +
-    '<div class="panel verdict"><p class="verdict__question">So was it a success?</p>' +
-    '<div class="verdict__choices" role="group" aria-label="Your verdict">' +
-    '<button type="button" class="pill" data-verdict="yes">Yes</button>' +
-    '<button type="button" class="pill" data-verdict="no">No</button>' +
-    '<button type="button" class="pill" data-verdict="unsure">We cannot tell yet</button></div>' +
+  html += h2(4, "So what next?") +
+    '<div class="panel verdict"><p class="verdict__question">So what next?</p>' +
+    '<div class="verdict__choices" role="group" aria-label="Your decision">' +
+    '<button type="button" class="pill" data-verdict="invest">Invest</button>' +
+    '<button type="button" class="pill" data-verdict="iterate">Iterate</button>' +
+    '<button type="button" class="pill" data-verdict="pause">Pause</button>' +
+    '<button type="button" class="pill" data-verdict="pivot">Pivot</button>' +
+    '<button type="button" class="pill" data-verdict="stop">Stop</button></div>' +
+    '<ul class="verdict__options">' +
+    "<li><strong>Invest:</strong> it worked well enough to put more money and sites behind it.</li>" +
+    "<li><strong>Iterate:</strong> keep the direction, change specific things, run it again.</li>" +
+    "<li><strong>Pause:</strong> stop spending until the missing evidence is in.</li>" +
+    "<li><strong>Pivot:</strong> keep the goal, change the solution.</li>" +
+    "<li><strong>Stop:</strong> switch it off and put the effort somewhere else.</li></ul>" +
     '<label class="form-label" for="verdict-why">Because</label>' +
-    '<textarea class="form-input" id="verdict-why" data-key="why" rows="4" placeholder="Say who it was a success for, against which number, and what you would need to be sure."></textarea>' +
+    '<textarea class="form-input" id="verdict-why" data-key="why" rows="4" placeholder="Say who it worked for, against which number, and what you would need to know to be sure."></textarea>' +
     '<ul class="verdict__prompts">' +
-    "<li><strong>Success for whom?</strong> You put <em>" + esc(firstNeed) + "</em> first and <em>" + esc(lastNeed) + "</em> last. Which of them is this a success for?</li>" +
+    "<li><strong>Success for whom?</strong> You put <em>" + esc(firstNeed) + "</em> first and <em>" + esc(lastNeed) + "</em> last. Which of them did this work for?</li>" +
     "<li><strong>Success against what?</strong> The target was <em>" + esc(so.target) + "</em>. The baseline is <em>" + esc(so.baseline) + "</em>. The guard-rail was <em>" + esc(so.guardRail) + "</em>.</li>" +
-    "<li><strong>What would you have needed to decide before seeing the numbers?</strong> A number that would have counted as failure, agreed by the CFO and by reception.</li>" +
+    "<li><strong>What would you need to find out before you were confident?</strong> And what result would have counted as failure, agreed by the CFO and by reception?</li>" +
     "</ul></div>";
 
   /* If there is time: the additional data builder, source guide and what comes back. */

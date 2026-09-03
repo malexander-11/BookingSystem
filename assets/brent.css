@@ -896,6 +896,8 @@ a:hover { color: var(--brent-blue-dark); }
 .verdict__choices { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
 .verdict__choices .pill { font-size: 1rem; padding: 0.55rem 1rem; }
 .verdict .form-input { max-width: none; margin-bottom: 1rem; }
+.verdict__options { margin: 0 0 1rem; padding-left: 1.25rem; font-size: 0.95rem; }
+.verdict__options li { margin-bottom: 0.25rem; }
 .verdict__prompts { margin: 0; padding-left: 1.25rem; }
 .verdict__prompts li { margin-bottom: 0.6rem; }
 .if-time {
