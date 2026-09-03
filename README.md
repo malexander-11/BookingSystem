@@ -43,6 +43,15 @@ python3 -m http.server 8080
 every push to any branch, so the latest push is what participants see at
 https://malexander-11.github.io/BookingSystem/.
 
+**One-time setup (needs the repository owner):** GitHub will not let a
+workflow create the Pages site itself, so before the first deploy go to
+*Settings → Pages → Build and deployment* and set **Source** to
+**GitHub Actions**. Then re-run the failed "Deploy to GitHub Pages" workflow
+from the Actions tab (or push any commit). If the deploy is rejected with a
+"branch is not allowed to deploy to github-pages" message, open
+*Settings → Environments → github-pages* and allow all branches under
+"Deployment branches and tags".
+
 ## Branding
 
 Colours and fonts (Poppins, Noto Sans) are taken from the public
