@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a sports facility | Brent Council (training sandbox)</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/brent.css">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="sandbox-banner" id="sandbox-banner">Training sandbox: fictional service</div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="Brent Council home (sandbox)">
+        <svg viewBox="0 0 150 40" width="150" height="40" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3982c6"/><stop offset="1" stop-color="#085093"/></linearGradient>
+            <linearGradient id="lg2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#30b781"/><stop offset="1" stop-color="#0964b9"/></linearGradient>
+          </defs>
+          <circle cx="20" cy="20" r="19" fill="url(#lg1)"/>
+          <path d="M20 6 C 30 10, 30 30, 20 34 C 10 30, 10 10, 20 6 Z" fill="url(#lg2)" opacity="0.9"/>
+          <path d="M8 14 C 18 8, 32 14, 32 26 C 22 32, 8 26, 8 14 Z" fill="#fff" opacity="0.18"/>
+          <circle cx="20" cy="20" r="4.5" fill="#f3eb03"/>
+          <text x="48" y="27" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="21" fill="currentColor" letter-spacing="-0.5">Brent</text>
+        </svg>
+      </a>
+      <nav aria-label="Council sections">
+        <ul class="site-nav">
+          <li><a href="#" onclick="return false">Residents</a></li>
+          <li><a href="#" onclick="return false">Business</a></li>
+          <li><a href="#" onclick="return false">Council and democracy</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="service-bar">
+    <div class="container">
+      <a class="service-name" href="index.html" id="service-name">Book a sports facility</a>
+      <ul class="service-links">
+        <li><a href="index.html" aria-current="page">Book</a></li>
+        <li><a href="evidence.html">After build: evidence</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <h1 id="hero-title">Book a sports facility</h1>
+      <p id="hero-strapline"></p>
+    </div>
+  </section>
+
+  <main id="main" class="page">
+    <div class="container layout">
+      <div id="app" aria-live="polite">
+        <noscript><p class="notice">This sandbox needs JavaScript turned on.</p></noscript>
+      </div>
+      <aside>
+        <details class="mvp-panel" id="mvp-panel">
+          <summary>About this MVP (for the workshop)</summary>
+          <dl id="mvp-panel-body"></dl>
+        </details>
+        <section class="panel" aria-labelledby="your-bookings-title">
+          <h2 id="your-bookings-title">Your bookings</h2>
+          <p class="muted" style="font-size:0.9rem;color:var(--text-muted)">Saved in this browser only.</p>
+          <ul class="bookings-list" id="bookings-list"></ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <ul>
+        <li><a href="#" onclick="return false">Accessibility</a></li>
+        <li><a href="#" onclick="return false">Privacy</a></li>
+        <li><a href="#" onclick="return false">Contact us</a></li>
+      </ul>
+      <p class="footer-note" id="footer-note"></p>
+    </div>
+  </footer>
+
+  <script src="config/mvp.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
