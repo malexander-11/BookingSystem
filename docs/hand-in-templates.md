@@ -1,9 +1,12 @@
 # Hand-in templates
 
-Copy the block for the stage, fill it in, and paste it to Claude. Keep the
-labels as they are; Claude uses them to map your words into the site.
+The Discover and Define pages compile these from what the group types, with a
+Copy button. Paste the text to Claude. Keep the labels: Claude uses them to
+map the words into the site.
 
 ## End of Discover: problem statement
+
+Copied from the "Output: the problem statement" section of the Discover page.
 
 ```
 PROBLEM STATEMENT
@@ -12,40 +15,54 @@ Needs to:
 Because: 
 Today they: 
 Which results in: 
+
+AGREEMENT
+<who agrees this is the problem, who does not, what is still contested>
+
+SIZE OF THE PRIZE
+<what the numbers say it is worth solving>
+
+WATCH OUT FOR
+<who could lose out if we solve it the obvious way>
 ```
 
 ## End of Define: the MVP definition
 
+Copied from the "Copy what we've written" section of the Define page.
+
 ```
 USERS
-- Primary: <who they are> | Today: <what they do now>
-- Secondary: <who they are> | Today: <what they do now>
+- Primary: <name> | Who: <who they are> | Today: <what they do now>
+  Needs: <need>; <need>; <need>
+- Secondary: <name> | Who: <who they are> | Today: <what they do now>
+  Needs: <need>; <need>; <need>
 
-USER STORIES (one block per story)
-Story 1: As a <user>, I need <...>, so that <...>. Release: MVP
-  AC: Given <...> When <...> Then <...>
-  AC: Given <...> When <...> Then <...>
-Story 2: As a <user>, I need <...>, so that <...>. Release: later
-  AC: Given <...> When <...> Then <...>
+BUSINESS NEED PRIORITY
+1. <need>
+2. <need>
+3. <need>
+4. <need>
+5. <need>
+Why, and who disagrees: <...>
 
-NEW PROCESS FLOW
-1. <step> (who does it)
-2. <step> (who does it)
-3. <step> (who does it)
-4. <step> (who does it)
-
-HYPOTHESIS FOR CHANGE
+THEORY OF CHANGE
 If we: 
 Then: 
 Because: 
 Leading to: 
 Measured by: 
 
+PROCESS FEEDBACK
+<what to change, add or remove in the to-be process>
+
+STORY MAP FEEDBACK
+<which stories are wrong, missing or on the wrong side of the MVP line>
+
 SUCCESS MEASURES
-- Name: <what we count> | Target: <number and time window> | Baseline: <the number today> | Source: <where the number comes from> | Guard-rail: <what must not get worse>
+- Name: <what we count> | Target: <number and window> | Baseline: <today> | Source: <where from> | Guard-rail: <must not get worse>
 ```
 
-Optional build choices, if you have decided them:
+Optional build choices, if the group decided them:
 
 ```
 BUILD CHOICES
@@ -57,7 +74,7 @@ Ask if first visit: yes / no
 
 ## End of Evaluate: measurement plan
 
-Use the builder on the Evaluate page and press "Copy plan". It produces:
+Copied from the plan builder on the Evaluate page ("Copy plan").
 
 ```
 MEASUREMENT PLAN

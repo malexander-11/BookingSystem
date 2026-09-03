@@ -23,6 +23,16 @@ a hand-in into Claude, Claude updates the config and pushes; the site
 redeploys in a minute or two. `CLAUDE.md` has the exact mapping and
 `docs/hand-in-templates.md` the plain-text templates.
 
+The Discover and Define pages are interactive: the group fills in the brief,
+drags stakeholders onto the power/interest grid, prepares and records two
+interviews, takes a true/false quiz on the data, annotates the as-is process
+with pain points, adds assumptions, composes the problem statement, names the
+users, ranks the business needs, writes the theory of change, comments on the
+process and story map, and adds success measures. Everything typed is saved
+in that browser; "Reset this page" clears it. Model answers and the interview
+scripts appear only in **facilitator view**: open any page with
+`?facilitator=1` (and `?facilitator=0` to turn it off).
+
 ## Running locally
 
 No build step and no dependencies. Either open any `.html` file directly in a

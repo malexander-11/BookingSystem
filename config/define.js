@@ -1,13 +1,21 @@
 /* ==================================================================
-   DEFINE (during build): worked example for the workshop
+   DEFINE (during build): content for the interactive Define page
    ------------------------------------------------------------------
    Rendered by define.html. Everything here is fictional and matches
    the seed booking site in config/mvp.js.
 
-   The group hands in: users, user stories with acceptance criteria,
-   a new process flow, a hypothesis for change and success measures.
-   When the facilitator pastes that, replace the matching sections
-   here AND update config/mvp.js (the booking site) and
+   Participants see: the problem statement, two blank user group cards
+   (one need given, two to add), five business needs to prioritise, a
+   blank theory of change, the to-be process and story map (with space
+   for feedback), the example success measures (with space to add
+   their own), and a "copy what we've written" box that compiles the
+   hand-in.
+
+   Facilitator view (?facilitator=1) also shows the example user
+   groups, the tension note and the example theory of change.
+
+   When the facilitator pastes the Define hand-in, replace the matching
+   sections here AND update config/mvp.js (the booking site) and
    `setOutToDo` in config/evidence.js. See CLAUDE.md for the mapping.
    ================================================================== */
 
@@ -25,10 +33,17 @@ window.DEFINE = {
     ]
   },
 
-  /* Carried over from Discover, unchanged. */
+  /* Carried over from Discover. Replaced by the group's own statement when handed in. */
   problemStatement:
     "Brent residents who want to play sport casually need to find a free slot and secure it with confidence, because they will only play if it is easy and predictable. Today they phone during office hours or turn up and hope, which results in residents being turned away from full evening slots while daytime slots sit at 30% occupancy, flat facility use, lost income from no-shows, and around 40 staff hours a week spent on the phone and the diary.",
 
+  /* One need is given for each blank card; the group adds two more. */
+  starterNeeds: {
+    primary: "See what is free tonight or this week without having to ask anyone",
+    secondary: "Keep the way they book today working while the new one is tried"
+  },
+
+  /* Example user groups, facilitator-only until the group's own replace them. */
   userGroups: [
     { name: "Casual players who do not use council facilities", primary: true,
       who: "Brent residents aged 18 to 35 who play, or would like to play, sport casually with friends. Comfortable on a phone. Not in a club.",
@@ -37,11 +52,7 @@ window.DEFINE = {
     { name: "Regular bookers", primary: false,
       who: "Residents who already book by phone or at the desk, often weekly. Skew older.",
       today: "Ring on Monday for Thursday. Know the staff by name.",
-      needs: ["Keep their usual slot", "Not be forced online", "A quicker way if it exists"] },
-    { name: "Reception and duty staff", primary: false,
-      who: "The people who take bookings and run the buildings.",
-      today: "Paper diary per site, reconciled with the till nightly.",
-      needs: ["One record of bookings", "Fewer 'is anything free' calls", "People who booked actually turning up"] }
+      needs: ["Keep their usual slot", "Not be forced online", "A quicker way if it exists"] }
   ],
 
   userNeeds: [
@@ -51,13 +62,26 @@ window.DEFINE = {
     { as: "regular booker", need: "the phone line to keep working", soThat: "I am not forced to change how I book" }
   ],
 
+  /* The five business needs the group ranks. Order here is the starting order. */
+  businessPriorities: [
+    { need: "Increased revenue", owner: "CFO, Cabinet Member" },
+    { need: "Decreased costs", owner: "CFO" },
+    { need: "Healthier children", owner: "Cabinet Member, Public Health" },
+    { need: "More inclusion for the community", owner: "Reception staff, Public Health" },
+    { need: "Support public health for the over-50s", owner: "Public Health" }
+  ],
+  businessTension:
+    "Two of these are the CFO's (revenue up, costs down) and three are inclusion needs from reception, Public Health and the Cabinet Member. Whatever order the group picks, someone in the room loses. The point is to make the trade-off explicit and say who will disagree, not to find an order everyone likes. A booking platform on its own mainly serves cost reduction; inclusion needs pricing, outreach or staffed help, which cost money.",
+
+  /* Kept for the config-driven rebuild; not shown on the page as a list. */
   businessNeeds: [
     { need: "One record of bookings across online and phone", owner: "Leisure Operations Manager", why: "Double bookings are the biggest source of complaints" },
-    { need: "No rise in no-shows", owner: "Finance", why: "An empty floodlit hour costs about £40 and blocks a paying user" },
+    { need: "No rise in no-shows", owner: "CFO", why: "An empty floodlit hour costs about £40 and blocks a paying user" },
     { need: "Evidence of new users, not just moved bookings", owner: "Cabinet Member, Public Health", why: "The stated outcome is more residents active, not more clicks" },
     { need: "Reception time freed for people who need help", owner: "Reception lead", why: "About 40 hours a week currently go on booking calls" }
   ],
 
+  /* Example theory of change, facilitator-only until the group's own replaces it. */
   theoryOfChange: {
     ifWe: "let residents see availability and book online in under three minutes, without an account",
     then: "casual players, including people who have never used a council facility, will book a slot instead of giving up",
@@ -67,6 +91,13 @@ window.DEFINE = {
   },
   hypothesis:
     "If residents can see availability and book online in under three minutes, more people who have never used our facilities will book, and overall facility use will go up.",
+  theoryOfChangeHints: {
+    ifWe: "What will we build or change? Be concrete.",
+    then: "What will people do differently? Who?",
+    because: "Why do we believe that? This is the assumption evaluation will test.",
+    leadingTo: "What outcome does the council actually want from that behaviour?",
+    measuredBy: "Which number, from where, by when?"
+  },
 
   toBeProcess: {
     lanes: ["Resident", "Booking service", "Reception"],

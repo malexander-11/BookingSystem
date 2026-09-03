@@ -29,6 +29,20 @@ flowchart LR
 - The measurement plan from Evaluate says what data to generate.
 - The decision at the end restarts discovery. That is why BA is continuous.
 
+## Interactive pages
+
+Discover and Define are worksheets, not just examples. Participants type on
+the page and it is saved in their browser. Each page has a "Reset this page"
+button. The example answers, intended stakeholder placement, interview scripts
+and example theory of change are shown only in facilitator view: open a page
+with `?facilitator=1` (turn off with `?facilitator=0`).
+
+| Page | What the group does |
+|---|---|
+| Discover | Fill in the brief; drag stakeholders onto the grid; prepare, run and record two interviews (CFO, reception staff); read the data and take a true/false quiz; annotate the as-is process with pain points; add an assumption; compose the problem statement with agreement, size of prize and watch-outs; copy it |
+| Define | Name the primary and secondary users and their needs; rank five business needs and say who disagrees; write the theory of change; give feedback on the to-be process and the story map; add success measures; copy the compiled hand-in |
+| Evaluate | Build the measurement plan and copy it |
+
 ## How the hand-ins reach the site
 
 Every page renders from a config file. When the facilitator pastes a hand-in

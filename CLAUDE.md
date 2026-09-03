@@ -26,41 +26,44 @@ few minutes. There is no build step and no server.
 
 The group hands in three things during the session. Each arrives as pasted text using the labels in `docs/hand-in-templates.md` (the same text is in the "Hand this in" panel on the Discover and Define pages, and the plan builder on the Evaluate page).
 
+The Discover and Define pages are interactive: participants type on the page (saved in their browser) and press a Copy button that compiles the hand-in. Model answers and interview scripts appear only in facilitator view (open any page with `?facilitator=1`; `?facilitator=0` turns it off).
+
 ### Hand-in 1: problem statement (end of Discover)
 
 ```
 PROBLEM STATEMENT
 Who: ... / Needs to: ... / Because: ... / Today they: ... / Which results in: ...
+AGREEMENT ...  SIZE OF THE PRIZE ...  WATCH OUT FOR ...
 ```
 
-1. `config/discovery.js` → `problemStatement.who`, `.needsTo`, `.because`, `.today`, `.resultsIn`. Rewrite `.note` to point at what their statement leaves open (one or two sentences, no praise).
-2. `config/define.js` → `problemStatement`: the same five parts joined into one paragraph.
-3. Leave the rest of the Discover example as it is unless they pasted more findings and asked for them to replace the example.
+1. `config/discovery.js` → `problemStatement.who`, `.needsTo`, `.because`, `.today`, `.resultsIn`, and `.agreement`, `.sizeOfPrize`, `.watchOuts` from the three extra blocks. Rewrite `.note` to point at what their statement leaves open (one or two sentences, no praise).
+2. `config/define.js` → `problemStatement`: the same five parts joined into one paragraph. (The Define page shows agreement, prize and watch-outs from `DISCOVERY.problemStatement` automatically.)
+3. Leave the rest of the Discover content as it is unless they pasted more findings and asked for them to replace the example.
 
 ### Hand-in 2: the MVP definition (end of Define)
 
-`USERS`, `USER STORIES` (with `AC:` lines), `NEW PROCESS FLOW`, `HYPOTHESIS FOR CHANGE`, `SUCCESS MEASURES`, optional `BUILD CHOICES`.
+`USERS`, `BUSINESS NEED PRIORITY`, `THEORY OF CHANGE`, `PROCESS FEEDBACK`, `STORY MAP FEEDBACK`, `SUCCESS MEASURES`, optional `BUILD CHOICES`.
 
 Update three files:
 
 **`config/define.js`**
-- `userGroups`: one per USERS line; the "Primary" one gets `primary: true`. Fill `who` and `today` from the line; `needs` from the stories for that user.
-- `userNeeds`: one per story, as / need / soThat.
-- `businessNeeds`: keep the example unless they gave business needs.
-- `theoryOfChange`: the five HYPOTHESIS FOR CHANGE lines. `hypothesis`: one sentence combining If we / then.
-- `toBeProcess`: lanes from the "(who does it)" parts; one step per line.
-- `storyMap.activities`: one activity per process step (name it after the step), plus "Manage my booking" and "Run the service" only if they have stories for them. Put each story under the activity it belongs to. `release` is "mvp" or "later" from the story line. Each `AC:` line becomes `{given, when, then}`. Ids S1, S2, … in the order given.
-- `successMeasures`: one per SUCCESS MEASURES line; a Guard-rail value goes in `guardRail`.
+- `userGroups`: two entries from USERS; Primary gets `primary: true`. `name`, `who`, `today`, `needs` from the line (needs are the "Needs:" list, including the given one).
+- `userNeeds`: one per need, written as as / need / soThat (as = the group name; soThat inferred from the problem statement if not given).
+- `businessNeeds`: reorder to match BUSINESS NEED PRIORITY (top three first), and put the "who disagrees" answer into the `why` of the need that loses.
+- `theoryOfChange`: the five THEORY OF CHANGE lines. `hypothesis`: one sentence combining If we / then.
+- `toBeProcess`: apply PROCESS FEEDBACK (add, remove, rename or re-lane steps). Keep 5 to 8 steps.
+- `storyMap.activities`: apply STORY MAP FEEDBACK (move stories across the MVP line, add missing stories with at least one Given/When/Then each, drop stories they called wrong). Keep ids unique; new ones continue the S-numbering.
+- `successMeasures`: append the SUCCESS MEASURES lines to the examples, group's first; a Guard-rail value goes in `guardRail`.
 - `buildChoices`: from BUILD CHOICES if given, otherwise leave.
 
 **`config/mvp.js`** (the booking site)
-- `mvp.targetUser` ← the Primary user's "who".
-- `mvp.userNeed` ← the first MVP story as one sentence "As a …, I need …, so that …".
+- `mvp.targetUser` ← the Primary user's "Who".
+- `mvp.userNeed` ← the Primary user's first need as "As a <group>, I need <need>, so that <outcome from the problem statement>".
 - `mvp.hypothesis` ← `hypothesis` above.
-- `mvp.process` ← the NEW PROCESS FLOW step names, shortened to 2 to 4 words each; keep 3 to 5 steps. The site's flow is always facility → slot → details → confirmation; the labels are what change.
-- `mvp.acceptanceCriteria` ← every MVP story's ACs as plain sentences ("A resident can …").
-- `mvp.successMeasure.name` and `.target` ← the first success measure.
-- `facilities`, `bookingForm.fields`, `bookingForm.requireBrentPostcode`, `bookingForm.askFirstTimeUser`, `brand.service`, `copy.*` ← from BUILD CHOICES if given, otherwise from what the stories imply (a story about paying online is still "later", so no payment; a measure about first-time users means `askFirstTimeUser: true`).
+- `mvp.process` ← the resident's steps in the updated `toBeProcess`, shortened to 2 to 4 words each; keep 3 to 5 steps. The site's flow is always facility → slot → details → confirmation; the labels are what change.
+- `mvp.acceptanceCriteria` ← every MVP story's ACs as plain sentences ("A resident can …"), after the story-map feedback is applied.
+- `mvp.successMeasure.name` and `.target` ← the group's first success measure (or the first example if they added none).
+- `facilities`, `bookingForm.fields`, `bookingForm.requireBrentPostcode`, `bookingForm.askFirstTimeUser`, `brand.service`, `copy.*` ← from BUILD CHOICES if given, otherwise from what the feedback and measures imply (a story about paying online is still "later", so no payment; a measure about first-time users means `askFirstTimeUser: true`).
 
 **`config/evidence.js`** → `setOutToDo`: `hypothesis`, `measure`, `target`, `baseline`, `guardRail` from the Define hand-in, so the evidence page shows their words before the Evaluate stage.
 

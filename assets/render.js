@@ -1,4 +1,4 @@
-/* Shared renderers for the workshop pages. Plain script, assigns window.R. */
+/* Shared renderers and helpers for the workshop pages. Plain script, assigns window.R. */
 (function () {
   "use strict";
 
@@ -15,7 +15,62 @@
     return '<h2 class="section-title"' + (id ? ' id="' + esc(id) + '"' : "") + ">" + (n ? n + ". " : "") + esc(text) + "</h2>";
   }
 
-  /* Stat tiles: [{label, value, note, tone}] */
+  /* ---- Per-page state in localStorage ---------------------------------- */
+  function store(key) {
+    var api = { key: key, state: {} };
+    try { api.state = JSON.parse(localStorage.getItem(key) || "{}") || {}; } catch (e) { api.state = {}; }
+    api.save = function () { try { localStorage.setItem(key, JSON.stringify(api.state)); } catch (e) { /* private mode */ } };
+    api.get = function (k, d) { return api.state[k] == null ? d : api.state[k]; };
+    api.set = function (k, v) { api.state[k] = v; api.save(); };
+    api.clear = function () { api.state = {}; try { localStorage.removeItem(key); } catch (e) { /* ignore */ } };
+    return api;
+  }
+
+  /* Two-way binding for every [data-key] input/textarea/select under root. */
+  function bind(root, st, onChange) {
+    root.querySelectorAll("[data-key]").forEach(function (el) {
+      var k = el.getAttribute("data-key");
+      if (el.dataset.bound) return;
+      el.dataset.bound = "1";
+      var v = st.get(k, "");
+      if (el.type === "checkbox") el.checked = !!v; else el.value = v;
+      el.addEventListener("input", function () {
+        st.set(k, el.type === "checkbox" ? el.checked : el.value);
+        if (onChange) onChange(k, el);
+      });
+    });
+  }
+
+  /* ---- Facilitator view ------------------------------------------------- */
+  var FKEY = "brent-sandbox-facilitator";
+  function isFacilitator() {
+    try {
+      var q = new URLSearchParams(location.search).get("facilitator");
+      if (q === "1") localStorage.setItem(FKEY, "1");
+      if (q === "0") localStorage.removeItem(FKEY);
+      return localStorage.getItem(FKEY) === "1";
+    } catch (e) { return false; }
+  }
+  /* Returns "" for participants; an amber details panel for the facilitator. */
+  function facilitatorBlock(title, inner, open) {
+    if (!isFacilitator()) return "";
+    return '<details class="facilitator-only"' + (open ? " open" : "") + "><summary>Facilitator only: " + esc(title) + "</summary><div>" + inner + "</div></details>";
+  }
+
+  /* Page tools bar: reset button and facilitator pill. */
+  function pageTools(el, stores) {
+    var fac = isFacilitator();
+    el.innerHTML = '<div class="page-tools"><span class="page-tools__note">What you type on this page is saved in this browser.</span>' +
+      '<button class="btn btn--link" type="button" data-reset-page>Reset this page</button>' +
+      (fac ? '<span class="facilitator-pill">Facilitator view on · <a href="?facilitator=0">turn off</a></span>' : "") + "</div>";
+    el.querySelector("[data-reset-page]").addEventListener("click", function () {
+      if (!window.confirm("Clear everything typed on this page?")) return;
+      stores.forEach(function (s) { s.clear(); });
+      location.reload();
+    });
+  }
+
+  /* ---- Stat tiles, bar chart, table ------------------------------------- */
   function statTiles(list) {
     var html = '<div class="stat-grid">';
     (list || []).forEach(function (h) {
@@ -27,7 +82,6 @@
     return html + "</div>";
   }
 
-  /* Single-hue horizontal bar chart with direct labels and a table view. */
   function barChart(c, idx) {
     var max = Math.max.apply(null, c.items.map(function (i) { return i.value; })) || 1;
     var id = "chart-" + (idx == null ? Math.random().toString(36).slice(2, 7) : idx);
@@ -48,7 +102,6 @@
     return html + "</tbody></table></details></figure>";
   }
 
-  /* Data table: headers [string], rows [[cell, ...]]. Cells are escaped. */
   function dataTable(headers, rows, cls) {
     var html = '<div class="table-wrap"><table class="data-table ' + (cls || "") + '"><thead><tr>';
     headers.forEach(function (h) { html += "<th>" + esc(h) + "</th>"; });
@@ -61,59 +114,107 @@
     return html + "</tbody></table></div>";
   }
 
-  /* Process flow: lanes [string], steps [{lane, text, painPoint}] */
-  function flow(lanes, steps) {
+  /* ---- Process flow ------------------------------------------------------ */
+  /* opts.editable = { st, prefix }: each step gets a pain-point textarea bound to prefix.i
+     opts.hidePain: do not show the config's painPoint fields. */
+  function flow(lanes, steps, opts) {
+    opts = opts || {};
     var html = '<div class="flow-legend">';
     lanes.forEach(function (l, i) { html += '<span class="flow-legend__item"><span class="flow-swatch flow-lane-' + i + '"></span>' + esc(l) + "</span>"; });
-    html += '</div><ol class="flow">';
+    html += '</div><ol class="flow' + (opts.editable ? " flow--editable" : "") + '">';
     steps.forEach(function (s, i) {
       var li = Math.max(0, lanes.indexOf(s.lane));
-      html += '<li class="flow-step flow-lane-' + li + (s.painPoint ? " has-pain" : "") + '">' +
+      var pain = opts.hidePain ? "" : s.painPoint;
+      var typed = opts.editable ? opts.editable.st.get(opts.editable.prefix + "." + i, "") : "";
+      html += '<li class="flow-step flow-lane-' + li + (pain || typed ? " has-pain" : "") + '" data-step="' + i + '">' +
         '<span class="flow-step__lane">' + esc(s.lane) + "</span>" +
         '<span class="flow-step__text">' + esc(s.text) + "</span>" +
-        (s.painPoint ? '<span class="flow-step__pain" title="' + esc(s.painPoint) + '">Pain point</span>' : "") +
+        (pain ? '<span class="flow-step__pain" title="' + esc(pain) + '">Pain point</span>' : "") +
+        (opts.editable ? '<label class="visually-hidden" for="pain-' + i + '">Pain point for step ' + (i + 1) + '</label>' +
+          '<textarea class="flow-step__input" id="pain-' + i + '" rows="2" placeholder="Where does this step hurt?" data-key="' + esc(opts.editable.prefix + "." + i) + '"></textarea>' +
+          '<span class="flow-step__pain flow-step__pain--typed"' + (typed ? "" : " hidden") + ">Pain point</span>" : "") +
         "</li>";
     });
     html += "</ol>";
-    var pains = steps.filter(function (s) { return s.painPoint; });
-    if (pains.length) {
-      html += '<ul class="pain-list">';
-      pains.forEach(function (s) { html += "<li><strong>" + esc(s.text) + ":</strong> " + esc(s.painPoint) + "</li>"; });
-      html += "</ul>";
+    if (!opts.hidePain) {
+      var pains = steps.filter(function (s) { return s.painPoint; });
+      if (pains.length) {
+        html += '<ul class="pain-list">';
+        pains.forEach(function (s) { html += "<li><strong>" + esc(s.text) + ":</strong> " + esc(s.painPoint) + "</li>"; });
+        html += "</ul>";
+      }
     }
+    if (opts.editable) html += '<ul class="pain-list" data-pain-list></ul>';
     return html;
   }
-
-  /* Hand-in panel: an editable template saved per page, with copy and reset. */
-  function handIn(el, key, title, intro, template) {
-    var saved = "";
-    try { saved = localStorage.getItem(key) || ""; } catch (e) { /* ignore */ }
-    el.innerHTML = '<h2 class="section-title" id="hand-in">' + esc(title) + "</h2>" +
-      '<div class="panel hand-in"><p>' + esc(intro) + "</p>" +
-      '<label class="form-label" for="hand-in-text">Type here, then copy and paste it to Claude</label>' +
-      '<textarea class="hand-in__text" id="hand-in-text" rows="14" spellcheck="false"></textarea>' +
-      '<div class="btn-row"><button class="btn" type="button" data-copy>Copy</button>' +
-      '<button class="btn btn--secondary" type="button" data-reset>Reset to template</button>' +
-      '<span class="hand-in__status" aria-live="polite"></span></div></div>';
-    var ta = el.querySelector("textarea"), status = el.querySelector(".hand-in__status");
-    ta.value = saved || template;
-    ta.addEventListener("input", function () { try { localStorage.setItem(key, ta.value); } catch (e) { /* ignore */ } });
-    el.querySelector("[data-copy]").addEventListener("click", function () {
-      ta.select();
-      var ok = false;
-      try { ok = document.execCommand("copy"); } catch (e) { /* ignore */ }
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(function () { status.textContent = "Copied."; }, function () { status.textContent = ok ? "Copied." : "Select the text and copy it manually."; });
-      else status.textContent = ok ? "Copied." : "Select the text and copy it manually.";
-    });
-    el.querySelector("[data-reset]").addEventListener("click", function () {
-      if (ta.value !== template && !window.confirm("Replace what is typed here with the blank template?")) return;
-      ta.value = template;
-      try { localStorage.removeItem(key); } catch (e) { /* ignore */ }
-      status.textContent = "Reset.";
-    });
+  /* After bind(): keep the typed badges and list in sync. */
+  function flowSync(root, steps, st, prefix) {
+    var list = root.querySelector("[data-pain-list]");
+    function update() {
+      var items = "";
+      steps.forEach(function (s, i) {
+        var v = (st.get(prefix + "." + i, "") || "").trim();
+        var step = root.querySelector('.flow-step[data-step="' + i + '"]');
+        if (step) { step.classList.toggle("has-pain", !!v); var b = step.querySelector(".flow-step__pain--typed"); if (b) b.hidden = !v; }
+        if (v) items += "<li><strong>" + esc(s.text) + ":</strong> " + esc(v) + "</li>";
+      });
+      if (list) list.innerHTML = items;
+    }
+    root.querySelectorAll(".flow-step__input").forEach(function (t) { t.addEventListener("input", update); });
+    update();
   }
 
-  /* Static chrome shared by workshop pages. */
+  /* ---- Editable row list -------------------------------------------------- */
+  /* fields: [{id, label, placeholder}] ; rows stored as an array under st[key]. */
+  function editableRows(el, st, key, fields, opts) {
+    opts = opts || {};
+    var min = opts.min == null ? 1 : opts.min;
+    function rows() { var r = st.get(key, null); if (!Array.isArray(r)) { r = []; } while (r.length < min) r.push({}); return r; }
+    function render() {
+      var r = rows(), html = "";
+      r.forEach(function (row, i) {
+        html += '<fieldset class="edit-row"><legend>' + esc(opts.legend || "Row") + " " + (i + 1) + "</legend>";
+        fields.forEach(function (f) {
+          html += '<div class="form-group"><label class="form-label" for="' + key + "-" + f.id + "-" + i + '">' + esc(f.label) + "</label>" +
+            (f.multiline ? '<textarea class="form-input" rows="2"' : '<input class="form-input"') + ' id="' + key + "-" + f.id + "-" + i + '" data-row="' + i + '" data-field="' + f.id + '" placeholder="' + esc(f.placeholder || "") + '"' +
+            (f.multiline ? ">" + esc(row[f.id] || "") + "</textarea>" : ' value="' + esc(row[f.id] || "") + '">') + "</div>";
+        });
+        html += '<button class="btn btn--link" type="button" data-remove-row="' + i + '">Remove</button></fieldset>';
+      });
+      html += '<button class="btn btn--secondary" type="button" data-add-row>' + esc(opts.addLabel || "Add another") + "</button>";
+      el.innerHTML = html;
+      el.querySelectorAll("[data-row]").forEach(function (inp) {
+        inp.addEventListener("input", function () { var r = rows(); r[+inp.dataset.row][inp.dataset.field] = inp.value; st.set(key, r); if (opts.onChange) opts.onChange(); });
+      });
+      el.querySelectorAll("[data-remove-row]").forEach(function (b) {
+        b.addEventListener("click", function () { var r = rows(); r.splice(+b.getAttribute("data-remove-row"), 1); st.set(key, r); render(); if (opts.onChange) opts.onChange(); });
+      });
+      el.querySelector("[data-add-row]").addEventListener("click", function () { var r = rows(); r.push({}); st.set(key, r); render(); });
+    }
+    render();
+    return { rows: rows, render: render };
+  }
+
+  /* ---- Copy box ------------------------------------------------------------ */
+  function copyBox(el, opts) {
+    el.innerHTML = '<label class="form-label" for="' + esc(opts.id) + '">' + esc(opts.label) + "</label>" +
+      '<textarea class="hand-in__text" id="' + esc(opts.id) + '" rows="' + (opts.rows || 12) + '" readonly></textarea>' +
+      '<div class="btn-row"><button class="btn" type="button" data-copy>' + esc(opts.button || "Copy") + '</button><span class="hand-in__status" aria-live="polite"></span></div>';
+    var ta = el.querySelector("textarea"), status = el.querySelector(".hand-in__status");
+    function update() { ta.value = opts.text(); }
+    el.querySelector("[data-copy]").addEventListener("click", function () {
+      update(); ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { /* ignore */ }
+      var done = function () { status.textContent = "Copied. Paste it to Claude."; };
+      var fail = function () { status.textContent = ok ? "Copied. Paste it to Claude." : "Select the text and copy it manually."; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(done, fail); else fail();
+    });
+    update();
+    return { update: update };
+  }
+
+  /* ---- Static chrome shared by workshop pages --------------------------- */
   function chrome(MVP) {
     if (!MVP || !MVP.brand) return;
     var s = document.getElementById("service-name"); if (s) s.textContent = MVP.brand.service;
@@ -121,5 +222,10 @@
     var b = document.getElementById("sandbox-banner"); if (b && !b.dataset.keep) b.textContent = MVP.brand.sandboxNotice;
   }
 
-  window.R = { esc: esc, fmtNum: fmtNum, h2: h2, statTiles: statTiles, barChart: barChart, dataTable: dataTable, flow: flow, handIn: handIn, chrome: chrome };
+  window.R = {
+    esc: esc, fmtNum: fmtNum, h2: h2,
+    store: store, bind: bind, isFacilitator: isFacilitator, facilitatorBlock: facilitatorBlock, pageTools: pageTools,
+    statTiles: statTiles, barChart: barChart, dataTable: dataTable,
+    flow: flow, flowSync: flowSync, editableRows: editableRows, copyBox: copyBox, chrome: chrome
+  };
 })();
