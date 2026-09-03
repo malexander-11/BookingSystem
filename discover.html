@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/brent.css">
+  <script>document.write('<link rel="stylesheet" href="assets/brent.css?v=' + Date.now() + '">');</script>
+  <noscript><link rel="stylesheet" href="assets/brent.css"></noscript>
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 </head>
 <body>
@@ -85,9 +86,12 @@
     </div>
   </footer>
 
-  <script src="config/mvp.js"></script>
-  <script src="config/discovery.js"></script>
-  <script src="assets/render.js"></script>
-  <script src="assets/discover.js"></script>
+  <script>
+    /* Load config and page scripts fresh on every visit, so a push during the
+       workshop shows up on the next refresh instead of after the 10-minute cache. */
+    (function () { var v = Date.now(); ["config/mvp.js", "config/discovery.js", "assets/render.js", "assets/discover.js"].forEach(function (src) {
+      document.write('<script src="' + src + '?v=' + v + '"><\/script>');
+    }); })();
+  </script>
 </body>
 </html>
