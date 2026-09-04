@@ -25,9 +25,7 @@
   function dv(k) { return (disc.get(k, "") || "").trim(); }
   function v(k) { return (st.get(k, "") || "").trim(); }
 
-  var html = '<div class="notice"><strong>This stage ends with:</strong><ul class="inline-list">';
-  (D.stage.endsWith || []).forEach(function (e) { html += "<li>" + esc(e) + "</li>"; });
-  html += "</ul></div>";
+  var html = "";
   var STAGES = ["Agreeing the problem", "Prioritising user groups", "Prioritising business needs", "Writing the theory of change", "Reviewing the to-be process", "Reviewing the user story map", "Defining success measures", "Handing it in"];
   html += '<ol class="stage-steps" aria-label="Steps in Define">' + STAGES.map(function (t, i) { return '<li><a href="#s' + (i + 1) + '"><span class="stage-steps__n">' + (i + 1) + "</span>" + esc(t) + "</a></li>"; }).join("") + "</ol>";
 
