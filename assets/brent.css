@@ -563,6 +563,11 @@ a:hover { color: var(--brent-blue-dark); }
 @media (max-width: 500px) { .decision-list li { grid-template-columns: 1fr; gap: 0.15rem; } }
 
 .section-title { margin-top: 2rem; }
+.subsection { margin-top: 1.5rem; padding-top: 0.25rem; border-top: 2px solid var(--border-light); font-size: 1.15rem; }
+.stage-steps { list-style: none; margin: 0 0 1.5rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.stage-steps a { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--surface); border: 1px solid var(--border-light); border-radius: 999px; padding: 0.3rem 0.75rem 0.3rem 0.35rem; font-size: 0.85rem; font-weight: 600; color: var(--brent-blue-dark); text-decoration: none; }
+.stage-steps a:hover { border-color: var(--brent-blue); }
+.stage-steps__n { display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--brent-blue); color: #fff; font-family: var(--font-heading); font-size: 0.75rem; }
 .muted { color: var(--text-muted); font-size: 0.95rem; }
 .muted-line { display: block; color: var(--text-muted); font-size: 0.9rem; font-weight: 400; }
 .callout {

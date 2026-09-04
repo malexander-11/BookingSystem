@@ -22,15 +22,17 @@
       '<textarea class="form-input" id="' + key + '" data-key="' + key + '" rows="' + (rows || 2) + '" placeholder="' + esc(placeholder || "") + '"></textarea></div>';
   }
 
-  var html = '<div class="notice"><strong>This stage ends with:</strong> ' + esc(D.stage.endsWith) + "</div>";
+  var STAGES = ["Understanding the brief", "Mapping stakeholders", "Interview stakeholders and users", "Analysing available data", "Analysing the as-is process", "Defining our riskiest assumptions", "Agreeing on a shared problem to solve"];
+  var html = '<div class="notice"><strong>This stage ends with:</strong> ' + esc(D.stage.endsWith) + "</div>" +
+    '<ol class="stage-steps" aria-label="Steps in Discover">' + STAGES.map(function (t, i) { return '<li><a href="#s' + (i + 1) + '"><span class="stage-steps__n">' + (i + 1) + "</span>" + esc(t) + "</a></li>"; }).join("") + "</ol>";
 
   /* ---- 1. The brief ------------------------------------------------------- */
   var b = D.brief || {};
-  html += h2(1, "The brief") + '<div class="panel"><p class="eyebrow">What was asked for</p><p class="brief-quote">' + esc(b.askedFor) + "</p>" +
+  html += h2(1, "Understanding the brief", "s1") + '<div class="panel"><p class="eyebrow">What was asked for</p><p class="brief-quote">' + esc(b.askedFor) + "</p>" +
     "<p>" + esc(b.why || "Before anything is built we need to understand why this should happen and what people want to achieve.") + "</p></div>";
 
   /* ---- 2. Stakeholder map (drag and drop) -------------------------------- */
-  html += h2(2, "Stakeholder map") +
+  html += h2(2, "Mapping stakeholders", "s2") +
     "<p>Drag each stakeholder into the box where they belong. Power: can they stop or change this work? Interest: how much do they care about the outcome? On a phone, tap a chip, then tap a box.</p>" +
     '<div id="stakeholder-map"></div>';
   var cards = "";
@@ -56,11 +58,11 @@
     }
     return out + "</div>";
   }
-  html += h2(3, "Interview guide") + "<p>Read this before the interviews. Stakeholders and users need different questions.</p>" +
+  html += h2(3, "Interview stakeholders and users", "s3") + '<h3 class="subsection">Interview guide</h3>' + "<p>Read this before the interviews. Stakeholders and users need different questions.</p>" +
     '<div class="guide guide--two">' + guidePanel(g.stakeholders, "guide-panel--stakeholders") + guidePanel(g.users, "guide-panel--users") + "</div>";
 
   /* ---- 4. What colleagues have already heard ---------------------------- */
-  html += h2(4, "What colleagues have already heard") +
+  html += '<h3 class="subsection">What colleagues have already heard</h3>' +
     "<p>Your PM and UX colleagues have already spoken to some of the stakeholders. Read what they learnt before your own interviews. Notice where what people want does not line up.</p>" +
     '<div class="colleague-grid">';
   (D.colleagueInterviews || []).forEach(function (c) {
@@ -72,7 +74,7 @@
     (D.colleagueTension ? fac("the competing demands", "<p>" + esc(D.colleagueTension) + "</p>") : "");
 
   /* ---- 5. Your interviews --------------------------------------------------- */
-  html += h2(5, "Your interviews") +
+  html += '<h3 class="subsection">Your interviews</h3>' +
     "<p>This is practice. Two interviews, five minutes each, with your facilitator playing the interviewee. Take it in turns to ask the questions, and remember the tips above. Afterwards, write down what you learned. Listen for what each person wants that the others do not.</p>" +
     '<div class="interview-grid">';
   (D.interviews || []).forEach(function (iv) {
@@ -89,7 +91,7 @@
 
   /* ---- 6. Data, then quiz --------------------------------------------------- */
   var da = D.dataAnalysis || {};
-  html += h2(6, "Data analysis output") + (da.summary ? "<p>" + esc(da.summary) + "</p>" : "") + R.statTiles(da.stats);
+  html += h2(4, "Analysing available data", "s4") + (da.summary ? "<p>" + esc(da.summary) + "</p>" : "") + R.statTiles(da.stats);
   if (da.gaps && da.gaps.length) {
     html += '<div class="callout callout--gaps"><strong>What is missing from this data.</strong><ul>';
     da.gaps.forEach(function (g) { html += "<li>" + esc(g) + "</li>"; });
@@ -104,20 +106,20 @@
 
   /* ---- 7. As-is process, annotate ------------------------------------------ */
   var p = D.asIsProcess || { lanes: [], steps: [] };
-  html += h2(7, "How it works today (as-is process)") +
+  html += h2(5, "Analysing the as-is process", "s5") +
     "<p>The current process end to end. Three steps already have their pain points filled in. Under the other three, write where it hurts and for whom, using what the interviews and the data told you.</p>" +
     '<div id="flow">' + R.flow(p.lanes, p.steps, { editable: { st: st, prefix: "pain" }, hidePain: true }) + "</div>" +
     '<div class="prompt-q"><span class="prompt-q__label">Discuss</span>How confident are we in these pain points?</div>' +
     fac("pain points staff reported", '<ul class="pain-list">' + p.steps.filter(function (s) { return s.painPoint; }).map(function (s) { return "<li><strong>" + esc(s.text) + ":</strong> " + esc(s.painPoint) + "</li>"; }).join("") + "</ul>");
 
   /* ---- 8. Assumptions --------------------------------------------------------- */
-  html += h2(8, "Risky assumptions") +
+  html += h2(6, "Defining our riskiest assumptions", "s6") +
     "<p>A risky assumption is something the plan only works if it is true, that nobody has checked, and that would hurt most if it turned out to be wrong. Rank these from riskiest to least risky: how likely is it to be wrong, and how much would that matter?</p>" +
     '<div id="assumption-rank"></div>';
 
   /* ---- 9. Problem statement composer ------------------------------------ */
   var hints = D.problemStatementHints || {};
-  html += h2(9, "Output: the problem statement") +
+  html += h2(7, "Agreeing on a shared problem to solve", "s7") +
     "<p>This is what you hand in. Four parts: the shared problem in one paragraph, then whether there is agreement, the size of the prize, and the accidental impacts to watch. If any part is blank, discovery is not finished. If it names a solution, it is not a problem statement.</p>" +
     '<div class="compose">' +
     '<div class="compose__part compose__part--wide"><h3>The shared problem</h3><span class="form-hint">' + esc(hints.shared) + '</span><div class="ps-inline">' +
