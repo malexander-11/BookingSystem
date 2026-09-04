@@ -231,13 +231,20 @@ window.DEFINE = {
   /* The group's measures first (name and source from the hand-in; target,
      baseline and guard-rail added), then the examples. */
   successMeasures: [
-    { name: "Reception satisfaction", target: "Up by 1 point on a 5-point scale by the end of the pilot", baseline: "Unknown; the before-survey runs in week 1. Staff estimate about 3 out of 5 today", source: "Survey before-and-after.", guardRail: "No site loses staffed reception hours during the pilot" },
-    { name: "Increase in over-50s bookings", target: "Over-50s make 20% of bookings in the first six weeks", baseline: "Unknown; the diary never recorded age. Estimated 15% by matching names by hand", source: "Data provided at checkout.", guardRail: "" },
-    { name: "% of people using online booking vs walk-in vs phone calls", target: "Half of bookings made online by week six", baseline: "0% online today; about 70% phone, 30% walk-in", source: "Online system records this.", guardRail: "Phone bookings must still be possible at every site" },
-    { name: "Decrease in time spent on bookings", target: "Down by a quarter", baseline: "About 40 hours a week across the borough, staff estimate", source: "Survey from reception staff", guardRail: "" },
-    { name: "Decrease in costs", target: "Running costs down 5% on the same quarter last year", baseline: "About £62,000 over six weeks last year (fictional)", source: "From their recorded quarterly cost sheets", guardRail: "" },
-    { name: "Increase in revenue", target: "Up 5% on the same six weeks last year", baseline: "About £48,000 over six weeks last year (fictional)", source: "From their revenue sheets", guardRail: "" },
-    { name: "Failure demand on the online booking", target: "Fewer than 30% of started bookings abandoned", baseline: "None; there is no online journey today", source: "Abandoned journeys in Google Analytics", guardRail: "Calls about the website must stay under 10% of all calls" }
+    { name: "Reception satisfaction", target: "Up by 1 point on a 5-point scale by the end of the pilot", baseline: "Unknown; the before-survey runs in week 1. Staff estimate about 3 out of 5 today", source: "Survey before-and-after.", guardRail: "No site loses staffed reception hours during the pilot",
+      comment: "Puts the people most disrupted by the change at the centre, which is rare and right. Self-reported and small-sample (eleven receptions), so it can support a story but not settle one." },
+    { name: "Increase in over-50s bookings", target: "Over-50s make 20% of bookings in the first six weeks", baseline: "Unknown; the diary never recorded age. Estimated 15% by matching names by hand", source: "Data provided at checkout.", guardRail: "",
+      comment: "The inclusion measure, and it drove a field on the form. There is no baseline, because the paper diary never recorded age, so the first six weeks only give us a starting point." },
+    { name: "% of people using online booking vs walk-in vs phone calls", target: "Half of bookings made online by week six", baseline: "0% online today; about 70% phone, 30% walk-in", source: "Online system records this.", guardRail: "Phone bookings must still be possible at every site",
+      comment: "The cleanest measure of whether behaviour moved, straight from the system. It says nothing about whether demand grew: a phone booking that becomes an online booking is not a new booking." },
+    { name: "Decrease in time spent on bookings", target: "Down by a quarter", baseline: "About 40 hours a week across the borough, staff estimate", source: "Survey from reception staff", guardRail: "",
+      comment: "A proxy for the cost saving the CFO wants, but staff time freed is not the same as staff cost saved, and it is self-reported." },
+    { name: "Decrease in costs", target: "Running costs down 5% on the same quarter last year", baseline: "About £62,000 over six weeks last year (fictional)", source: "From their recorded quarterly cost sheets", guardRail: "",
+      comment: "What the CFO will actually look at. Quarterly, so a six-week pilot cannot show it moving; either the pilot runs longer or a proxy such as reception hours stands in." },
+    { name: "Increase in revenue", target: "Up 5% on the same six weeks last year", baseline: "About £48,000 over six weeks last year (fictional)", source: "From their revenue sheets", guardRail: "",
+      comment: "The other CFO measure, with the same timing problem. Also the easiest to misread, because most early online income is money that would have come in by phone." },
+    { name: "Failure demand on the online booking", target: "Fewer than 30% of started bookings abandoned", baseline: "None; there is no online journey today", source: "Abandoned journeys in Google Analytics", guardRail: "Calls about the website must stay under 10% of all calls",
+      comment: "Measures the health of the service itself, and it is the one measure we can read every week. Analytics cannot tell a give-up from someone who only came to check availability, so pair it with a few calls to the desk." }
   ],
 
   /* Commentary for the post-session handout (scripts/build-handout.mjs).
@@ -265,7 +272,14 @@ window.DEFINE = {
     storyMapNote:
       "Three stories, three different beliefs, three different build costs. Moving them all above the line makes the MVP bigger and the first pilot slower. That is the trade-off we accepted in order to chase costs and revenue first; a room that had put inclusion first would have made a different call.",
     measuresNote:
-      "A good spread: staff (reception satisfaction, time spent on bookings), users (the channel split, over-50s bookings), money (costs, revenue) and the health of the service itself (failure demand). Two things to notice. The survey-based measures will be self-reported and small-sample, so they can support a story but not settle one. Costs and revenue come from quarterly sheets, so a six-week pilot will not show them moving; either the pilot runs longer or a proxy is needed. The over-50s measure has no baseline, because the paper diary never recorded age. And none of the seven has a target yet, which is the next conversation to have with the CFO and with reception.",
+      "A good spread across staff, users, money and the health of the service itself. None of the seven has a target or a baseline yet, and that is the next conversation to have with the CFO and with reception, because measures cannot be defined after the fact: you cannot turn back time to collect a baseline you did not ask for.",
+    notCovered: [
+      { name: "Non-functional requirements", text: "Performance, accessibility, security, resilience. The story map says what the service does; NFRs say how well it has to do it, and they are usually where the cost hides." },
+      { name: "Getting through the Technical Design Authority", text: "Any real build at Brent goes through architecture and security review. The BA's job is to have the requirements and the trade-offs written down clearly enough that the review is quick." },
+      { name: "Getting a business case signed off", text: "The size of the prize, the costs and the risks, in the format finance expects. The problem statement and the measures are the raw material; the case is a separate document with a separate audience." },
+      { name: "Reporting", text: "Who needs to know what, how often, and in what form, from the first week of the pilot. We touched on the dashboard in the process feedback; the reporting rhythm around it is its own piece of work." }
+    ],
+    notCoveredNote: "All very much needed. They add to what we did; they do not replace it.",
     buildErrors: [
       "Under-18s could book the over-50s midday session. The age question was on the form, but nothing used the answer.",
       "Payment did not work as the acceptance criteria said. The confirmation said 'paid', but no payment was taken."
