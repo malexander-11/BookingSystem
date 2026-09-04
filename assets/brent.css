@@ -946,3 +946,138 @@ a:hover { color: var(--brent-blue-dark); }
   .plan-row legend { grid-column: 1 / -1; }
   .plan-row .btn--link { grid-column: 1 / -1; justify-self: start; }
 }
+
+/* ====================================================================
+   GDS readability layer
+   --------------------------------------------------------------------
+   Spacing and type modelled on the GOV.UK Design System: 19px body text
+   on desktop (16px on phones), a 5px spacing scale with 30 to 60px gaps
+   between sections, a 960px container, running text capped at about 66
+   characters, section breaks above numbered headings, inset text for
+   notices, normal-case table headers and GOV.UK-style form controls.
+   Appended last so it overrides the component styles above.
+   ==================================================================== */
+:root {
+  --max-width: 960px;
+  --ink: #0b0c0c;
+  --text-secondary: #505a5f;
+  --space-1: 5px; --space-2: 10px; --space-3: 15px; --space-4: 20px; --space-5: 25px;
+  --space-6: 30px; --space-7: 40px; --space-8: 50px; --space-9: 60px;
+}
+body { font-size: 1.1875rem; line-height: 1.5; color: var(--ink); }
+h1, h2, h3, h4 { color: var(--ink); }
+h1 { font-size: 2.25rem; line-height: 1.1; margin: 0 0 var(--space-6); }
+h2 { font-size: 1.6875rem; line-height: 1.15; margin: 0 0 var(--space-4); }
+h3 { font-size: 1.3125rem; line-height: 1.2; margin: 0 0 var(--space-3); }
+h4 { font-size: 1.1875rem; margin: 0 0 var(--space-2); }
+p { margin: 0 0 var(--space-4); }
+ul, ol { margin: 0 0 var(--space-4); }
+li { margin-bottom: var(--space-1); }
+.container { padding: 0 var(--space-6); }
+.hero { padding: var(--space-7) 0 var(--space-6); }
+.hero h1 { margin-bottom: var(--space-3); }
+.hero p { font-size: 1.1875rem; color: var(--text-secondary); max-width: 66ch; }
+.page { padding: var(--space-6) 0 var(--space-9); }
+
+/* Measure: running text no wider than about 66 characters. */
+main p,
+.guide-tips li, .guide-list li, .pain-list li, .result-list li, .surprise-list li, .caveat-list li,
+.verdict__prompts li, .verdict__options li, .callout--gaps li, .inline-list li, .need-list li, .panel--tips li, .ac-list li { max-width: 66ch; }
+
+/* Section breaks between numbered steps. */
+.section-title { margin: var(--space-9) 0 var(--space-4); padding-top: var(--space-6); border-top: 1px solid var(--border); }
+#stage > .section-title:first-of-type, #evidence > .section-title:first-of-type { border-top: 0; padding-top: 0; margin-top: var(--space-6); }
+.subsection { margin: var(--space-7) 0 var(--space-3); padding-top: var(--space-3); border-top: 2px solid var(--border-light); }
+.section-title + p { margin-bottom: var(--space-5); }
+
+/* Panels, cards and grids on the spacing scale. */
+.panel { padding: var(--space-6); margin-bottom: var(--space-6); }
+.stat-tile, .risk-card, .stakeholder-card, .group-card, .colleague-card, .chart, .quote, .compose__part, .interview-card, .facility-card__body { padding: var(--space-4); }
+.stat-grid, .chart-grid, .risk-grid, .colleague-grid, .stakeholder-grid, .group-grid, .rank-cards, .interview-grid, .quote-grid, .two-col, .compose, .guide, .card-grid { gap: var(--space-6); margin-bottom: var(--space-6); }
+.stakeholder-card dd, .group-card dd { margin-bottom: var(--space-1); }
+
+/* Inset text for notices and callouts (the blue prompts and amber facilitator panels keep their colour). */
+.notice, .callout, .callout--gaps { background: none; border-left: 10px solid var(--border); padding: var(--space-3) var(--space-4); margin-bottom: var(--space-6); font-size: inherit; color: var(--ink); }
+.callout--gaps ul { margin-top: var(--space-2); }
+.prompt-q { padding: var(--space-3) var(--space-4); margin: var(--space-6) 0; }
+.facilitator-only { padding: var(--space-3) var(--space-4); margin: var(--space-6) 0; font-size: 1rem; }
+.problem-statement { padding: var(--space-4) var(--space-6); font-size: 1.1875rem; margin-bottom: var(--space-4); }
+.hypothesis-box { padding: var(--space-4) var(--space-6); margin-bottom: var(--space-6); }
+
+/* Tables: normal-case bold headers, GOV.UK cell padding. */
+.data-table { font-size: 1rem; margin-top: var(--space-2); }
+.data-table th { font-family: var(--font-body); font-weight: 700; font-size: 1rem; text-transform: none; letter-spacing: 0; color: var(--ink); border-bottom: 1px solid var(--border); padding: var(--space-2) var(--space-4) var(--space-2) 0; }
+.data-table td { padding: var(--space-2) var(--space-4) var(--space-2) 0; border-bottom: 1px solid var(--border); }
+.data-table th:last-child, .data-table td:last-child { padding-right: 0; }
+.table-wrap { margin-bottom: var(--space-6); }
+
+/* Form controls. */
+.form-group { margin-bottom: var(--space-6); }
+.edit-row .form-group, .plan-row .form-group, .compose__part .form-group, .group-card .form-group, .input-block.form-group { margin-bottom: var(--space-4); }
+.form-label { font-weight: 700; font-size: inherit; margin-bottom: var(--space-1); }
+.form-hint { color: var(--text-secondary); font-size: 1rem; margin-bottom: var(--space-2); }
+.form-input { border: 2px solid var(--ink); border-radius: 0; padding: var(--space-1); min-height: 40px; font-size: inherit; line-height: 1.4; }
+.form-group--error { border-left-width: 5px; padding-left: var(--space-3); }
+.form-group--error .form-input { border: 4px solid var(--error); }
+.error-summary { padding: var(--space-4); margin-bottom: var(--space-6); }
+.error-summary h2 { margin-bottom: var(--space-3); }
+.hand-in__text, .flow-step__input, .chain--editable textarea { border: 2px solid var(--ink); border-radius: 0; padding: var(--space-2); font-size: 1rem; line-height: 1.4; }
+.edit-row, .plan-row { padding: var(--space-3) var(--space-4) var(--space-2); margin-bottom: var(--space-4); }
+
+/* Buttons. */
+.btn { font-size: 1.1875rem; line-height: 1.2; padding: 8px 10px 7px; border-radius: 0; box-shadow: 0 2px 0 var(--brent-blue-dark); }
+.btn--secondary { box-shadow: 0 2px 0 var(--brent-blue-dark); }
+.btn--success { box-shadow: 0 2px 0 #002d18; }
+.btn--danger { box-shadow: 0 2px 0 #6b0000; }
+.btn--link { box-shadow: none; padding: var(--space-1) 0; font-size: inherit; }
+.btn-row { gap: var(--space-2) var(--space-3); margin-top: var(--space-4); }
+.pill { font-size: 1rem; padding: 7px 15px; }
+.chip { font-size: 1rem; padding: 5px 12px; margin: 0 var(--space-1) var(--space-1) 0; }
+
+/* Details. */
+.if-time > summary, .chart details > summary, .mvp-panel > summary { color: var(--brent-blue); text-decoration: underline; text-underline-offset: 0.15em; font-weight: 600; }
+.if-time { padding: var(--space-3) var(--space-4); margin: var(--space-7) 0 var(--space-6); }
+.if-time > div { border-left: 1px solid var(--border); padding-left: var(--space-4); margin-top: var(--space-3); }
+
+/* Smaller components. */
+.page-tools { padding: var(--space-2) var(--space-3); margin-bottom: var(--space-6); font-size: 1rem; }
+.stage-steps { gap: var(--space-2); margin-bottom: var(--space-6); }
+.stage-steps a { font-size: 1rem; padding: 5px 15px 5px 5px; }
+.workshop-nav { font-size: 1rem; }
+.mvp-panel { font-size: 1rem; padding: var(--space-3) var(--space-4); }
+.stat-label { font-size: 1rem; margin-top: var(--space-1); }
+.stat-note, .chart__subtitle, .evidence-source, .muted, .muted-line, .interview-card__role, .stakeholder-card__meta, .facility-card__site, .facility-card__meta, .quadrant__hint, .slot-legend { color: var(--text-secondary); font-size: 1rem; }
+.stakeholder-card__meta, .quadrant__hint { font-size: 0.875rem; }
+.quadrant { padding: var(--space-3) var(--space-4); }
+.quadrant-grid { gap: var(--space-2); margin-bottom: var(--space-6); }
+.rank-list li { padding: var(--space-2) var(--space-3); margin-bottom: var(--space-2); }
+.rank-list__text, .rank-cards__head { font-size: inherit; }
+.verdict__question { font-size: 1.6875rem; margin-bottom: var(--space-4); }
+.verdict__choices { margin-bottom: var(--space-4); }
+.quiz li { padding: var(--space-3) var(--space-4); margin-bottom: var(--space-2); }
+.quiz__buttons .btn { font-size: 1rem; padding: 6px 12px 5px; }
+.flow { gap: 30px 30px; margin-bottom: var(--space-4); }
+.flow-step { font-size: 1rem; padding: var(--space-2) var(--space-3) var(--space-3); }
+.story-card { font-size: 1rem; padding: var(--space-2) var(--space-3); }
+.chain li { font-size: 1rem; padding: var(--space-3); }
+.chain { margin-bottom: var(--space-6); }
+.decision-list li { padding: var(--space-2) 0; }
+.summary-list { gap: var(--space-2) var(--space-5); margin-bottom: var(--space-4); }
+.steps { margin-bottom: var(--space-6); }
+.date-pills { margin-bottom: var(--space-5); }
+.card-grid { margin-bottom: 0; }
+
+/* Phones: 16px body, tighter gaps. */
+@media (max-width: 640px) {
+  body { font-size: 1rem; }
+  h1 { font-size: 1.75rem; } h2 { font-size: 1.5rem; } h3 { font-size: 1.1875rem; }
+  .container { padding: 0 var(--space-3); }
+  .hero { padding: var(--space-6) 0 var(--space-4); }
+  .page { padding: var(--space-4) 0 var(--space-7); }
+  .section-title { margin-top: var(--space-7); padding-top: var(--space-4); }
+  .panel { padding: var(--space-4); }
+  .stat-grid, .chart-grid, .risk-grid, .colleague-grid, .stakeholder-grid, .group-grid, .rank-cards, .interview-grid, .quote-grid, .two-col, .compose, .guide, .card-grid { gap: var(--space-4); margin-bottom: var(--space-4); }
+  .problem-statement { padding: var(--space-3) var(--space-4); font-size: 1rem; }
+  .btn { font-size: 1rem; }
+  .verdict__question { font-size: 1.5rem; }
+}
