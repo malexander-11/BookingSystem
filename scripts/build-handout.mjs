@@ -248,7 +248,6 @@ th { font-weight: 700; }
 .terms { display: grid; grid-template-columns: 180px 1fr; gap: 8px 20px; }
 .terms dt { font-weight: 700; }
 .terms dd { margin: 0; }
-footer { max-width: 760px; margin: 50px auto 0; padding-top: 15px; border-top: 1px solid var(--rule); font-size: 15px; color: var(--muted); }
 @media (max-width: 640px) {
   body { font-size: 16px; }
   h1 { font-size: 28px; } h2 { font-size: 22px; }
@@ -265,7 +264,6 @@ footer { max-width: 760px; margin: 50px auto 0; padding-top: 15px; border-top: 1
 }
 `;
 
-const generated = new Date().toISOString().slice(0, 10);
 const html = `<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -281,7 +279,6 @@ const html = `<!DOCTYPE html>
 <h1>After the session: what we did and why</h1>
 ${body}
 </main>
-<footer>The booking system, data and results in the session were fictional. Handout generated ${generated}.</footer>
 </body>
 </html>
 `;
