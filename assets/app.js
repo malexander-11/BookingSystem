@@ -276,8 +276,7 @@
       }
       html += "</div>";
     }
-    html += '<div class="btn-row"><button class="btn" type="button" data-restart>Book another slot</button>' +
-      '<a class="btn btn--secondary" href="evidence.html">See what happened after launch</a></div>';
+    html += '<div class="btn-row"><button class="btn" type="button" data-restart>Book another slot</button>' + "</div>";
     return html;
   }
 

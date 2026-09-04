@@ -2,7 +2,7 @@
 
 This repo is a static, faux-Brent-Council site used in a Business Analysis
 training workshop. It has four workshop stage pages (Discover, Define, Build,
-Evaluate) plus an evidence page. During the session the facilitator pastes the
+Evaluate) plus an evidence page that is not linked from the menu (reached by URL only). During the session the facilitator pastes the
 group's hand-ins into chat and expects the live site to reflect them within a
 few minutes. There is no build step and no server.
 

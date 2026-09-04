@@ -123,7 +123,7 @@
 
   /* What comes back */
   html += "<h3>What comes back</h3>" +
-    '<div class="panel"><p>Once the additional data needed is handed in, the fictional evidence for each row appears on the <a href="evidence.html">evidence page</a>, alongside the results above, under the same headings: what we set out to do, the measurement plan with results, what happened, what users did, whether impact changed, the four product risks, what surprised us, and the decision.</p>' +
+    '<div class="panel"><p>Once the additional data needed is handed in, the facilitator generates the fictional evidence for each row and shares it with the group, alongside the results above, under the same headings: what we set out to do, the measurement plan with results, what happened, what users did, whether impact changed, the four product risks, what surprised us, and the decision.</p>' +
     "<p>Then the discussion: for each of the four product risks (value, usability, feasibility, viability), what does the evidence say for and against what you assumed? And what should the council do next: continue, iterate, expand, pivot or stop?</p></div>" +
     "</div></details>";
 

@@ -10,7 +10,7 @@ around the tools for that stage, and ends with what the group must hand in.
 | **2 Define** (during build) | `define.html` | User groups, user needs, business needs, theory of change, to-be process map, user story map, acceptance criteria per story, success measures | **Users, user stories with acceptance criteria, new process flow, hypothesis for change, success measures** |
 | **3 Build** | `index.html` | The booking site itself, rendered from the Define hand-in | Nothing; they test it against their acceptance criteria |
 | **4 Evaluate** (after build) | `evaluate.html` | The question chain, theory-of-change links, fake pilot results against the group's measures, a builder for additional data needed, a source guide | **Pilot results and additional data needed** (copied from the page) |
-| Evidence | `evidence.html` | Fictional pilot results generated from the measurement plan, under the evaluation headings | A decision: continue, iterate, expand, pivot or stop |
+| Evidence (not in the menu) | `evidence.html` | Fictional pilot results generated from the measurement plan, under the evaluation headings. Reached by URL only; the facilitator shares it if the optional third hand-in is used | A decision: continue, iterate, expand, pivot or stop |
 
 ## The golden thread
 
