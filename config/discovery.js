@@ -90,42 +90,44 @@ window.DISCOVERY = {
       willSay: "The people who need this most are not the ones phoning reception. They are the ones who have never been in the building." }
   ],
 
+  /* Two side-by-side guides, shown before the interviews. */
   interviewGuide: {
-    opening: "Thanks for giving me twenty minutes. I am trying to understand how people find and book sport in Brent today. There are no right answers and I am not here to sell anything. I will mostly ask you to tell me about specific times things happened.",
-    sections: [
-      { audience: "Residents who book today", questions: [
-        "Tell me about the last time you booked a court or pitch. Walk me through it from the moment you decided to play.",
-        "What happened the last time it went wrong?",
-        "How do you decide where and when to play?",
-        "If you could change one thing about booking, what would it be, and why that?"
-      ] },
-      { audience: "Residents who do not use council facilities", questions: [
-        "When did you last do any sport or exercise? Where was that, and how did you arrange it?",
-        "Have you ever thought about using a council sports centre? What happened?",
-        "If a friend asked you to play five-a-side next Tuesday, what would you need to know before saying yes?",
-        "What would make it feel like somewhere for you?"
-      ] },
-      { audience: "Reception and duty staff", questions: [
-        "Walk me through what happens when the phone rings with a booking.",
-        "What do people ask most often? What do you have to say no to?",
-        "What goes wrong in a typical week?",
-        "What would make your shift easier?"
-      ] },
-      { audience: "Decision makers and budget holders", questions: [
+    stakeholders: {
+      title: "Tips for interviewing stakeholders",
+      intro: "Senior people, budget holders and service managers. They arrive with a solution and an outcome they are accountable for. Your job is to find the outcome underneath the solution, and who else it has to satisfy.",
+      tips: [
+        "Start with what they are accountable for, not what they want built. \"What outcome are you on the hook for, and by when?\"",
+        "Ask what would make them stop or change course. It reveals the real constraint faster than asking what they want.",
+        "Ask who else needs to be happy, and who will object. Tension between stakeholders is a finding, not a problem to smooth over.",
+        "Separate the solution they arrived with from the problem underneath it: \"If the platform did not exist, what would still be true?\"",
+        "Play back what you heard in their words and check it. Senior people correct you quickly, and the correction is the useful bit.",
+        "Write down any number they mention. It is usually the one they will judge the work by."
+      ],
+      questions: [
         "What outcome are you hoping to see, and by when?",
         "How will you know it has worked? What number would you look at?",
         "What would make you stop and try something else?",
-        "Who else needs to be happy with this?"
-      ] }
-    ],
-    closing: "Is there anything I should have asked and did not? Who else should I talk to?",
-    tips: [
-      "Ask about the last time, not what they usually do. Memories of specific events are more honest than generalisations.",
-      "Do not pitch the solution. If they ask what you are building, say you are not sure yet.",
-      "Leave silences. The second answer is usually the real one.",
-      "Write down exact words. A quote in the problem statement carries more weight than a summary.",
-      "Five people per group is enough to hear the main themes. Then go and check the numbers."
-    ]
+        "Who else needs to be happy with this, and who will push back?"
+      ]
+    },
+    users: {
+      title: "Tips for interviewing users",
+      intro: "Residents who book, residents who never come in, and the staff who run the process every day. They do not think in outcomes. They remember what happened last time.",
+      tips: [
+        "Ask about the last time, not what they usually do. Memories of specific events are more honest than generalisations.",
+        "Walk through it step by step. Ask \"what happened next?\" more than \"why?\"",
+        "Do not pitch the solution. If they ask what you are building, say you are not sure yet.",
+        "Leave silences. The second answer is usually the real one.",
+        "Write down exact words. A quote in the problem statement carries more weight than a summary.",
+        "Talk to people who do not use the service, not just the ones who do. Five per group is enough to hear the main themes."
+      ],
+      questions: [
+        "Tell me about the last time you booked a court or pitch. Walk me through it from the moment you decided to play.",
+        "What happened the last time it went wrong?",
+        "If a friend asked you to play five-a-side next Tuesday, what would you need to know before saying yes?",
+        "Walk me through what happens when the phone rings with a booking. What goes wrong in a typical week?"
+      ]
+    }
   },
 
   /* Interviews already done by the PM and UX colleagues. Shown before the

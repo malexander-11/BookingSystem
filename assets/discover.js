@@ -41,22 +41,23 @@
   });
   html += fac("intended placement and what each stakeholder will say", '<div class="stakeholder-grid">' + cards + "</div>");
 
-  /* ---- 3. Interview guide ------------------------------------------------- */
+  /* ---- 3. Interview guide: two side-by-side sets of tips ------------------ */
   var g = D.interviewGuide || {};
-  html += h2(3, "Interview guide") + "<p>Read this before the interviews. Pick your questions from it, or write better ones.</p><div class=\"guide\">" +
-    '<div class="panel"><p class="eyebrow">Opening</p><p>' + esc(g.opening) + "</p>";
-  (g.sections || []).forEach(function (sec) {
-    html += "<h3>" + esc(sec.audience) + '</h3><ol class="guide-list">';
-    (sec.questions || []).forEach(function (q) { html += "<li>" + esc(q) + "</li>"; });
-    html += "</ol>";
-  });
-  html += '<p class="eyebrow">Closing</p><p>' + esc(g.closing) + "</p></div>";
-  if (g.tips && g.tips.length) {
-    html += '<aside class="panel panel--tips"><h3>How to get honest answers</h3><ul>';
-    g.tips.forEach(function (t) { html += "<li>" + esc(t) + "</li>"; });
-    html += "</ul></aside>";
+  function guidePanel(gp, cls) {
+    if (!gp) return "";
+    var out = '<div class="panel guide-panel ' + cls + '"><h3>' + esc(gp.title) + "</h3>" + (gp.intro ? '<p class="muted">' + esc(gp.intro) + "</p>" : "") +
+      '<p class="eyebrow">Tips</p><ul class="guide-tips">';
+    (gp.tips || []).forEach(function (t) { out += "<li>" + esc(t) + "</li>"; });
+    out += "</ul>";
+    if (gp.questions && gp.questions.length) {
+      out += '<p class="eyebrow">Example questions</p><ol class="guide-list">';
+      gp.questions.forEach(function (q) { out += "<li>" + esc(q) + "</li>"; });
+      out += "</ol>";
+    }
+    return out + "</div>";
   }
-  html += "</div>";
+  html += h2(3, "Interview guide") + "<p>Read this before the interviews. Stakeholders and users need different questions.</p>" +
+    '<div class="guide guide--two">' + guidePanel(g.stakeholders, "guide-panel--stakeholders") + guidePanel(g.users, "guide-panel--users") + "</div>";
 
   /* ---- 4. What colleagues have already heard ---------------------------- */
   html += h2(4, "What colleagues have already heard") +

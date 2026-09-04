@@ -629,6 +629,12 @@ a:hover { color: var(--brent-blue-dark); }
 
 /* ---- Interview guide -------------------------------------------------- */
 .guide { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 1.25rem; }
+.guide--two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.guide-panel h3 { margin-top: 0; }
+.guide-panel--stakeholders { border-top: 6px solid var(--brent-blue-dark); }
+.guide-panel--users { border-top: 6px solid var(--brent-green); }
+.guide-tips { margin: 0 0 1rem; padding-left: 1.2rem; }
+.guide-tips li { margin-bottom: 0.5rem; font-size: 0.95rem; }
 @media (max-width: 800px) { .guide { grid-template-columns: 1fr; } }
 .guide h3 { margin-top: 1.25rem; font-size: 1.05rem; }
 .guide-list { padding-left: 1.4rem; margin: 0; }

@@ -204,8 +204,7 @@ if (!DISCOVERY) {
   const ci = req(DISCOVERY, "colleagueInterviews", "array", w) || [];
   if (ci.length < 3) problems.push(`${w}: need at least 3 colleagueInterviews`);
   ci.forEach((c, i) => ["who", "by", "notes", "learnt"].forEach((k) => req(c, k, "string", `${w} colleagueInterviews[${i}]`)));
-  const sections = req(DISCOVERY, "interviewGuide.sections", "array", w) || [];
-  sections.forEach((s, i) => { req(s, "audience", "string", `${w} interviewGuide.sections[${i}]`); req(s, "questions", "array", `${w} interviewGuide.sections[${i}]`); });
+  ["stakeholders", "users"].forEach((k) => { req(DISCOVERY, `interviewGuide.${k}.title`, "string", w); req(DISCOVERY, `interviewGuide.${k}.tips`, "array", w); });
   req(DISCOVERY, "dataAnalysis.stats", "array", w);
   const lanes = req(DISCOVERY, "asIsProcess.lanes", "array", w) || [];
   const steps = req(DISCOVERY, "asIsProcess.steps", "array", w) || [];
