@@ -894,6 +894,9 @@ a:hover { color: var(--brent-blue-dark); }
 .rank-cards__btns button { font: inherit; background: #fff; border: 2px solid var(--brent-blue); color: var(--brent-blue); border-radius: var(--radius); width: 2.2rem; height: 2.2rem; cursor: pointer; }
 .rank-cards__btns button:disabled { opacity: 0.3; cursor: default; }
 .rank-cards .group-card h3 { margin-top: 0.25rem; }
+.rank-table__rank { white-space: nowrap; }
+.rank-table__rank .rank-cards__btns { display: inline-flex; margin-left: 0.4rem; vertical-align: middle; }
+.rank-table__rank .rank-cards__btns button { width: 1.8rem; height: 1.8rem; font-size: 0.8rem; }
 
 /* Blank user group cards */
 .group-card .form-group { margin-bottom: 0.6rem; }

@@ -111,9 +111,9 @@
     fac("pain points staff reported", '<ul class="pain-list">' + p.steps.filter(function (s) { return s.painPoint; }).map(function (s) { return "<li><strong>" + esc(s.text) + ":</strong> " + esc(s.painPoint) + "</li>"; }).join("") + "</ul>");
 
   /* ---- 8. Assumptions --------------------------------------------------------- */
-  html += h2(8, "Key assumptions") +
-    "<p>Every proposal rests on assumptions. Writing them down lets them be tested rather than discovered the hard way. Add at least one of your own.</p>" +
-    R.dataTable(["Assumption", "If it is wrong", "How we would test it", "Status"], (D.assumptions || []).map(function (a) { return [a.assumption, a.ifWrong, a.howToTest, a.status]; })) +
+  html += h2(8, "Risky assumptions") +
+    "<p>A risky assumption is something the plan only works if it is true, that nobody has checked, and that would hurt most if it turned out to be wrong. Rank these from riskiest to least risky: how likely is it to be wrong, and how much would that matter? Then add at least one of your own.</p>" +
+    '<div id="assumption-rank"></div>' +
     '<div id="assumption-rows"></div>';
 
   /* ---- 9. Problem statement composer ------------------------------------ */
@@ -215,11 +215,37 @@
   renderQuiz();
 
   /* ---- extra assumption rows ---------------------------------------------- */
+  /* ---- risky assumptions, ranked ------------------------------------------ */
+  var assumptions = D.assumptions || [];
+  function aorder() {
+    var o = st.get("assumptionOrder", null);
+    if (!Array.isArray(o) || o.length !== assumptions.length) o = assumptions.map(function (_, i) { return i; });
+    return o;
+  }
+  function renderAssumptions() {
+    var o = aorder(), el = document.getElementById("assumption-rank");
+    var out = '<div class="table-wrap"><table class="data-table rank-table"><thead><tr><th>Rank</th><th>Assumption</th><th>If it is wrong</th><th>Cheapest way to test</th></tr></thead><tbody>';
+    o.forEach(function (idx, pos) {
+      var a = assumptions[idx];
+      out += '<tr><td class="rank-table__rank"><span class="rank-list__n">' + (pos + 1) + '</span><span class="rank-cards__btns">' +
+        '<button type="button" data-aup="' + pos + '" aria-label="Move up"' + (pos === 0 ? " disabled" : "") + ">▲</button>" +
+        '<button type="button" data-adown="' + pos + '" aria-label="Move down"' + (pos === o.length - 1 ? " disabled" : "") + ">▼</button></span></td>" +
+        "<td><strong>" + esc(a.assumption) + "</strong></td><td>" + esc(a.ifWrong) + "</td><td>" + esc(a.cheapestTest || a.howToTest || "") + "</td></tr>";
+    });
+    el.innerHTML = out + "</tbody></table></div>";
+    el.querySelectorAll("[data-aup]").forEach(function (b) { b.addEventListener("click", function () { amove(+b.dataset.aup, -1); }); });
+    el.querySelectorAll("[data-adown]").forEach(function (b) { b.addEventListener("click", function () { amove(+b.dataset.adown, 1); }); });
+  }
+  function amove(pos, d) {
+    var o = aorder(), j = pos + d; if (j < 0 || j >= o.length) return;
+    var tmp = o[pos]; o[pos] = o[j]; o[j] = tmp; st.set("assumptionOrder", o); renderAssumptions();
+  }
+  renderAssumptions();
   R.editableRows(document.getElementById("assumption-rows"), st, "assumptions", [
     { id: "assumption", label: "Assumption", placeholder: "What are we taking for granted?" },
     { id: "ifWrong", label: "If it is wrong", placeholder: "What happens?" },
-    { id: "howToTest", label: "How we would test it", placeholder: "Cheapest way to find out" }
-  ], { min: 1, legend: "Your assumption", addLabel: "Add another assumption" });
+    { id: "cheapestTest", label: "Cheapest way to test", placeholder: "The quickest, cheapest way to find out" }
+  ], { min: 1, legend: "Your risky assumption", addLabel: "Add another assumption" });
 
   /* ---- problem statement copy box ---------------------------------------- */
   function v(k) { return (st.get(k, "") || "").trim(); }

@@ -266,12 +266,14 @@ window.DISCOVERY = {
     ]
   },
 
+  /* Risky assumptions: the plan only works if these are true, nobody has checked
+     them, and being wrong would hurt. The group ranks them riskiest first. */
   assumptions: [
-    { assumption: "People are not using facilities because booking is hard.", ifWrong: "We build a booking tool and use does not change.", howToTest: "Interviews with non-users; check whether the neighbouring borough's use actually rose.", status: "Untested" },
-    { assumption: "Residents aged 18 to 35 would book online if they could.", ifWrong: "Wrong target group; existing users benefit instead.", howToTest: "Ask that group directly.", status: "Untested" },
-    { assumption: "Online booking reduces reception workload.", ifWrong: "Staff time moves to helping people with the website.", howToTest: "Measure call reasons before and after.", status: "Untested" },
-    { assumption: "Online booking will not increase no-shows.", ifWrong: "Empty floodlit pitches cost money and block other users.", howToTest: "Compare no-show rates by channel in a pilot.", status: "Untested" },
-    { assumption: "Daytime slots are empty because people cannot find them.", ifWrong: "They are empty because people are at work. A booking tool cannot fix that.", howToTest: "Look at who books daytime now.", status: "Partly tested: daytime bookers are mostly retired or shift workers" }
+    { assumption: "People are not using facilities because booking is hard.", ifWrong: "We build a booking tool and use does not change.", cheapestTest: "Ask ten non-users on the high street why they do not come. Half a day, no budget." },
+    { assumption: "Residents aged 18 to 35 would book online if they could.", ifWrong: "Wrong target group; existing users benefit instead.", cheapestTest: "Put a 'register your interest' link on the council website for two weeks and count who clicks." },
+    { assumption: "Online booking reduces reception workload.", ifWrong: "Staff time moves to helping people with the website instead of disappearing.", cheapestTest: "Tally call reasons at one reception desk for a week, before anything is built." },
+    { assumption: "Online booking will not increase no-shows.", ifWrong: "Empty floodlit pitches cost money and block other users.", cheapestTest: "Take bookings by email at one site for two weeks and compare no-shows with phone bookings." },
+    { assumption: "Daytime slots are empty because people cannot find them.", ifWrong: "They are empty because people are at work. A booking tool cannot fix that.", cheapestTest: "Look at who books daytime now. The diary sample already half answers this." }
   ],
 
   /* Hint text under each part of the guided problem statement. */
