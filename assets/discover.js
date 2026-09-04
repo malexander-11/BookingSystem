@@ -112,9 +112,8 @@
 
   /* ---- 8. Assumptions --------------------------------------------------------- */
   html += h2(8, "Risky assumptions") +
-    "<p>A risky assumption is something the plan only works if it is true, that nobody has checked, and that would hurt most if it turned out to be wrong. Rank these from riskiest to least risky: how likely is it to be wrong, and how much would that matter? Then add at least one of your own.</p>" +
-    '<div id="assumption-rank"></div>' +
-    '<div id="assumption-rows"></div>';
+    "<p>A risky assumption is something the plan only works if it is true, that nobody has checked, and that would hurt most if it turned out to be wrong. Rank these from riskiest to least risky: how likely is it to be wrong, and how much would that matter?</p>" +
+    '<div id="assumption-rank"></div>';
 
   /* ---- 9. Problem statement composer ------------------------------------ */
   var hints = D.problemStatementHints || {};
@@ -241,11 +240,6 @@
     var tmp = o[pos]; o[pos] = o[j]; o[j] = tmp; st.set("assumptionOrder", o); renderAssumptions();
   }
   renderAssumptions();
-  R.editableRows(document.getElementById("assumption-rows"), st, "assumptions", [
-    { id: "assumption", label: "Assumption", placeholder: "What are we taking for granted?" },
-    { id: "ifWrong", label: "If it is wrong", placeholder: "What happens?" },
-    { id: "cheapestTest", label: "Cheapest way to test", placeholder: "The quickest, cheapest way to find out" }
-  ], { min: 1, legend: "Your risky assumption", addLabel: "Add another assumption" });
 
   /* ---- problem statement copy box ---------------------------------------- */
   function v(k) { return (st.get(k, "") || "").trim(); }
