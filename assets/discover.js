@@ -90,6 +90,11 @@
   /* ---- 6. Data, then quiz --------------------------------------------------- */
   var da = D.dataAnalysis || {};
   html += h2(6, "Data analysis output") + (da.summary ? "<p>" + esc(da.summary) + "</p>" : "") + R.statTiles(da.stats);
+  if (da.gaps && da.gaps.length) {
+    html += '<div class="callout callout--gaps"><strong>What is missing from this data.</strong><ul>';
+    da.gaps.forEach(function (g) { html += "<li>" + esc(g) + "</li>"; });
+    html += "</ul></div>";
+  }
   if (da.charts && da.charts.length) {
     html += '<div class="chart-grid">';
     da.charts.forEach(function (c, i) { html += R.barChart(c, "d" + i); });

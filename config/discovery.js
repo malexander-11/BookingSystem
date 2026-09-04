@@ -197,39 +197,47 @@ window.DISCOVERY = {
   ],
 
   dataAnalysis: {
-    summary: "Four weeks of paper diaries from four sites, typed up and counted.",
+    summary: "Four weeks of paper diaries from four of the 11 sites, typed up and counted by an apprentice in a week. Two weeks of the Bridge Park diary are missing, walk-ins were not always written down, and no-shows were only logged at two sites. Treat every number here as an estimate.",
+    gaps: [
+      "Four sites out of 11. The other seven have never been counted. Nobody knows whether they look the same.",
+      "Two of the four weeks are missing for Bridge Park: the diary was in the duty manager's car.",
+      "Walk-in bookings are written up when reception has time. On busy evenings they often are not, so the walk-in share is a guess.",
+      "No-shows were logged at Willesden and Vale Farm only, and only when someone remembered.",
+      "Names are hand-written, so 'regular booker' was worked out by matching handwriting. The apprentice reckons it is right to within about ten points either way.",
+      "The complaints register only counts people who filled in the form. Reception say most people just shout."
+    ],
     stats: [
-      { label: "Average occupancy of bookable hours", value: "58%", note: "Four-site diary sample, four weeks", tone: "neutral" },
-      { label: "Weekday evening occupancy", value: "92%", note: "Same sample, 5pm to 10pm", tone: "neutral" },
-      { label: "Weekday daytime occupancy", value: "30%", note: "Same sample, 9am to 5pm", tone: "neutral" },
-      { label: "Booking calls per week", value: "~350", note: "Across 11 sites, office hours only", tone: "neutral" },
-      { label: "Provisional bookings never used", value: "12%", note: "Duty manager logs; no payment taken at booking", tone: "neutral" },
-      { label: "Complaints in 12 months", value: "31", note: "Complaints register, category 'leisure bookings'", tone: "neutral" }
+      { label: "Average occupancy of bookable hours", value: "55 to 62%", note: "Four-site sample, four weeks, one diary incomplete", tone: "neutral" },
+      { label: "Weekday evening occupancy", value: "About 90%", note: "5pm to 10pm; walk-ins under-recorded so possibly higher", tone: "neutral" },
+      { label: "Weekday daytime occupancy", value: "25 to 35%", note: "9am to 5pm, same sample", tone: "neutral" },
+      { label: "Booking calls per week", value: "300 to 400", note: "Reception's estimate; nobody counts calls", tone: "neutral" },
+      { label: "Provisional bookings never used", value: "Roughly 1 in 8", note: "Logged at two sites only, when someone remembered", tone: "neutral" },
+      { label: "Complaints in 12 months", value: "31 on the register", note: "Plus an unknown number made in person or by phone", tone: "neutral" }
     ],
     charts: [
-      { title: "Occupancy by time of week", subtitle: "Share of bookable hours that were booked", unit: "%", source: "Diary sample",
+      { title: "Occupancy by time of week", subtitle: "Share of bookable hours that were booked, four of 11 sites", unit: "%", source: "Diary sample; Bridge Park two weeks missing",
         items: [
           { label: "Weekday daytime", value: 30 },
           { label: "Weekday evening", value: 92 },
           { label: "Weekend daytime", value: 65 },
           { label: "Weekend evening", value: 70 }
         ] },
-      { title: "How bookings are made today", subtitle: "Share of bookings by channel", unit: "%", source: "Diary sample",
+      { title: "How bookings are made today", subtitle: "Share of recorded bookings by channel", unit: "%", source: "Diary sample; walk-ins under-recorded",
         items: [
           { label: "Phone", value: 60 },
-          { label: "Walk in", value: 40 },
+          { label: "Walk in (recorded)", value: 40 },
           { label: "Online", value: 0 }
         ] },
-      { title: "Who books daytime slots", subtitle: "Share of weekday daytime bookings", unit: "%", source: "Diary sample, names matched by hand",
+      { title: "Who books daytime slots", subtitle: "Share of weekday daytime bookings, best guess", unit: "%", source: "Handwriting matched by hand; about ten points either way",
         items: [
           { label: "Retired residents and clubs", value: 61 },
           { label: "Shift workers", value: 22 },
           { label: "Parents with pre-school children", value: 11 },
-          { label: "Other", value: 6 }
+          { label: "Other or unreadable", value: 6 }
         ] },
-      { title: "Who makes the bookings", subtitle: "Share of all bookings in the sample", unit: "%", source: "Diary sample, names matched by hand",
+      { title: "Who makes the bookings", subtitle: "Share of recorded bookings in the sample", unit: "%", source: "Handwriting matched by hand",
         items: [
-          { label: "Regular bookers (40% of people)", value: 75 },
+          { label: "Regular bookers (about 40% of people)", value: 75 },
           { label: "Everyone else", value: 25 }
         ] }
     ]
@@ -239,7 +247,9 @@ window.DISCOVERY = {
   quiz: [
     { statement: "Most bookings are already made online.", answer: false, why: "None are. Every booking goes through the phone or the desk into a paper diary." },
     { statement: "Weekday evenings are nearly full.", answer: true, why: "92% occupancy. Most of the 'no' answers on the phone are for these slots." },
-    { statement: "About one in eight provisional bookings is never used.", answer: true, why: "12% of holds are never used, because nothing is paid at booking." },
+    { statement: "About one in eight provisional bookings is never used.", answer: true, why: "Roughly, at the two sites that logged it. Nothing is paid at booking. It could be higher elsewhere, and nobody knows." },
+    { statement: "These figures cover all 11 sites.", answer: false, why: "Four sites, and one of those has two weeks missing. The other seven have never been counted." },
+    { statement: "We can be confident that 40% of bookings are walk-ins.", answer: false, why: "Walk-ins are written up when reception has time, and on busy evenings they often are not. The real share is unknown." },
     { statement: "Daytime slots are empty because people cannot find out about them.", answer: false, why: "The data does not say why they are empty. Who books daytime now suggests it is people who are not at work. A booking tool does not change that." },
     { statement: "We know why residents who do not use the facilities stay away.", answer: false, why: "One resident interview is not evidence. Nobody has asked them properly. It is the biggest gap." },
     { statement: "Making booking easier will increase overall facility use.", answer: false, why: "That is the Cabinet Member's assumption, not a finding. The data shows a capacity problem at peak and a demand problem off-peak. It cannot tell us what easier booking would do." },

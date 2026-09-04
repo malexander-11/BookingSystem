@@ -572,6 +572,9 @@ a:hover { color: var(--brent-blue-dark); }
   font-size: 0.95rem;
 }
 .inline-list { margin: 0.35rem 0 0; padding-left: 1.25rem; }
+.callout--gaps { margin: 0 0 1.5rem; }
+.callout--gaps ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+.callout--gaps li { margin-bottom: 0.3rem; }
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 1.25rem; }
 .need-list { margin: 0; padding-left: 1.25rem; }
 .need-list li { margin-bottom: 0.6rem; }
