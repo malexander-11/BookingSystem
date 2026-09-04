@@ -73,7 +73,7 @@
 
   /* ---- 5. Your interviews --------------------------------------------------- */
   html += h2(5, "Your interviews") +
-    "<p>Two interviews, ten minutes each. Your facilitator will play the interviewee. Take notes during it, then write down what you learned straight after. Listen for what each person wants that the others do not.</p>" +
+    "<p>This is practice. Two interviews, five minutes each, with your facilitator playing the interviewee. Take it in turns to ask the questions, and remember the tips above. Afterwards, write down what you learned. Listen for what each person wants that the others do not.</p>" +
     '<div class="interview-grid">';
   (D.interviews || []).forEach(function (iv) {
     var sc = iv.script || {};
@@ -82,8 +82,7 @@
     script += "</ul>" + (sc.pushBack ? "<p><strong>Push back:</strong> " + esc(sc.pushBack) + "</p>" : "") + (sc.tension ? '<p class="callout">' + esc(sc.tension) + "</p>" : "");
     html += '<div class="panel interview-card"><h3>' + esc(iv.who) + '</h3><p class="interview-card__role">' + esc(iv.role) + "</p>" +
       "<p><strong>Before you walk in:</strong> " + esc(iv.brief) + "</p>" +
-      ta("interview." + iv.id + ".notes", "Notes", "Exact words where you can.", 6) +
-      ta("interview." + iv.id + ".learned", "What we learned", "One or two sentences. What does this person want, and what do they fear?", 3) +
+      ta("interview." + iv.id + ".learned", "What we learned", "One or two sentences. What does this person want, and what do they fear?", 4) +
       fac("script for " + iv.who, script) + "</div>";
   });
   html += "</div>";
