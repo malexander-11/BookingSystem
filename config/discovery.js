@@ -94,17 +94,17 @@ window.DISCOVERY = {
   interviewGuide: {
     stakeholders: {
       title: "Tips for interviewing stakeholders",
-      intro: "Senior people, budget holders and service managers. They arrive with a solution and an outcome they are accountable for. Your job is to find the outcome underneath the solution, and who else it has to satisfy.",
+      intro: "Senior people, budget holders and service managers. They may arrive with a solution and an outcome they are accountable for. Try to uncover their problems and what they want solving, rather than starting with any solution.",
       tips: [
-        "Start with what they are accountable for, not what they want built. \"What outcome are you on the hook for, and by when?\"",
+        "Start with what they want solved, not what they want built. \"What outcome do you want to get at, and by when?\"",
         "Ask what would make them stop or change course. It reveals the real constraint faster than asking what they want.",
         "Ask who else needs to be happy, and who will object. Tension between stakeholders is a finding, not a problem to smooth over.",
-        "Separate the solution they arrived with from the problem underneath it: \"If the platform did not exist, what would still be true?\"",
+        "Separate any solution they arrive with from the problem underneath it: \"If the platform did not exist, what would still be true?\"",
         "Play back what you heard in their words and check it. Senior people correct you quickly, and the correction is the useful bit.",
-        "Write down any number they mention. It is usually the one they will judge the work by."
+        "Write down any number they mention. They are usually important for a reason."
       ],
       questions: [
-        "What outcome are you hoping to see, and by when?",
+        "What outcome do you want to get at, and by when?",
         "How will you know it has worked? What number would you look at?",
         "What would make you stop and try something else?",
         "Who else needs to be happy with this, and who will push back?"
@@ -112,14 +112,14 @@ window.DISCOVERY = {
     },
     users: {
       title: "Tips for interviewing users",
-      intro: "Residents who book, residents who never come in, and the staff who run the process every day. They do not think in outcomes. They remember what happened last time.",
+      intro: "Residents who book, residents who never come in, and the staff who run the process every day. They tend not to think in outcomes. They are more likely to remember what happened last time.",
       tips: [
-        "Ask about the last time, not what they usually do. Memories of specific events are more honest than generalisations.",
-        "Walk through it step by step. Ask \"what happened next?\" more than \"why?\"",
-        "Do not pitch the solution. If they ask what you are building, say you are not sure yet.",
-        "Leave silences. The second answer is usually the real one.",
-        "Write down exact words. A quote in the problem statement carries more weight than a summary.",
-        "Talk to people who do not use the service, not just the ones who do. Five per group is enough to hear the main themes."
+        "Try asking about the last time rather than what they usually do. Memories of specific events tend to be more honest than generalisations.",
+        "Walk through it step by step where you can. \"What happened next?\" often gets further than \"why?\"",
+        "Try not to pitch a solution. If they ask what you are building, it is fine to say you are not sure yet.",
+        "Leave a silence where it feels natural. The second answer is often the real one.",
+        "Where you can, write down exact words. A quote in the problem statement tends to carry more weight than a summary.",
+        "If possible, talk to people who do not use the service as well as those who do. Around five per group is usually enough to hear the main themes."
       ],
       questions: [
         "Tell me about the last time you booked a court or pitch. Walk me through it from the moment you decided to play.",
@@ -129,7 +129,6 @@ window.DISCOVERY = {
       ]
     }
   },
-
   /* Interviews already done by the PM and UX colleagues. Shown before the
      group's own interviews so the competing demands are visible early. */
   colleagueInterviews: [
