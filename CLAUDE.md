@@ -65,6 +65,8 @@ Update three files:
 - `mvp.successMeasure.name` and `.target` ← the group's first success measure with the target you added (or the first example if they added none).
 - `facilities`, `bookingForm.fields`, `bookingForm.requireBrentPostcode`, `bookingForm.askFirstTimeUser`, `brand.service`, `copy.*` ← from BUILD CHOICES if given, otherwise from what the feedback and measures imply (a story about paying online is still "later", so no payment; a measure about first-time users means `askFirstTimeUser: true`).
 
+**`config/define.js` → `handout`** and **`config/discovery.js` → `problemStatement.pushback`** (only if the facilitator wants the handout refreshed): the group's PROCESS FEEDBACK and STORY MAP FEEDBACK points each with a one-sentence response, a note on their user-group order, a holistic comment on their measures, the errors they caught when testing the site, and the evaluation notes (confounders, analysing versus deciding, what they decided). Then `node scripts/build-handout.mjs`.
+
 **`config/evidence.js`** → `setOutToDo`: `hypothesis`, `measure`, `target`, `baseline`, `guardRail` from the Define hand-in, so the evidence page shows their words before the Evaluate stage.
 
 ### Hand-in 3: pilot results and additional data needed (end of Evaluate, optional)

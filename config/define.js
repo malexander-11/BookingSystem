@@ -240,6 +240,45 @@ window.DEFINE = {
     { name: "Failure demand on the online booking", target: "Fewer than 30% of started bookings abandoned", baseline: "None; there is no online journey today", source: "Abandoned journeys in Google Analytics", guardRail: "Calls about the website must stay under 10% of all calls" }
   ],
 
+  /* Commentary for the post-session handout (scripts/build-handout.mjs).
+     The group's own points, each with a short response. Optional. */
+  handout: {
+    userGroupsNote:
+      "Ranking the groups is a decision, and a contentious one. Putting regular bookers first protects the people who use the service today and keeps the CFO's revenue safe. A different room might have put other residents first to chase inclusion, or reception staff first so that the change does not disrupt the desk. Each order serves a different business need, which is why the two rankings have to be made together.",
+    processFeedback: [
+      { said: "Include cancellations and a 24-hour confirm-your-booking. This will stop the no-shows.", comment: "Attacks the no-show pain point directly, and it is cheap. Worth checking whether 'stop' is realistic: a reminder usually reduces no-shows rather than ending them." },
+      { said: "The repeat feature needs different recurring options, and perhaps an end date.", comment: "A real need from regular bookers, and a scope risk: every option is a screen to design, test and explain at the desk." },
+      { said: "Introduce paying online to drive up revenue. It should stop no-shows too.", comment: "Two claims in one. Payment may raise revenue and it may cut no-shows, but they are separate beliefs and the pilot should test them separately." },
+      { said: "Block no-show accounts.", comment: "A policy, not a feature. Who decides, after how many, and what about people who book by phone and never had an account?" },
+      { said: "Get more information: an indication of age.", comment: "Needed for the over-50s measure. The site already asked for it, which shows how a measure drives a form field." },
+      { said: "It is not clear about the storing of the name. Is it secure?", comment: "The right instinct, and a question the to-be map did not answer. Data protection is part of the process, not something added afterwards." },
+      { said: "When they turn up and pay, how is it logged against the booking? What is the pay system?", comment: "A gap in the UX colleague's map. Reception needs a step that ties a desk payment to a booking, or the till and the diary drift apart again." },
+      { said: "What is the process for walk-ins? Let's have a check-availability-before-you-come feature.", comment: "Turns a wasted journey into an informed one, and it is the same screen as the slot picker, so it costs almost nothing extra." },
+      { said: "We need a reporting mechanism and a dashboard, joining up the data to show the end.", comment: "Without it there is nothing to evaluate against. It is also the piece most teams leave until last, then regret." },
+      { said: "A reception view to book in sessions from phones and walk-ins, and amend them too.", comment: "The step that makes 'one record of bookings' true. Without it, the platform is a second diary." }
+    ],
+    storyMapFeedback: [
+      { said: "Pay online should be MVP.", comment: "Adds a payment provider, refunds and reconciliation to the first build. It tests the belief that paying up front changes behaviour." },
+      { said: "Reminders should be MVP.", comment: "Cheap, and it tests the belief that people forget rather than choose not to come." },
+      { said: "Block bookings should be MVP.", comment: "Serves clubs and regular bookers, the group we put first. It tests whether regulars will move online if their season is protected." }
+    ],
+    storyMapNote:
+      "Three stories, three different beliefs, three different build costs. Moving them all above the line makes the MVP bigger and the first pilot slower. That is the trade-off we accepted in order to chase costs and revenue first; a room that had put inclusion first would have made a different call.",
+    measuresNote:
+      "A good spread: staff (reception satisfaction, time spent on bookings), users (the channel split, over-50s bookings), money (costs, revenue) and the health of the service itself (failure demand). Two things to notice. The survey-based measures will be self-reported and small-sample, so they can support a story but not settle one. Costs and revenue come from quarterly sheets, so a six-week pilot will not show them moving; either the pilot runs longer or a proxy is needed. The over-50s measure has no baseline, because the paper diary never recorded age. And none of the seven has a target yet, which is the next conversation to have with the CFO and with reception.",
+    buildErrors: [
+      "Under-18s could book the over-50s midday session. The age question was on the form, but nothing used the answer.",
+      "Payment did not work as the acceptance criteria said. The confirmation said 'paid', but no payment was taken."
+    ],
+    buildLesson:
+      "This is why BAs get into the detail of the implementation as well as the definition: so that we catch these, not users. An acceptance criterion is only useful if somebody checks it against the real thing.",
+    evaluateNotes: {
+      confounders: "The pilot ran in weeks when pitch demand changes anyway: lighter evenings, school terms, weather. A rise or fall against the same weeks last year may be the season, not the platform, so the comparison has to be with a like-for-like period and, ideally, with sites that did not get the platform.",
+      deciding: "There is a trade-off between analysing and deciding. More data is always available and it is hard to know when enough is enough. Waiting has a cost, in staff time and in a pilot that drifts. Deciding too early has a cost too. The job is to name in advance what evidence would be enough to commit, then commit when it arrives.",
+      decision: "We agreed to wait for more data, in particular a like-for-like comparison and the first quarterly cost and revenue figures, and then look to iterate rather than invest or stop."
+    }
+  },
+
   /* Optional build choices the group may hand in. These mirror config/mvp.js. */
   buildChoices: {
     facilities: "Vale Farm 3G pitch, Willesden badminton court, Bridge Park sports hall, King Edward VII Park tennis court, plus the midday over-50s session at Willesden (kept from the PM's story map)",

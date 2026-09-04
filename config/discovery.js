@@ -290,6 +290,7 @@ window.DISCOVERY = {
     agreement: "The CFO would put the revenue line first and the health line last. Reception would worry about their job; it may help to make clear that residents can still ring up.",
     sizeOfPrize: "Lower cost and higher revenue for the council, plus more residents playing sport. No numbers against any of the three yet.",
     watchOuts: "Reception may also do other tasks, like unlocking gates or being the first-aider on hand, so time saved on bookings is not the same as staff time saved.",
+    pushback: "The CFO will push back on the consequences: 'lower revenues' has no number against it, and nothing in the statement says how much cost the platform is expected to take out. Reception will push back on 'book seamlessly and easily', which sounds like a website replacing the desk; they need to hear that the phone stays open. And keeping 'residents' and 'play more sport' this wide felt safe in the room, but it costs later: Define forces trade-offs (who first, which need first) that a wide problem statement has not made, so every one of those decisions has to be argued from scratch.",
     note: "What this leaves open: 'residents' does not say who the MVP is for first, and 'book seamlessly' describes a feature rather than the need underneath it. 'Don't play sport' is not what the data shows: courts are over half booked, so some residents play and the real gap is who does not. None of the three consequences has a number against it, although occupancy, no-shows and staff hours are known."
   }
 };
