@@ -40,6 +40,10 @@ window.EVIDENCE = {
      the group defined. The first rule whose keywords match the measure wins.
      Keep every result ambiguous: near a plausible target, never a clean win. */
   measureResults: [
+    { match: ["satisfaction", "happy", "morale"], value: "3.8 / 5", detail: "reception satisfaction after six weeks, from 3.3 in the before-survey", tone: "neutral", but: "Only 6 of the 11 receptions answered the after-survey, and the two busiest sites are missing." },
+    { match: ["online vs", "vs walk-in", "vs phone", "channel", "online booking vs"], value: "54%", detail: "of bookings were made online by week six; 31% by phone, 15% walk-in", tone: "good", but: "Most of the online bookings are regulars who used to phone. Walk-ins barely moved, and the over-50s still phone 84% of the time." },
+    { match: ["time spent", "staff time", "reception time", "hours on"], value: "-9 hrs", detail: "a week spent on bookings across the borough, from about 40 to 31, as reported by reception", tone: "neutral", but: "Self-reported. Reception says most of the time freed went on helping people with the website instead." },
+    { match: ["failure demand", "abandon", "drop-off", "gave up"], value: "27%", detail: "of started bookings were abandoned before confirmation; one in six of those left at the payment step", tone: "neutral", but: "Analytics cannot tell someone who gave up from someone who only came to check availability and left happy." },
     { match: ["over 50 and under 18", "under 18 and over 50", "over-50 and under-18", "over 50s and under 18s"], value: "23%", detail: "of participants were over 50 or under 18: 19% over 50 (almost all booked by phone) and 4% under 18 (booked by a parent)", tone: "neutral", but: "The paper diary never recorded age, so there is no baseline to say whether 23% is up, down or the same." },
     { match: ["total cost", "total costs", "running cost", "costs"], value: "-£700", detail: "total running cost over six weeks compared with last year, after £3,100 of reception time freed and £2,400 of floodlit hours lost to no-shows", tone: "neutral", but: "The platform's licence and support cost of about £1,500 a quarter is not yet in the finance spreadsheet." },
     { match: ["no-show", "no show", "turn up", "attend"], value: "22%", detail: "no-show rate on online bookings, against 9% for phone bookings last year", tone: "bad", but: "Nobody pays at booking, so a click costs nothing to abandon." },
@@ -60,11 +64,11 @@ window.EVIDENCE = {
   /* 1. What we set out to do (from the Define hand-in) */
   setOutToDo: {
     hypothesis:
-      "If we build an inclusive, helpful booking service, more residents, especially the over-50s and children, will use our sports pitches because it is easier to do so, leading to healthier older people and a more inclusive borough.",
-    measure: "Participants over 50 and under 18",
-    target: "25% of all participants in the first six weeks",
-    baseline: "Unknown; the paper diary never recorded age. Estimated 15 to 20% from names matched by hand",
-    guardRail: "Total costs must not rise above last year's for the same period"
+      "If we implement an online booking platform, more people will book pitches and fewer will phone in, because it is more seamless, leading to lower costs and higher revenue.",
+    measure: "Reception satisfaction",
+    target: "Up by 1 point on a 5-point scale by the end of the pilot",
+    baseline: "Unknown; the before-survey runs in week 1. Staff estimate about 3 out of 5 today",
+    guardRail: "No site loses staffed reception hours during the pilot"
   },
 
   /* 2. Measurement plan: the group's additional-data rows, with generated results.

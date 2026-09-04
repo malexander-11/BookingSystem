@@ -21,31 +21,35 @@ window.MVP = {
 
   mvp: {
     targetUser:
-      "Brent residents who do not currently use council sports facilities, especially the over-50s and families with children.",
+      "Residents who already book by phone or at the desk, often weekly. Many are in clubs or informal groups. Skew older.",
     userNeed:
-      "As a resident who has never used the council's facilities, I need booking to be easy and welcoming, so that trying a session feels possible rather than daunting.",
+      "As a regular booker, I need to keep my usual slot and book it without phoning, so that I play more sport.",
     hypothesis:
-      "If we build an inclusive, helpful booking service, more residents, especially the over-50s and children, will use our sports pitches because it is easier to do so, leading to healthier older people and a more inclusive borough.",
+      "If we implement an online booking platform, more people will book pitches and fewer will phone in, because it is more seamless, leading to lower costs and higher revenue.",
     process: [
-      "Choose a session",
+      "Check what is free",
       "Pick a date and time",
       "Enter your details",
-      "Confirm and repeat"
+      "Pay and confirm"
     ],
     acceptanceCriteria: [
       "A resident can see every bookable facility with its site, activity and price without logging in.",
-      "A resident can see which slots are free for the next 14 days, and booked slots cannot be selected.",
+      "A resident can see which slots are free for the next 14 days before travelling, and booked slots cannot be selected.",
       "A resident can book by giving only their name, email, postcode and age group, in under three minutes on a phone.",
       "A resident who leaves a required field empty sees a specific error next to the field and at the top of the page.",
+      "A resident pays by card when they book; a failed payment releases the slot, and free facilities skip the payment step.",
+      "The resident's details are stored securely and are visible only to reception and the duty manager.",
       "The resident receives a unique booking reference on screen immediately.",
-      "A resident can see and book low-cost midday over-50s sessions like any other slot, and can also book them by phone.",
-      "A resident can book the same slot again next week with one tap from the confirmation page, and is told if it is taken.",
+      "A resident is asked to confirm or cancel 24 hours before, and unconfirmed slots are released.",
       "The resident can cancel their own booking and the slot becomes available again.",
-      "Reception sees online bookings in the same diary as phone bookings."
+      "A resident can repeat the same slot with one tap, or set it to repeat weekly, fortnightly or monthly until an end date.",
+      "A resident can see and book low-cost midday over-50s sessions like any other slot, and can also book them by phone.",
+      "Reception can book, amend and cancel phone and walk-in bookings in the same system, with payment logged against each booking.",
+      "An approved club can book a weekly slot for a whole season in one go."
     ],
     successMeasure: {
-      name: "Participants over 50 and under 18",
-      target: "25% of all participants in the first six weeks"
+      name: "Reception satisfaction",
+      target: "Up by 1 point on a 5-point scale by the end of the pilot"
     },
     repeatBooking: true
   },
@@ -132,8 +136,8 @@ window.MVP = {
   },
 
   copy: {
-    intro: "Choose a session to see what is free over the next two weeks. You do not need an account. Look out for the low-cost midday over-50s sessions, and once you have booked you can repeat the same slot every week.",
-    confirmation: "Your booking is confirmed. Show this reference at reception when you arrive.",
+    intro: "Check what is free over the next two weeks before you set off. You do not need an account. Pay by card when you book, and once you have booked you can repeat the same slot every week. You can still book by phone.",
+    confirmation: "Your booking is confirmed and paid. Show this reference at reception when you arrive.",
     repeatButton: "Book this slot again next week",
     firstTimeQuestion: "Have you used a Brent Council sports facility in the last 12 months?"
   }

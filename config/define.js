@@ -44,52 +44,53 @@ window.DEFINE = {
       who: "Residents who already book by phone or at the desk, often weekly. Many are in clubs or informal groups. Skew older.",
       today: "Ring on Monday for Thursday, or walk in. Know the staff by name.",
       needs: ["Keep their usual slot", "Not be forced online", "A quicker way to book if one exists"] },
-    { name: "Other residents", primary: false,
-      who: "Residents who do not currently use council sports facilities: casual players, families with children, the over-50s, people who have never been in the building.",
-      today: "Play in the park, use a commercial venue, or do not play at all. Have never phoned a leisure centre.",
-      needs: ["Find out what exists, where it is and what it costs", "See what is free without having to ask anyone", "Feel that the facilities are for people like them"] },
     { name: "Reception staff", primary: false,
       who: "The people who take bookings, answer the phone and run the buildings, alongside unlocking gates and first aid.",
       today: "Paper diary per site, reconciled with the till nightly. About 350 booking calls a week across the borough.",
-      needs: ["One record of bookings", "Fewer 'is anything free tonight' calls", "People who booked actually turning up", "To keep helping the residents who need to phone"] }
+      needs: ["One record of bookings", "Fewer 'is anything free tonight' calls", "People who booked actually turning up", "To keep helping the residents who need to phone"] },
+    { name: "Other residents", primary: false,
+      who: "Residents who do not currently use council sports facilities: casual players, families with children, the over-50s, people who have never been in the building.",
+      today: "Play in the park, use a commercial venue, or do not play at all. Have never phoned a leisure centre.",
+      needs: ["Find out what exists, where it is and what it costs", "See what is free without having to ask anyone", "Feel that the facilities are for people like them"] }
   ],
 
   userNeeds: [
     { as: "resident who wants to play sport casually", need: "to see what is free and book it quickly", soThat: "I do not have to phone the centre or turn up and be turned away" },
     { as: "resident", need: "a booking reference straight away", soThat: "I know it worked and can show it at reception" },
     { as: "resident", need: "to cancel my own booking", soThat: "I do not block a slot I cannot use" },
-    { as: "regular booker", need: "the phone line to keep working", soThat: "I am not forced to change how I book" }
+    { as: "regular booker", need: "the phone line to keep working", soThat: "I am not forced to change how I book" },
+    { as: "reception staff member", need: "to book and amend phone and walk-in bookings in the same system", soThat: "every booking is in one place" }
   ],
 
   /* The five business needs the group ranks. Order here is the group's order (Define hand-in). */
   businessPriorities: [
+    { need: "Decreased costs", owner: "CFO" },
+    { need: "Increased revenue", owner: "CFO, Cabinet Member" },
     { need: "More inclusion for the community", owner: "Reception staff, Public Health" },
     { need: "Healthier children", owner: "Cabinet Member, Public Health" },
-    { need: "Support public health for the over-50s", owner: "Public Health" },
-    { need: "Increased revenue", owner: "CFO, Cabinet Member" },
-    { need: "Decreased costs", owner: "CFO" }
+    { need: "Support public health for the over-50s", owner: "Public Health" }
   ],
   businessTension:
     "Two of these are the CFO's (revenue up, costs down) and three are inclusion needs from reception, Public Health and the Cabinet Member. Whatever order the group picks, someone in the room loses. The point is to make the trade-off explicit and say who will disagree, not to find an order everyone likes. A booking platform on its own mainly serves cost reduction; inclusion needs pricing, outreach or staffed help, which cost money.",
 
   /* The group's priority order, with their reasoning and who disagrees. */
   businessNeeds: [
-    { need: "More inclusion for the community", owner: "Reception staff, Public Health", why: "Ranked first by the group: this is the main bulk of the issue and the core mission." },
-    { need: "Healthier children", owner: "Cabinet Member, Public Health", why: "Ranked second: part of the core mission the group will not veer from." },
-    { need: "Support public health for the over-50s", owner: "Public Health", why: "Ranked third: the theory of change leads to healthier older people." },
-    { need: "Increased revenue", owner: "CFO, Cabinet Member", why: "Ranked fourth. The group's words: helpful, but we can't veer from our core mission. The CFO and the CDIO, who put cost first, will disagree." },
-    { need: "Decreased costs", owner: "CFO, CDIO", why: "Ranked fifth. Same reasoning. This is the order the CFO and CDIO will push back on hardest: the platform was sold to them as a cost-reduction showcase." }
+    { need: "Decreased costs", owner: "CFO, CDIO", why: "Ranked first by the group: the platform is funded as a cost-reduction showcase, and the theory of change leads with costs." },
+    { need: "Increased revenue", owner: "CFO, Cabinet Member", why: "Ranked second: fewer empty slots and online payment both put money back into the budget." },
+    { need: "More inclusion for the community", owner: "Reception staff, Public Health", why: "Ranked third: wanted, but the group expects it to follow from an easier service rather than drive the build." },
+    { need: "Healthier children", owner: "Cabinet Member, Public Health", why: "Ranked fourth. The group's words: if Public Health funded this, they would have their priorities top. This is where Public Health will disagree." },
+    { need: "Support public health for the over-50s", owner: "Public Health", why: "Ranked fifth. Same reasoning: whoever pays sets the order, and Public Health is not paying. Public Health and the Cabinet Member will push back on this order hardest." }
   ],
 
   /* The group's theory of change (Define hand-in). */
   theoryOfChange: {
-    ifWe: "build an inclusive, helpful service",
-    then: "people will be more likely to use sports pitches",
-    because: "it is easier to do so",
-    leadingTo: "healthier older people and a more inclusive borough"
+    ifWe: "Implement a booking platform online.",
+    then: "More people book pitches and fewer people phone in. Some of these people will be children or older people.",
+    because: "It is more seamless and they don't need to phone up anymore.",
+    leadingTo: "Costs will decrease and revenues will increase."
   },
   hypothesis:
-    "If we build an inclusive, helpful booking service, more residents, especially the over-50s and children, will use our sports pitches because it is easier to do so, leading to healthier older people and a more inclusive borough.",
+    "If we implement an online booking platform, more people will book pitches and fewer will phone in, because it is more seamless, leading to lower costs and higher revenue.",
   theoryOfChangeHints: {
     ifWe: "What will we build or change? Be concrete.",
     then: "What will people do differently? Who?",
@@ -100,14 +101,14 @@ window.DEFINE = {
   toBeProcess: {
     lanes: ["Resident", "Booking service", "Reception"],
     steps: [
-      { lane: "Resident", text: "Chooses a facility" },
-      { lane: "Booking service", text: "Shows free slots for the next 14 days" },
-      { lane: "Resident", text: "Picks a date and time" },
-      { lane: "Resident", text: "Enters name, email and postcode" },
-      { lane: "Booking service", text: "Confirms on screen with a reference; holds the slot" },
-      { lane: "Booking service", text: "Offers to repeat the same slot every week, to build the habit" },
-      { lane: "Reception", text: "Sees the booking in the same diary as phone bookings" },
-      { lane: "Resident", text: "Turns up, shows the reference, pays at the desk" }
+      { lane: "Resident", text: "Checks what is free before travelling, instead of walking in on the off-chance" },
+      { lane: "Resident", text: "Chooses a facility, date and time" },
+      { lane: "Resident", text: "Enters name, email, postcode and age group" },
+      { lane: "Booking service", text: "Takes card payment and confirms with a reference; details stored securely" },
+      { lane: "Booking service", text: "Offers to repeat the slot weekly, fortnightly or monthly until an end date" },
+      { lane: "Booking service", text: "Asks the resident to confirm 24 hours before; releases unconfirmed slots" },
+      { lane: "Reception", text: "Books and amends phone and walk-in bookings in the same system; payment logged against the booking" },
+      { lane: "Booking service", text: "Reports bookings, no-shows and income to a dashboard; flags repeat no-shows" }
     ]
   },
 
@@ -147,17 +148,20 @@ window.DEFINE = {
           ] }
       ] },
       { name: "Enter your details", stories: [
-        { id: "S5", title: "Book with name, email and postcode", release: "mvp",
-          as: "resident", need: "to book by giving only my name, email and postcode", soThat: "it takes less than three minutes",
+        { id: "S5", title: "Book with name, email, postcode and age group", release: "mvp",
+          as: "resident", need: "to book by giving only my name, email, postcode and age group", soThat: "it takes less than three minutes",
           acceptanceCriteria: [
             { given: "a resident has chosen a free slot", when: "they enter valid details and confirm", then: "the slot is theirs and no longer available to others" },
+            { given: "a completed booking", when: "it is stored", then: "name and contact details are encrypted and visible only to reception and the duty manager" },
             { given: "a resident leaves a required field empty", when: "they confirm", then: "they see a specific error message next to the field and at the top of the page" },
             { given: "a resident with a typical phone", when: "they start from the facility list", then: "they complete a booking in under three minutes without help" }
           ] },
-        { id: "S6", title: "Pay online", release: "later",
-          as: "resident", need: "to pay when I book", soThat: "I do not queue at 6pm",
+        { id: "S6", title: "Pay online", release: "mvp",
+          as: "resident", need: "to pay by card when I book", soThat: "I do not queue at 6pm and I turn up because I have paid",
           acceptanceCriteria: [
-            { given: "a resident confirming a paid slot", when: "they pay by card", then: "the booking is marked paid and reception sees it" }
+            { given: "a resident confirming a paid slot", when: "they pay by card", then: "the booking is marked paid, the payment is logged against the booking and reception sees it" },
+            { given: "a card payment fails", when: "the resident does not retry within ten minutes", then: "the slot is released for others" },
+            { given: "a free facility such as a park tennis court", when: "the resident confirms", then: "no payment step is shown" }
           ] }
       ] },
       { name: "Get confirmation", stories: [
@@ -166,10 +170,12 @@ window.DEFINE = {
           acceptanceCriteria: [
             { given: "a completed booking", when: "the confirmation page loads", then: "a unique reference, the facility, date, time and cost are shown" }
           ] },
-        { id: "S8", title: "Get a reminder", release: "later",
-          as: "resident", need: "a text the day before", soThat: "I do not forget and become a no-show",
+        { id: "S8", title: "Confirm or cancel 24 hours before", release: "mvp",
+          as: "resident", need: "a text or email the day before asking me to confirm", soThat: "I do not forget, and the slot goes to someone else if I cannot make it",
           acceptanceCriteria: [
-            { given: "a booking with a mobile number", when: "it is 24 hours before the slot", then: "a reminder text is sent" }
+            { given: "a booking with a mobile number or email", when: "it is 24 hours before the slot", then: "a message is sent with one-tap confirm and cancel links" },
+            { given: "a resident taps cancel", when: "the slot is released", then: "it shows as free on the site within a minute" },
+            { given: "a resident has not confirmed", when: "it is two hours before the slot", then: "reception can see it as unconfirmed and offer it to a walk-in" }
           ] }
       ] },
       { name: "Manage my booking", stories: [
@@ -178,10 +184,11 @@ window.DEFINE = {
           acceptanceCriteria: [
             { given: "a resident with a booking", when: "they cancel it", then: "the slot is available again and the booking is gone from their list" }
           ] },
-        { id: "S14", title: "Repeat my booking every week", release: "mvp",
-          as: "resident", need: "to book the same slot again next week with one tap", soThat: "playing becomes a habit rather than a one-off",
+        { id: "S14", title: "Repeat my booking until an end date", release: "mvp",
+          as: "resident", need: "to book the same slot again weekly, fortnightly or monthly with one tap", soThat: "playing becomes a habit rather than a one-off",
           acceptanceCriteria: [
             { given: "a resident on the confirmation page", when: "they choose to repeat the booking", then: "the same facility and time seven days later is booked and a second reference is shown" },
+            { given: "a resident choosing to repeat", when: "they pick weekly, fortnightly or monthly and an end date", then: "every free slot in that series is booked and listed with its own reference" },
             { given: "the same slot next week is already taken", when: "they choose to repeat", then: "they are told it is taken and offered the slot picker instead" }
           ] },
         { id: "S10", title: "Change my booking", release: "later",
@@ -196,10 +203,26 @@ window.DEFINE = {
           acceptanceCriteria: [
             { given: "an online booking is made", when: "reception opens the diary", then: "the booking is there with the resident's name and reference" }
           ] },
-        { id: "S12", title: "Block bookings for clubs", release: "later",
+        { id: "S12", title: "Block bookings for clubs", release: "mvp",
           as: "club secretary", need: "to book a hall for a whole season", soThat: "my club has a home",
           acceptanceCriteria: [
             { given: "an approved club", when: "they request a weekly slot for 12 weeks", then: "all 12 are held and shown as unavailable to others" }
+          ] },
+        { id: "S15", title: "Reception books and amends phone and walk-in bookings", release: "mvp",
+          as: "reception staff member", need: "to book, change and cancel phone and walk-in bookings in the same system as online ones", soThat: "every booking is in one place and payment is logged against it",
+          acceptanceCriteria: [
+            { given: "a resident phones or walks in", when: "reception books a slot for them", then: "it appears in the same list as online bookings with a reference and a payment status" },
+            { given: "a resident pays at the desk", when: "reception marks the booking paid", then: "the payment is logged against that booking and the till" }
+          ] },
+        { id: "S16", title: "Flag residents who repeatedly no-show", release: "later",
+          as: "duty manager", need: "to see and block accounts with three no-shows in a month", soThat: "slots are not held by people who do not turn up",
+          acceptanceCriteria: [
+            { given: "a resident with three no-shows in 30 days", when: "they try to book", then: "they are asked to pay in full and are told why" }
+          ] },
+        { id: "S17", title: "See a bookings and income dashboard", release: "later",
+          as: "operations manager", need: "a dashboard joining bookings, no-shows, income and costs by site", soThat: "we can show the CFO what changed",
+          acceptanceCriteria: [
+            { given: "the end of a week", when: "the operations manager opens the dashboard", then: "bookings by channel, no-shows, income and reception hours are shown per site against last year" }
           ] }
       ] }
     ]
@@ -208,21 +231,24 @@ window.DEFINE = {
   /* The group's measures first (name and source from the hand-in; target,
      baseline and guard-rail added), then the examples. */
   successMeasures: [
-    { name: "Participants over 50 and under 18", target: "25% of all participants in the first six weeks", baseline: "Unknown; the paper diary never recorded age. Estimated 15 to 20% from names matched by hand", source: "SQL on the age band captured at booking", guardRail: "" },
-    { name: "Total revenue", target: "Up 5% on the same six weeks last year", baseline: "About £48,000 over six weeks last year (fictional)", source: "SQL on the finance table", guardRail: "" },
-    { name: "Total costs", target: "No increase", baseline: "About £62,000 over six weeks last year (fictional)", source: "Finance spreadsheet", guardRail: "Costs must not rise above last year's for the same period" },
-    { name: "Bookings made by people who have not used a Brent sports facility in the last 12 months", target: "30% of all bookings in the first six weeks", baseline: "Unknown; estimated 10 to 15% of phone bookings", source: "Checkout question plus SQL on the bookings table", guardRail: "" },
-    { name: "Hours booked", target: "Up 10% on the same six weeks last year", baseline: "Diary sample", source: "Bookings table and diaries", guardRail: "" },
-    { name: "Reception time on booking calls", target: "Down by a quarter", baseline: "About 40 hours a week", source: "Contact centre report plus a two-week call reason sample", guardRail: "" },
-    { name: "No-show rate", target: "Guard-rail", baseline: "About 12% of provisional holds", source: "Duty manager logs", guardRail: "Must not rise above 15%" }
+    { name: "Reception satisfaction", target: "Up by 1 point on a 5-point scale by the end of the pilot", baseline: "Unknown; the before-survey runs in week 1. Staff estimate about 3 out of 5 today", source: "Survey before-and-after.", guardRail: "No site loses staffed reception hours during the pilot" },
+    { name: "Increase in over-50s bookings", target: "Over-50s make 20% of bookings in the first six weeks", baseline: "Unknown; the diary never recorded age. Estimated 15% by matching names by hand", source: "Data provided at checkout.", guardRail: "" },
+    { name: "% of people using online booking vs walk-in vs phone calls", target: "Half of bookings made online by week six", baseline: "0% online today; about 70% phone, 30% walk-in", source: "Online system records this.", guardRail: "Phone bookings must still be possible at every site" },
+    { name: "Decrease in time spent on bookings", target: "Down by a quarter", baseline: "About 40 hours a week across the borough, staff estimate", source: "Survey from reception staff", guardRail: "" },
+    { name: "Decrease in costs", target: "Running costs down 5% on the same quarter last year", baseline: "About £62,000 over six weeks last year (fictional)", source: "From their recorded quarterly cost sheets", guardRail: "" },
+    { name: "Increase in revenue", target: "Up 5% on the same six weeks last year", baseline: "About £48,000 over six weeks last year (fictional)", source: "From their revenue sheets", guardRail: "" },
+    { name: "Failure demand on the online booking", target: "Fewer than 30% of started bookings abandoned", baseline: "None; there is no online journey today", source: "Abandoned journeys in Google Analytics", guardRail: "Calls about the website must stay under 10% of all calls" }
   ],
 
   /* Optional build choices the group may hand in. These mirror config/mvp.js. */
   buildChoices: {
-    facilities: "Vale Farm 3G pitch, Willesden badminton court, Bridge Park sports hall, King Edward VII Park tennis court, plus a midday over-50s session at Willesden (from the story map feedback)",
-    detailsCollected: "Name, email, phone (optional), postcode, age group (so participants over 50 and under 18 can be counted)",
+    facilities: "Vale Farm 3G pitch, Willesden badminton court, Bridge Park sports hall, King Edward VII Park tennis court, plus the midday over-50s session at Willesden (kept from the PM's story map)",
+    detailsCollected: "Name, email, phone (optional), postcode, age group (the group asked for an indication of age)",
     residentsOnly: "No",
-    askFirstVisit: "No; the age group question replaces it",
-    repeatBooking: "Yes: one tap on the confirmation page books the same slot next week (from the process feedback)"
+    askFirstVisit: "No",
+    payOnline: "Yes, by card at booking (simulated in the sandbox: the confirmation says the booking is paid)",
+    repeatBooking: "Yes: one tap on the confirmation page books the same slot next week; weekly, fortnightly or monthly until an end date is in the story map",
+    reminders: "Confirm-or-cancel message 24 hours before; unconfirmed slots released",
+    blockBookings: "Yes, for approved clubs"
   }
 };
