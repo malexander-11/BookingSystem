@@ -105,7 +105,7 @@
   /* ---- 7. As-is process, annotate ------------------------------------------ */
   var p = D.asIsProcess || { lanes: [], steps: [] };
   html += h2(7, "How it works today (as-is process)") +
-    "<p>The current process end to end. Under each step, write where it hurts and for whom. Use what the interviews and the data told you.</p>" +
+    "<p>The current process end to end. Three steps already have their pain points filled in. Under the other three, write where it hurts and for whom, using what the interviews and the data told you.</p>" +
     '<div id="flow">' + R.flow(p.lanes, p.steps, { editable: { st: st, prefix: "pain" }, hidePain: true }) + "</div>" +
     fac("pain points staff reported", '<ul class="pain-list">' + p.steps.filter(function (s) { return s.painPoint; }).map(function (s) { return "<li><strong>" + esc(s.text) + ":</strong> " + esc(s.painPoint) + "</li>"; }).join("") + "</ul>");
 

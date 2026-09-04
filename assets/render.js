@@ -126,11 +126,12 @@
       var li = Math.max(0, lanes.indexOf(s.lane));
       var pain = opts.hidePain ? "" : s.painPoint;
       var typed = opts.editable ? opts.editable.st.get(opts.editable.prefix + "." + i, "") : "";
-      html += '<li class="flow-step flow-lane-' + li + (pain || typed ? " has-pain" : "") + '" data-step="' + i + '">' +
+      html += '<li class="flow-step flow-lane-' + li + (pain || typed || (opts.editable && s.prefilled) ? " has-pain" : "") + '" data-step="' + i + '">' +
         '<span class="flow-step__lane">' + esc(s.lane) + "</span>" +
         '<span class="flow-step__text">' + esc(s.text) + "</span>" +
         (pain ? '<span class="flow-step__pain" title="' + esc(pain) + '">Pain point</span>' : "") +
-        (opts.editable ? '<label class="visually-hidden" for="pain-' + i + '">Pain point for step ' + (i + 1) + '</label>' +
+        (opts.editable && s.prefilled ? '<p class="flow-step__given">' + esc(s.painPoint) + '</p><span class="flow-step__pain">Pain point</span>' :
+         opts.editable ? '<label class="visually-hidden" for="pain-' + i + '">Pain point for step ' + (i + 1) + '</label>' +
           '<textarea class="flow-step__input" id="pain-' + i + '" rows="2" placeholder="Where does this step hurt?" data-key="' + esc(opts.editable.prefix + "." + i) + '"></textarea>' +
           '<span class="flow-step__pain flow-step__pain--typed"' + (typed ? "" : " hidden") + ">Pain point</span>" : "") +
         "</li>";
@@ -153,6 +154,7 @@
     function update() {
       var items = "";
       steps.forEach(function (s, i) {
+        if (s.prefilled) { items += "<li><strong>" + esc(s.text) + ":</strong> " + esc(s.painPoint) + " <em>(given)</em></li>"; return; }
         var v = (st.get(prefix + "." + i, "") || "").trim();
         var step = root.querySelector('.flow-step[data-step="' + i + '"]');
         if (step) { step.classList.toggle("has-pain", !!v); var b = step.querySelector(".flow-step__pain--typed"); if (b) b.hidden = !v; }

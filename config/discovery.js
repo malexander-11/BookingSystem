@@ -258,10 +258,10 @@ window.DISCOVERY = {
     lanes: ["Resident", "Reception", "Duty manager"],
     steps: [
       { lane: "Resident", text: "Wants to play; phones in office hours or walks in", painPoint: "Cannot see availability without asking. Evening callers usually hear 'no'." },
-      { lane: "Reception", text: "Checks the paper diary for that site", painPoint: "Each site has its own diary. Cannot see other sites." },
-      { lane: "Reception", text: "Slot free? If not, offers another time or turns them away", painPoint: "Nobody records what happens to the people turned away." },
+      { lane: "Reception", text: "Checks the paper diary for that site", prefilled: true, painPoint: "Each site has its own diary. Cannot see other sites." },
+      { lane: "Reception", text: "Slot free? If not, offers another time or turns them away", prefilled: true, painPoint: "Nobody records what happens to the people turned away." },
       { lane: "Reception", text: "Writes name and phone number in the diary as a provisional hold", painPoint: "No payment taken, so about 12% of holds are never used." },
-      { lane: "Resident", text: "Turns up and pays at the desk", painPoint: "Queues at 6pm. Card machine at only 7 of 11 sites." },
+      { lane: "Resident", text: "Turns up and pays at the desk", prefilled: true, painPoint: "Queues at 6pm. Card machine at only 7 of 11 sites." },
       { lane: "Duty manager", text: "Reconciles diary and till at close", painPoint: "Errors found weekly. Double bookings about twice a month per site." }
     ]
   },
