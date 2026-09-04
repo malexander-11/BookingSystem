@@ -61,14 +61,15 @@
 
   /* ---- 4. What colleagues have already heard ---------------------------- */
   html += h2(4, "What colleagues have already heard") +
-    "<p>Your PM and UX colleagues have already spoken to some of the stakeholders. Read their notes before your own interviews. Notice where what people want does not line up.</p>" +
+    "<p>Your PM and UX colleagues have already spoken to some of the stakeholders. Read what they learnt before your own interviews. Notice where what people want does not line up.</p>" +
     '<div class="colleague-grid">';
   (D.colleagueInterviews || []).forEach(function (c) {
     html += '<div class="panel colleague-card"><span class="tag tag--by">Interviewed by ' + esc(c.by) + '</span><h3>' + esc(c.who) + '</h3><p class="interview-card__role">' + esc(c.role) + "</p>" +
-      '<p class="eyebrow">Notes</p><p class="colleague-card__notes">' + esc(c.notes) + "</p>" +
       '<p class="eyebrow">What they learnt</p><p>' + esc(c.learnt) + "</p></div>";
   });
-  html += "</div>" + (D.colleagueTension ? fac("the competing demands", "<p>" + esc(D.colleagueTension) + "</p>") : "");
+  html += "</div>" +
+    '<div class="panel">' + ta("colleagues.challenge", "What challenge is emerging from these interviews?", "One or two sentences. Where do the things people want pull against each other?", 3) + "</div>" +
+    (D.colleagueTension ? fac("the competing demands", "<p>" + esc(D.colleagueTension) + "</p>") : "");
 
   /* ---- 5. Your interviews --------------------------------------------------- */
   html += h2(5, "Your interviews") +
