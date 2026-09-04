@@ -185,7 +185,7 @@ if (H.notCovered && H.notCovered.length) {
 }
 
 /* 7. Takeaways */
-body += h2(7, "Ten things to take back to your desk") +
+body += h2(7, "Ten key takeaways") +
   list([
     "Start with the problem and desired outcomes, not solutions.",
     "Ask what outcome the sponsor wants to get at, and by when.",

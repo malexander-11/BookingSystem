@@ -232,19 +232,19 @@ window.DEFINE = {
      baseline and guard-rail added), then the examples. */
   successMeasures: [
     { name: "Reception satisfaction", target: "Up by 1 point on a 5-point scale by the end of the pilot", baseline: "Unknown; the before-survey runs in week 1. Staff estimate about 3 out of 5 today", source: "Survey before-and-after.", guardRail: "No site loses staffed reception hours during the pilot",
-      comment: "Puts the people most disrupted by the change at the centre, which is rare and right. Self-reported and small-sample (eleven receptions), so it can support a story but not settle one." },
+      comment: "Puts employees at the centre, and a before-and-after study seems right. It will have a small sample and depend on the completion rate, with a risk that the least happy do not engage." },
     { name: "Increase in over-50s bookings", target: "Over-50s make 20% of bookings in the first six weeks", baseline: "Unknown; the diary never recorded age. Estimated 15% by matching names by hand", source: "Data provided at checkout.", guardRail: "",
-      comment: "The inclusion measure, and it drove a field on the form. There is no baseline, because the paper diary never recorded age, so the first six weeks only give us a starting point." },
+      comment: "There is no baseline, because the paper diary never recorded age, so the first six weeks only give us a starting point." },
     { name: "% of people using online booking vs walk-in vs phone calls", target: "Half of bookings made online by week six", baseline: "0% online today; about 70% phone, 30% walk-in", source: "Online system records this.", guardRail: "Phone bookings must still be possible at every site",
-      comment: "The cleanest measure of whether behaviour moved, straight from the system. It says nothing about whether demand grew: a phone booking that becomes an online booking is not a new booking." },
+      comment: "A powerful measure to look at channel shift, but not change in total volumes." },
     { name: "Decrease in time spent on bookings", target: "Down by a quarter", baseline: "About 40 hours a week across the borough, staff estimate", source: "Survey from reception staff", guardRail: "",
       comment: "A proxy for the cost saving the CFO wants, but staff time freed is not the same as staff cost saved, and it is self-reported." },
     { name: "Decrease in costs", target: "Running costs down 5% on the same quarter last year", baseline: "About £62,000 over six weeks last year (fictional)", source: "From their recorded quarterly cost sheets", guardRail: "",
       comment: "What the CFO will actually look at. Quarterly, so a six-week pilot cannot show it moving; either the pilot runs longer or a proxy such as reception hours stands in." },
     { name: "Increase in revenue", target: "Up 5% on the same six weeks last year", baseline: "About £48,000 over six weeks last year (fictional)", source: "From their revenue sheets", guardRail: "",
-      comment: "The other CFO measure, with the same timing problem. Also the easiest to misread, because most early online income is money that would have come in by phone." },
+      comment: "A good outcome measure, but it could be hard to draw the causal chain back to the solution." },
     { name: "Failure demand on the online booking", target: "Fewer than 30% of started bookings abandoned", baseline: "None; there is no online journey today", source: "Abandoned journeys in Google Analytics", guardRail: "Calls about the website must stay under 10% of all calls",
-      comment: "Measures the health of the service itself, and it is the one measure we can read every week. Analytics cannot tell a give-up from someone who only came to check availability, so pair it with a few calls to the desk." }
+      comment: "Great for measuring how the solution is being interacted with, but what is a 'good' number here?" }
   ],
 
   /* Commentary for the post-session handout (scripts/build-handout.mjs).
