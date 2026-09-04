@@ -97,8 +97,6 @@ window.DISCOVERY = {
       intro: "Senior people, budget holders and service managers. They may arrive with a solution and an outcome they are accountable for. Try to uncover their problems and what they want solving, rather than starting with any solution.",
       tips: [
         "Start with what they want solved, not what they want built. \"What outcome do you want to get at, and by when?\"",
-        "Ask what would make them stop or change course. It reveals the real constraint faster than asking what they want.",
-        "Ask who else needs to be happy, and who will object. Tension between stakeholders is a finding, not a problem to smooth over.",
         "Separate any solution they arrive with from the problem underneath it: \"If the platform did not exist, what would still be true?\"",
         "Play back what you heard in their words and check it. Senior people correct you quickly, and the correction is the useful bit.",
         "Write down any number they mention. They are usually important for a reason."
@@ -106,7 +104,6 @@ window.DISCOVERY = {
       questions: [
         "What outcome do you want to get at, and by when?",
         "How will you know it has worked? What number would you look at?",
-        "What would make you stop and try something else?",
         "Who else needs to be happy with this, and who will push back?"
       ]
     },
@@ -116,14 +113,11 @@ window.DISCOVERY = {
       tips: [
         "Try asking about the last time rather than what they usually do. Memories of specific events tend to be more honest than generalisations.",
         "Walk through it step by step where you can. \"What happened next?\" often gets further than \"why?\"",
-        "Try not to pitch a solution. If they ask what you are building, it is fine to say you are not sure yet.",
         "Leave a silence where it feels natural. The second answer is often the real one.",
-        "Where you can, write down exact words. A quote in the problem statement tends to carry more weight than a summary.",
-        "If possible, talk to people who do not use the service as well as those who do. Around five per group is usually enough to hear the main themes."
+        "Where you can, write down exact words. A quote in the problem statement tends to carry more weight than a summary."
       ],
       questions: [
         "Tell me about the last time you booked a court or pitch. Walk me through it from the moment you decided to play.",
-        "What happened the last time it went wrong?",
         "If a friend asked you to play five-a-side next Tuesday, what would you need to know before saying yes?",
         "Walk me through what happens when the phone rings with a booking. What goes wrong in a typical week?"
       ]
@@ -258,10 +252,10 @@ window.DISCOVERY = {
     lanes: ["Resident", "Reception", "Duty manager"],
     steps: [
       { lane: "Resident", text: "Wants to play; phones in office hours or walks in", painPoint: "Cannot see availability without asking. Evening callers usually hear 'no'." },
-      { lane: "Reception", text: "Checks the paper diary for that site", prefilled: true, painPoint: "Each site has its own diary. Cannot see other sites." },
-      { lane: "Reception", text: "Slot free? If not, offers another time or turns them away", prefilled: true, painPoint: "Nobody records what happens to the people turned away." },
+      { lane: "Reception", text: "Checks the paper diary for that site", painPoint: "Each site has its own diary. Cannot see other sites." },
+      { lane: "Reception", text: "Slot free? If not, offers another time or turns them away", painPoint: "Nobody records what happens to the people turned away." },
       { lane: "Reception", text: "Writes name and phone number in the diary as a provisional hold", painPoint: "No payment taken, so about 12% of holds are never used." },
-      { lane: "Resident", text: "Turns up and pays at the desk", prefilled: true, painPoint: "Queues at 6pm. Card machine at only 7 of 11 sites." },
+      { lane: "Resident", text: "Turns up and pays at the desk", painPoint: "Queues at 6pm. Card machine at only 7 of 11 sites." },
       { lane: "Duty manager", text: "Reconciles diary and till at close", painPoint: "Errors found weekly. Double bookings about twice a month per site." }
     ]
   },

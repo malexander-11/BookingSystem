@@ -23,8 +23,7 @@
   }
 
   var STAGES = ["Understanding the brief", "Mapping stakeholders", "Interview stakeholders and users", "Analysing available data", "Analysing the as-is process", "Defining our riskiest assumptions", "Agreeing on a shared problem to solve"];
-  var html = '<div class="notice"><strong>This stage ends with:</strong> ' + esc(D.stage.endsWith) + "</div>" +
-    '<ol class="stage-steps" aria-label="Steps in Discover">' + STAGES.map(function (t, i) { return '<li><a href="#s' + (i + 1) + '"><span class="stage-steps__n">' + (i + 1) + "</span>" + esc(t) + "</a></li>"; }).join("") + "</ol>";
+  var html = '<ol class="stage-steps" aria-label="Steps in Discover">' + STAGES.map(function (t, i) { return '<li><a href="#s' + (i + 1) + '"><span class="stage-steps__n">' + (i + 1) + "</span>" + esc(t) + "</a></li>"; }).join("") + "</ol>";
 
   /* ---- 1. The brief ------------------------------------------------------- */
   var b = D.brief || {};
@@ -33,7 +32,7 @@
 
   /* ---- 2. Stakeholder map (drag and drop) -------------------------------- */
   html += h2(2, "Mapping stakeholders", "s2") +
-    "<p>Drag each stakeholder into the box where they belong. Power: can they stop or change this work? Interest: how much do they care about the outcome? On a phone, tap a chip, then tap a box.</p>" +
+    "<p>Drag each stakeholder into the box where they belong. Power: can they stop or change this work? Interest: how much do they care about the outcome?</p>" +
     '<div id="stakeholder-map"></div>';
   var cards = "";
   (D.stakeholders || []).forEach(function (s) {
