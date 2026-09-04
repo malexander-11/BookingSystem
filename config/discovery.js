@@ -282,14 +282,14 @@ window.DISCOVERY = {
      group's own statement replaces them. */
   /* The group's problem statement (Discover hand-in). */
   problemStatement: {
-    who: "All residents who want to play sport",
-    needsTo: "be able to easily access and book sports pitches",
-    because: "they need to stay healthy, fit and included, while ensuring Brent Council is sustainable",
-    today: "often don't book and stay unfit",
-    resultsIn: "public health costs and unbooked pitches leading to revenue shortfalls",
-    agreement: "The CFO has a more laser-focused view. Reception would worry about her job; perhaps we make it clear that residents can still ring up.",
-    sizeOfPrize: "Reduced cost, increased revenue.",
-    watchOuts: "Reception may also do other tasks, like unlocking gates or being the first-aider on hand.",
-    note: "What this leaves open: it names all residents, so it does not yet say who the MVP is for first. It says residents often don't book without saying why, and the data cannot answer that. The size of the prize has no numbers against it, although occupancy, no-shows and staff hours are known. And 'included' is in the because line, but neither the prize nor the watch-outs mention the people who never come in."
+    who: "residents",
+    needsTo: "book seamlessly and easily",
+    because: "they need to play more sport",
+    today: "don't play sport",
+    resultsIn: "lack of inclusion, lack of health, and lower revenues for the council",
+    agreement: "The CFO would put the revenue line first and the health line last. Reception would worry about their job; it may help to make clear that residents can still ring up.",
+    sizeOfPrize: "Lower cost and higher revenue for the council, plus more residents playing sport. No numbers against any of the three yet.",
+    watchOuts: "Reception may also do other tasks, like unlocking gates or being the first-aider on hand, so time saved on bookings is not the same as staff time saved.",
+    note: "What this leaves open: 'residents' does not say who the MVP is for first, and 'book seamlessly' describes a feature rather than the need underneath it. 'Don't play sport' is not what the data shows: courts are over half booked, so some residents play and the real gap is who does not. None of the three consequences has a number against it, although occupancy, no-shows and staff hours are known."
   }
 };

@@ -35,7 +35,7 @@ window.DEFINE = {
 
   /* The group's problem statement, carried over from Discover. */
   problemStatement:
-    "All residents who want to play sport need to be able to easily access and book sports pitches, because they need to stay healthy, fit and included, while ensuring Brent Council is sustainable. Today they often don't book and stay unfit, which results in public health costs and unbooked pitches leading to revenue shortfalls.",
+    "Residents need to book seamlessly and easily, because they need to play more sport. Today they don't play sport, which results in lack of inclusion, lack of health, and lower revenues for the council.",
 
   /* The user groups, as defined by the UX colleague. The group ranks them on
      the Define page; the order here is only the starting order. */
