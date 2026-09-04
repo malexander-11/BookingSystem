@@ -245,15 +245,11 @@ window.DISCOVERY = {
 
   /* True or false, answered after reading the data above. */
   quiz: [
-    { statement: "Most bookings are already made online.", answer: false, why: "None are. Every booking goes through the phone or the desk into a paper diary." },
-    { statement: "Weekday evenings are nearly full.", answer: true, why: "92% occupancy. Most of the 'no' answers on the phone are for these slots." },
-    { statement: "About one in eight provisional bookings is never used.", answer: true, why: "Roughly, at the two sites that logged it. Nothing is paid at booking. It could be higher elsewhere, and nobody knows." },
-    { statement: "These figures cover all 11 sites.", answer: false, why: "Four sites, and one of those has two weeks missing. The other seven have never been counted." },
-    { statement: "We can be confident that 40% of bookings are walk-ins.", answer: false, why: "Walk-ins are written up when reception has time, and on busy evenings they often are not. The real share is unknown." },
-    { statement: "Daytime slots are empty because people cannot find out about them.", answer: false, why: "The data does not say why they are empty. Who books daytime now suggests it is people who are not at work. A booking tool does not change that." },
-    { statement: "We know why residents who do not use the facilities stay away.", answer: false, why: "One resident interview is not evidence. Nobody has asked them properly. It is the biggest gap." },
-    { statement: "Making booking easier will increase overall facility use.", answer: false, why: "That is the Cabinet Member's assumption, not a finding. The data shows a capacity problem at peak and a demand problem off-peak. It cannot tell us what easier booking would do." },
-    { statement: "Reception time on booking calls is roughly one full-time post.", answer: true, why: "About 350 calls a week at two to three minutes each, plus the diary, is around 40 hours across the borough." }
+    { statement: "Evenings are busier than daytime at every one of Brent's 11 sites.", answer: false, why: "Only four sites were counted, and one of those has two weeks missing. The pattern holds in the sample. Nobody has looked at the other seven." },
+    { statement: "Weekday evenings are nearly full at the sites that were counted, and may be fuller than the diary shows.", answer: true, why: "About 90% in the sample, and walk-ins are under-recorded on busy evenings, so the true figure is probably higher, not lower." },
+    { statement: "Because 60% of recorded bookings are made by phone, most residents prefer to phone.", answer: false, why: "The diary only contains people who booked. Walk-ins are under-recorded, and the people who rang, heard 'no' and gave up are not in the data at all. It cannot tell us what residents prefer." },
+    { statement: "Regular bookers make three quarters of the bookings, so the booking process works well for them.", answer: false, why: "Frequency is not satisfaction. They may simply have learnt to ring on Monday for Thursday. The complaints register and the interviews say otherwise." },
+    { statement: "This data cannot tell us whether easier online booking would increase overall use.", answer: true, why: "It describes capacity and demand as they are today. There is no before-and-after, and nobody who does not book has been asked why. That is the Cabinet Member's assumption, not a finding." }
   ],
 
   /* Participants annotate this with pain points. The painPoint fields here are
