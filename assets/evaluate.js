@@ -44,10 +44,11 @@
   }
   var results = measures.map(function (m) { var r = resultFor(m); return { name: m.name, source: m.source || "", value: r.value, detail: r.detail, tone: r.tone, but: r.but }; });
 
-  var html = "";
+  var STAGES = ["Four questions, in order", "Testing the theory of change", "Reading the pilot results", "So what next?"];
+  var html = '<ol class="stage-steps" aria-label="Steps in Evaluate">' + STAGES.map(function (t, i) { return '<li><a href="#s' + (i + 1) + '"><span class="stage-steps__n">' + (i + 1) + "</span>" + esc(t) + "</a></li>"; }).join("") + "</ol>";
 
   /* 1. The question chain */
-  html += h2(1, "Four questions, in order") +
+  html += h2(1, "Four questions, in order", "s1") +
     '<ol class="chain chain--questions">' +
     '<li><span class="chain__label">1</span>What did we set out to do? <span class="muted-line">The theory of change and the measures from Define.</span></li>' +
     '<li><span class="chain__label">2</span>What do the numbers say? <span class="muted-line">The pilot results against the measures you chose.</span></li>' +
@@ -56,7 +57,7 @@
     "</ol>";
 
   /* 2. Theory-of-change links */
-  html += h2(2, "Test every link in the theory of change") +
+  html += h2(2, "Testing the theory of change", "s2") +
     "<p>" + (ownToc ? "This is the theory of change your group wrote on the Define page. " : "This is the example theory of change; write your own on the Define page and it will appear here. ") + "Each link is a claim. Each claim needs its own question.</p>" +
     R.dataTable(["Link", "The claim", "The evaluation question"], [
       ["If we", t.ifWe, "Did we actually build and run it? Did people find it?"],
@@ -67,12 +68,12 @@
     ], "links-table");
 
   /* 3. Pilot results against the group's measures */
-  html += h2(3, "What the pilot showed against your measures") +
+  html += h2(3, "Reading the pilot results", "s3") +
     "<p>" + (ownMeasures.length ? "Six weeks after launch at four sites, here is what came back for each measure your group chose on the Define page." : "Six weeks after launch at four sites, here is what came back for the example measures. Add your own on the Define page and the results will follow.") +
     " Every number is fictional and every one is deliberately ambiguous.</p>" +
     R.statTiles(results.map(function (r) { return { label: r.name, value: r.value, note: r.detail, tone: r.tone }; })) +
     '<ul class="result-list">' + results.map(function (r) {
-      return "<li><strong>" + esc(r.name) + ":</strong> " + esc(r.value) + " " + esc(r.detail) + '. <span class="result-but">But: ' + esc(r.but) + "</span>" + (r.source ? '<span class="evidence-source">Source: ' + esc(r.source) + "</span>" : "") + "</li>";
+      return '<li><span class="result-line"><strong>' + esc(r.name) + ":</strong> " + esc(r.value) + " " + esc(r.detail) + '.</span><span class="result-but">But: ' + esc(r.but) + "</span>" + (r.source ? '<span class="evidence-source">Source: ' + esc(r.source) + "</span>" : "") + "</li>";
     }).join("") + "</ul>" +
     '<p class="callout">Headline numbers rarely answer the theory of change on their own. Which links above do these results settle, and which do they leave open?</p>';
 
@@ -82,7 +83,7 @@
   if (!Array.isArray(ord) || ord.length !== items.length) ord = items.map(function (_, i) { return i; });
   var firstNeed = items[ord[0]] ? items[ord[0]].need : "", lastNeed = items[ord[ord.length - 1]] ? items[ord[ord.length - 1]].need : "";
   var so = E.setOutToDo || {};
-  html += h2(4, "So what next?") +
+  html += h2(4, "So what next?", "s4") +
     '<div class="panel verdict"><p class="verdict__question">So what next?</p>' +
     '<div class="verdict__choices" role="group" aria-label="Your decision">' +
     '<button type="button" class="pill" data-verdict="invest">Invest</button>' +
