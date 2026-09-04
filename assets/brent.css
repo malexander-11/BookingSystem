@@ -573,6 +573,8 @@ a:hover { color: var(--brent-blue-dark); }
 }
 .inline-list { margin: 0.35rem 0 0; padding-left: 1.25rem; }
 .callout--gaps { margin: 0 0 1.5rem; }
+.prompt-q { background: var(--brent-blue-tint); border-left: 6px solid var(--brent-blue); border-radius: var(--radius); padding: 0.9rem 1.1rem; margin: 1rem 0 1.5rem; font-family: var(--font-heading); font-weight: 600; font-size: 1.15rem; }
+.prompt-q__label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brent-blue-dark); margin-bottom: 0.2rem; }
 .callout--gaps ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
 .callout--gaps li { margin-bottom: 0.3rem; }
 .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 1.25rem; }

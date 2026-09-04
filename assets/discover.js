@@ -68,7 +68,7 @@
       '<p class="eyebrow">What they learnt</p><p>' + esc(c.learnt) + "</p></div>";
   });
   html += "</div>" +
-    '<div class="panel">' + ta("colleagues.challenge", "What challenge is emerging from these interviews?", "One or two sentences. Where do the things people want pull against each other?", 3) + "</div>" +
+    '<div class="prompt-q"><span class="prompt-q__label">Discuss</span>What challenge is emerging from these interviews?</div>' +
     (D.colleagueTension ? fac("the competing demands", "<p>" + esc(D.colleagueTension) + "</p>") : "");
 
   /* ---- 5. Your interviews --------------------------------------------------- */
@@ -107,6 +107,7 @@
   html += h2(7, "How it works today (as-is process)") +
     "<p>The current process end to end. Three steps already have their pain points filled in. Under the other three, write where it hurts and for whom, using what the interviews and the data told you.</p>" +
     '<div id="flow">' + R.flow(p.lanes, p.steps, { editable: { st: st, prefix: "pain" }, hidePain: true }) + "</div>" +
+    '<div class="prompt-q"><span class="prompt-q__label">Discuss</span>How confident are we in these pain points?</div>' +
     fac("pain points staff reported", '<ul class="pain-list">' + p.steps.filter(function (s) { return s.painPoint; }).map(function (s) { return "<li><strong>" + esc(s.text) + ":</strong> " + esc(s.painPoint) + "</li>"; }).join("") + "</ul>");
 
   /* ---- 8. Assumptions --------------------------------------------------------- */
