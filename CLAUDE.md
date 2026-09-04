@@ -15,6 +15,7 @@ few minutes. There is no build step and no server.
 | `config/mvp.js` | The booking site: the six MVP fields, facilities, form fields, copy. Assigns `window.MVP`. | **Yes**: after Define |
 | `config/evidence.js` | Fictional post-launch evidence, generated from the group's measurement plan. Assigns `window.EVIDENCE`. | **Yes**: after Evaluate |
 | `discover.html`, `define.html`, `evaluate.html`, `evidence.html`, `index.html` | The pages. Each renders entirely from its config. | Only if the group asks for something the config cannot express |
+| `handout.pdf`, `scripts/handout-pdf.js` | The same handout as an A4 PDF, printed from `handout.html` by headless Chromium. Run `node scripts/handout-pdf.js` after rebuilding the handout. | Regenerate, do not hand-edit |
 | `handout.html`, `scripts/build-handout.mjs` | Standalone post-session revision handout (one file, inline CSS, no scripts), generated from the four configs. Not in the menu (URL only). Run `node scripts/build-handout.mjs` after a hand-in if the facilitator wants it refreshed. | Regenerate, do not hand-edit |
 | `assets/render.js` | Shared renderers (stat tiles, bar charts, tables, process flow, hand-in panel). | Rarely |
 | `assets/discover.js`, `assets/define.js`, `assets/evaluate.js`, `assets/evidence.js`, `assets/app.js` | Page logic. | Rarely |
