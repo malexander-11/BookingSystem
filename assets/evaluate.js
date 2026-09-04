@@ -31,17 +31,7 @@
   var measures = ownMeasures.length ? ownMeasures : (D.successMeasures || []).map(function (m) { return { name: m.name, source: m.source }; });
 
   /* ---- fake pilot results ----------------------------------------------- */
-  function hash(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
-  function resultFor(m) {
-    var text = (m.name || "").toLowerCase();
-    var rules = E.measureResults || [];
-    for (var i = 0; i < rules.length; i++) {
-      if ((rules[i].match || []).some(function (k) { return text.indexOf(k.toLowerCase()) !== -1; })) return rules[i];
-    }
-    var d = E.measureResultDefault || { value: "+{n}%", detail: "change over the pilot", tone: "neutral", but: "" };
-    var n = 2 + (hash(text) % 9);
-    return { value: (d.value || "").replace("{n}", n), detail: d.detail, tone: d.tone, but: d.but };
-  }
+  function resultFor(m) { return R.measureResult(E, m); }
   var results = measures.map(function (m) { var r = resultFor(m); return { name: m.name, source: m.source || "", value: r.value, detail: r.detail, tone: r.tone, but: r.but }; });
 
   var STAGES = ["Four questions, in order", "Testing the theory of change", "Reading the pilot results", "So what next?"];

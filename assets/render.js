@@ -224,8 +224,22 @@
     var b = document.getElementById("sandbox-banner"); if (b && !b.dataset.keep) b.textContent = MVP.brand.sandboxNotice;
   }
 
+  /* Fake pilot result for a measure: the first EVIDENCE.measureResults rule
+     whose keywords appear in the measure name wins; otherwise the default. */
+  function hashStr(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function measureResult(E, m) {
+    var text = ((m && m.name) || "").toLowerCase();
+    var rules = (E && E.measureResults) || [];
+    for (var i = 0; i < rules.length; i++) {
+      if ((rules[i].match || []).some(function (k) { return text.indexOf(k.toLowerCase()) !== -1; })) return rules[i];
+    }
+    var d = (E && E.measureResultDefault) || { value: "+{n}%", detail: "change over the pilot", tone: "neutral", but: "" };
+    var n = 2 + (hashStr(text) % 9);
+    return { value: (d.value || "").replace("{n}", n), detail: d.detail, tone: d.tone, but: d.but };
+  }
+
   window.R = {
-    esc: esc, fmtNum: fmtNum, h2: h2,
+    esc: esc, fmtNum: fmtNum, h2: h2, measureResult: measureResult,
     store: store, bind: bind, isFacilitator: isFacilitator, facilitatorBlock: facilitatorBlock, pageTools: pageTools,
     statTiles: statTiles, barChart: barChart, dataTable: dataTable,
     flow: flow, flowSync: flowSync, editableRows: editableRows, copyBox: copyBox, chrome: chrome
