@@ -1,93 +1,78 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>After the session: what we did and why | Brent Council (training sandbox)</title>
-  <meta name="robots" content="noindex">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-  <script>document.write('<link rel="stylesheet" href="assets/brent.css?v=' + Date.now() + '">');</script>
-  <noscript><link rel="stylesheet" href="assets/brent.css"></noscript>
-  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>After the session: what we did and why</title>
+<style>
+:root { --blue: #0964b9; --blue-dark: #085093; --green: #1c7a4b; --ink: #0b0c0c; --muted: #505a5f; --rule: #b1b4b6; --surface: #f3f2f1; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin: 0; padding: 0 20px 60px; font: 18px/1.5 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: var(--ink); background: #fff; }
+main { max-width: 760px; margin: 0 auto; }
+.eyebrow { margin: 40px 0 5px; font-size: 15px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); }
+h1 { margin: 0 0 15px; font-size: 34px; line-height: 1.15; color: var(--blue-dark); }
+.lede { font-size: 20px; margin: 0 0 10px; }
+.sandbox { margin: 0 0 40px; padding: 10px 15px; background: var(--surface); border-left: 6px solid var(--blue); font-size: 15px; color: var(--muted); }
+h2 { margin: 50px 0 15px; padding-top: 25px; border-top: 1px solid var(--rule); font-size: 26px; line-height: 1.2; color: var(--blue-dark); }
+h2 .num { display: inline-block; min-width: 36px; height: 36px; margin-right: 10px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 18px; line-height: 36px; text-align: center; }
+h3 { margin: 30px 0 10px; font-size: 20px; line-height: 1.25; }
+p, ul, ol, dl { margin: 0 0 20px; }
+li { margin-bottom: 8px; }
+a { color: var(--blue); }
+.muted { color: var(--muted); font-size: 16px; }
+.cards, .two { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 0 0 20px; }
+.card, .panel { padding: 15px 18px; border: 1px solid var(--rule); border-radius: 6px; background: #fff; }
+.card h3, .panel h3 { margin: 0 0 8px; font-size: 17px; }
+.card p, .panel ul { margin: 0; font-size: 16px; }
+.panel ul { padding-left: 20px; }
+.panel li { margin-bottom: 6px; }
+.facts { display: grid; grid-template-columns: 160px 1fr; gap: 6px 15px; }
+.facts dt { font-weight: 700; }
+.facts dd { margin: 0; }
+.callout { margin: 0 0 20px; padding: 12px 15px; border-left: 6px solid var(--blue); background: var(--surface); }
+.chain { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.chain li { padding: 10px 12px; border: 1px solid var(--rule); border-top: 4px solid var(--green); border-radius: 4px; background: #fff; margin: 0; }
+.chain__label { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green); margin-bottom: 3px; }
+.process { padding-left: 24px; }
+.process li { margin-bottom: 10px; }
+.lane { display: inline-block; min-width: 130px; margin-right: 8px; padding: 0 8px; border-radius: 3px; background: var(--surface); font-size: 14px; font-weight: 700; color: var(--blue-dark); }
+.scroll { overflow-x: auto; margin: 0 0 20px; }
+table { border-collapse: collapse; width: 100%; font-size: 16px; }
+th, td { padding: 8px 12px 8px 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+th { font-weight: 700; }
+.questions li, .takeaways li { margin-bottom: 10px; }
+.results li { margin-bottom: 14px; }
+.but { color: var(--muted); font-size: 16px; }
+.glossary { display: grid; grid-template-columns: 180px 1fr; gap: 8px 20px; }
+.glossary dt { font-weight: 700; }
+.glossary dd { margin: 0; }
+footer { max-width: 760px; margin: 50px auto 0; padding-top: 15px; border-top: 1px solid var(--rule); font-size: 15px; color: var(--muted); }
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  h1 { font-size: 28px; } h2 { font-size: 22px; }
+  .cards, .two, .chain { grid-template-columns: 1fr; }
+  .facts, .glossary { grid-template-columns: 1fr; gap: 2px 0; }
+  .facts dd, .glossary dd { margin-bottom: 10px; }
+  .lane { display: block; min-width: 0; width: max-content; margin-bottom: 3px; }
+}
+@media print {
+  body { font-size: 12pt; padding: 0; color: #000; }
+  h2 { break-after: avoid; }
+  .card, .panel, .chain, table, .callout, .results li { break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+}
+</style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-  <div class="sandbox-banner" id="sandbox-banner">Training sandbox: fictional service and fictional data</div>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="index.html" aria-label="Brent Council home (sandbox)">
-        <svg viewBox="0 0 150 40" width="150" height="40" aria-hidden="true">
-          <defs>
-            <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3982c6"/><stop offset="1" stop-color="#085093"/></linearGradient>
-            <linearGradient id="lg2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#30b781"/><stop offset="1" stop-color="#0964b9"/></linearGradient>
-          </defs>
-          <circle cx="20" cy="20" r="19" fill="url(#lg1)"/>
-          <path d="M20 6 C 30 10, 30 30, 20 34 C 10 30, 10 10, 20 6 Z" fill="url(#lg2)" opacity="0.9"/>
-          <path d="M8 14 C 18 8, 32 14, 32 26 C 22 32, 8 26, 8 14 Z" fill="#fff" opacity="0.18"/>
-          <circle cx="20" cy="20" r="4.5" fill="#f3eb03"/>
-          <text x="48" y="27" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="21" fill="currentColor" letter-spacing="-0.5">Brent</text>
-        </svg>
-      </a>
-      <nav aria-label="Council sections">
-        <ul class="site-nav">
-          <li><a href="#" onclick="return false">Residents</a></li>
-          <li><a href="#" onclick="return false">Business</a></li>
-          <li><a href="#" onclick="return false">Council and democracy</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <div class="service-bar">
-    <div class="container">
-      <a class="service-name" href="index.html" id="service-name">Book a sports facility</a>
-    </div>
-  </div>
-
-  <nav class="workshop-nav" aria-label="Workshop stages">
-    <div class="container">
-      <span class="workshop-nav__label">Workshop</span>
-      <a href="discover.html">1 Discover</a>
-      <a href="define.html">2 Define</a>
-      <a href="index.html">3 Build</a>
-      <a href="evaluate.html">4 Evaluate</a>
-    </div>
-  </nav>
-
-  <section class="hero">
-    <div class="container">
-      <p class="eyebrow">Introduction to Business Analysis</p>
-      <h1>After the session: what we did and why</h1>
-      <p>A revision handout. Everything below is what your group produced during the workshop, in the order you produced it, with a reminder of why each step matters. Print it, or keep the link.</p>
-    </div>
-  </section>
-
-  <main id="main" class="page">
-    <div class="container handout" id="handout">
-      <noscript><p class="notice">This sandbox needs JavaScript turned on.</p></noscript>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <ul>
-        <li><a href="#" onclick="return false">Accessibility</a></li>
-        <li><a href="#" onclick="return false">Privacy</a></li>
-        <li><a href="#" onclick="return false">Contact us</a></li>
-      </ul>
-      <p class="footer-note" id="footer-note"></p>
-    </div>
-  </footer>
-
-  <script>
-    /* Load config and page scripts fresh on every visit, so a push during the
-       workshop shows up on the next refresh instead of after the 10-minute cache. */
-    (function () { var v = Date.now(); ["config/mvp.js", "config/discovery.js", "config/define.js", "config/evidence.js", "assets/render.js", "assets/handout.js"].forEach(function (src) {
-      document.write('<script src="' + src + '?v=' + v + '"><\/script>');
-    }); })();
-  </script>
+<main>
+<p class="eyebrow">Introduction to Business Analysis</p>
+<h1>After the session: what we did and why</h1>
+<p class="lede">A revision handout. Everything below is what your group produced during the workshop, in the order you produced it, with a reminder of why each step matters.</p>
+<p class="sandbox">The booking system, the data and the results were a fictional training sandbox, not a Brent Council service.</p>
+<h2 id="s1"><span class="num">1</span>The golden thread</h2><p>Business analysis is the discipline of making sure the right problem gets solved before anyone spends money solving it. The session ran the four stages in order, and each stage produced one thing the next stage needed. That chain, from problem to decision, is the golden thread. If any link is missing you cannot say afterwards whether the work was worth doing.</p><div class="cards"><div class="card"><h3><a href="https://malexander-11.github.io/BookingSystem/discover.html">1 Discover</a></h3><p>A problem statement everyone in the room recognised as true.</p></div><div class="card"><h3><a href="https://malexander-11.github.io/BookingSystem/define.html">2 Define</a></h3><p>Who first, which business need first, a theory of change, a to-be process, a story map and success measures.</p></div><div class="card"><h3><a href="https://malexander-11.github.io/BookingSystem/index.html">3 Build</a></h3><p>A booking site built only from what was above the MVP line.</p></div><div class="card"><h3><a href="https://malexander-11.github.io/BookingSystem/evaluate.html">4 Evaluate</a></h3><p>Fake pilot results against your own measures, and the question: so what next?</p></div></div><h2 id="s2"><span class="num">2</span>Discover: understand before you build</h2><p>The brief arrived as a solution: a booking platform. Discover is where you refuse to take that at face value and find out what is actually going on. You used five tools, in this order.</p><ul><li><strong>Stakeholder map.</strong> Who can stop this, and who cares? Power against interest, so you know whom to keep close and whom to keep informed.</li><li><strong>Interviews.</strong> Stakeholders tell you what outcome they are on the hook for. Users tell you what happened last time. Both are evidence; neither is the whole story.</li><li><strong>Data analysis.</strong> What the numbers can and cannot answer. Incomplete, fuzzy data is normal; the skill is knowing which gaps matter.</li><li><strong>As-is process map.</strong> Where the current process hurts, step by step, and for whom.</li><li><strong>Risky assumptions.</strong> The beliefs the whole idea rests on, ranked by how much damage they do if wrong, with the cheapest way to test each.</li></ul><h3>Your problem statement</h3><dl class="facts"><dt>Who</dt><dd>residents</dd><dt>Needs to</dt><dd>book seamlessly and easily</dd><dt>Because</dt><dd>they need to play more sport</dd><dt>Today they</dt><dd>don&#39;t play sport</dd><dt>Which results in</dt><dd>lack of inclusion, lack of health, and lower revenues for the council</dd></dl><dl class="facts"><dt>Agreement</dt><dd>The CFO would put the revenue line first and the health line last. Reception would worry about their job; it may help to make clear that residents can still ring up.</dd><dt>Size of the prize</dt><dd>Lower cost and higher revenue for the council, plus more residents playing sport. No numbers against any of the three yet.</dd><dt>Watch out for</dt><dd>Reception may also do other tasks, like unlocking gates or being the first-aider on hand, so time saved on bookings is not the same as staff time saved.</dd></dl><div class="callout"><strong>What this leaves open.</strong> What this leaves open: &#39;residents&#39; does not say who the MVP is for first, and &#39;book seamlessly&#39; describes a feature rather than the need underneath it. &#39;Don&#39;t play sport&#39; is not what the data shows: courts are over half booked, so some residents play and the real gap is who does not. None of the three consequences has a number against it, although occupancy, no-shows and staff hours are known.</div><h3>Interview tips worth keeping</h3><div class="two"><div class="panel"><h3>Tips for interviewing stakeholders</h3><ul><li>Start with what they want solved, not what they want built. &quot;What outcome do you want to get at, and by when?&quot;</li><li>Separate any solution they arrive with from the problem underneath it: &quot;If the platform did not exist, what would still be true?&quot;</li><li>Play back what you heard in their words and check it. Senior people correct you quickly, and the correction is the useful bit.</li><li>Write down any number they mention. They are usually important for a reason.</li></ul></div><div class="panel"><h3>Tips for interviewing users</h3><ul><li>Try asking about the last time rather than what they usually do. Memories of specific events tend to be more honest than generalisations.</li><li>Walk through it step by step where you can. &quot;What happened next?&quot; often gets further than &quot;why?&quot;</li><li>Leave a silence where it feels natural. The second answer is often the real one.</li><li>Where you can, write down exact words. A quote in the problem statement tends to carry more weight than a summary.</li></ul></div></div><h2 id="s3"><span class="num">3</span>Define: decide what to build first</h2><p>Define turns one agreed problem into one small, testable plan. Every choice here is a trade-off, and the point of writing it down is so you can say later who it was for and who lost out.</p><h3>User groups, in your priority order</h3><ol><li><strong>Regular bookers (primary: the MVP is designed around them).</strong> Residents who already book by phone or at the desk, often weekly. Many are in clubs or informal groups. Skew older.</li><li><strong>Reception staff.</strong> The people who take bookings, answer the phone and run the buildings, alongside unlocking gates and first aid.</li><li><strong>Other residents.</strong> Residents who do not currently use council sports facilities: casual players, families with children, the over-50s, people who have never been in the building.</li></ol><h3>Business needs, in your priority order</h3><ol><li><strong>Decreased costs.</strong> Ranked first by the group: the platform is funded as a cost-reduction showcase, and the theory of change leads with costs.</li><li><strong>Increased revenue.</strong> Ranked second: fewer empty slots and online payment both put money back into the budget.</li><li><strong>More inclusion for the community.</strong> Ranked third: wanted, but the group expects it to follow from an easier service rather than drive the build.</li><li><strong>Healthier children.</strong> Ranked fourth. The group&#39;s words: if Public Health funded this, they would have their priorities top. This is where Public Health will disagree.</li><li><strong>Support public health for the over-50s.</strong> Ranked fifth. Same reasoning: whoever pays sets the order, and Public Health is not paying. Public Health and the Cabinet Member will push back on this order hardest.</li></ol><h3>Your theory of change</h3><p>Each link is a claim about the world. Evaluation tests the links one at a time, which is why a vague link cannot be evaluated.</p><ol class="chain "><li><span class="chain__label">If we</span>Implement a booking platform online.</li><li><span class="chain__label">then</span>More people book pitches and fewer people phone in. Some of these people will be children or older people.</li><li><span class="chain__label">because</span>It is more seamless and they don&#39;t need to phone up anymore.</li><li><span class="chain__label">leading to</span>Costs will decrease and revenues will increase.</li></ol><p><strong>In one line:</strong> If we implement an online booking platform, more people will book pitches and fewer will phone in, because it is more seamless, leading to lower costs and higher revenue.</p><h3>The to-be process</h3><ol class="process"><li><span class="lane">Resident</span>Checks what is free before travelling, instead of walking in on the off-chance</li><li><span class="lane">Resident</span>Chooses a facility, date and time</li><li><span class="lane">Resident</span>Enters name, email, postcode and age group</li><li><span class="lane">Booking service</span>Takes card payment and confirms with a reference; details stored securely</li><li><span class="lane">Booking service</span>Offers to repeat the slot weekly, fortnightly or monthly until an end date</li><li><span class="lane">Booking service</span>Asks the resident to confirm 24 hours before; releases unconfirmed slots</li><li><span class="lane">Reception</span>Books and amends phone and walk-in bookings in the same system; payment logged against the booking</li><li><span class="lane">Booking service</span>Reports bookings, no-shows and income to a dashboard; flags repeat no-shows</li></ol><h3>The story map</h3><p>Stories above the line are the MVP. Everything else waits until the evidence says it is needed.</p><div class="two"><div class="panel"><h3>In the MVP (12)</h3><ul><li>S1 See the facilities I can book</li><li>S3 See free slots for the next 14 days</li><li>S13 Book a midday over-50s session</li><li>S5 Book with name, email, postcode and age group</li><li>S6 Pay online</li><li>S7 Get a reference on screen</li><li>S8 Confirm or cancel 24 hours before</li><li>S9 Cancel my booking</li><li>S14 Repeat my booking until an end date</li><li>S11 Reception sees online bookings</li><li>S12 Block bookings for clubs</li><li>S15 Reception books and amends phone and walk-in bookings</li></ul></div><div class="panel"><h3>Later (5)</h3><ul><li>S2 Filter by activity near me</li><li>S4 Join a waiting list for a full slot</li><li>S10 Change my booking</li><li>S16 Flag residents who repeatedly no-show</li><li>S17 See a bookings and income dashboard</li></ul></div></div><h3>Success measures</h3><p>You named the measure and its source. The target, baseline and guard-rail were added afterwards, and they are the first thing to challenge: a target with no baseline is a guess, and a measure with no guard-rail can be hit by doing harm somewhere else.</p><div class="scroll"><table><thead><tr><th>Measure</th><th>Source</th><th>Target</th><th>Baseline</th><th>Guard-rail</th></tr></thead><tbody><tr><td><strong>Reception satisfaction</strong></td><td>Survey before-and-after.</td><td>Up by 1 point on a 5-point scale by the end of the pilot</td><td>Unknown; the before-survey runs in week 1. Staff estimate about 3 out of 5 today</td><td>No site loses staffed reception hours during the pilot</td></tr><tr><td><strong>Increase in over-50s bookings</strong></td><td>Data provided at checkout.</td><td>Over-50s make 20% of bookings in the first six weeks</td><td>Unknown; the diary never recorded age. Estimated 15% by matching names by hand</td><td></td></tr><tr><td><strong>% of people using online booking vs walk-in vs phone calls</strong></td><td>Online system records this.</td><td>Half of bookings made online by week six</td><td>0% online today; about 70% phone, 30% walk-in</td><td>Phone bookings must still be possible at every site</td></tr><tr><td><strong>Decrease in time spent on bookings</strong></td><td>Survey from reception staff</td><td>Down by a quarter</td><td>About 40 hours a week across the borough, staff estimate</td><td></td></tr><tr><td><strong>Decrease in costs</strong></td><td>From their recorded quarterly cost sheets</td><td>Running costs down 5% on the same quarter last year</td><td>About £62,000 over six weeks last year (fictional)</td><td></td></tr><tr><td><strong>Increase in revenue</strong></td><td>From their revenue sheets</td><td>Up 5% on the same six weeks last year</td><td>About £48,000 over six weeks last year (fictional)</td><td></td></tr><tr><td><strong>Failure demand on the online booking</strong></td><td>Abandoned journeys in Google Analytics</td><td>Fewer than 30% of started bookings abandoned</td><td>None; there is no online journey today</td><td>Calls about the website must stay under 10% of all calls</td></tr></tbody></table></div><h2 id="s4"><span class="num">4</span>Build: the smallest thing that tests the idea</h2><p>An MVP is not a small version of the final product. It is the least you can build to find out whether the theory of change is true. The booking site was built from your Define hand-in and nothing else.</p><dl class="facts"><dt>Target user</dt><dd>Residents who already book by phone or at the desk, often weekly. Many are in clubs or informal groups. Skew older.</dd><dt>User need</dt><dd>As a regular booker, I need to keep my usual slot and book it without phoning, so that I play more sport.</dd><dt>Hypothesis</dt><dd>If we implement an online booking platform, more people will book pitches and fewer will phone in, because it is more seamless, leading to lower costs and higher revenue.</dd><dt>Success measure</dt><dd>Reception satisfaction. Target: Up by 1 point on a 5-point scale by the end of the pilot</dd></dl><p><strong>The journey:</strong> Check what is free &rarr; Pick a date and time &rarr; Enter your details &rarr; Pay and confirm</p><h3>Acceptance criteria</h3><p>Plain sentences that say when a story is done. If you cannot test it, it is not an acceptance criterion.</p><ul><li>A resident can see every bookable facility with its site, activity and price without logging in.</li><li>A resident can see which slots are free for the next 14 days before travelling, and booked slots cannot be selected.</li><li>A resident can book by giving only their name, email, postcode and age group, in under three minutes on a phone.</li><li>A resident who leaves a required field empty sees a specific error next to the field and at the top of the page.</li><li>A resident pays by card when they book; a failed payment releases the slot, and free facilities skip the payment step.</li><li>The resident&#39;s details are stored securely and are visible only to reception and the duty manager.</li><li>The resident receives a unique booking reference on screen immediately.</li><li>A resident is asked to confirm or cancel 24 hours before, and unconfirmed slots are released.</li><li>The resident can cancel their own booking and the slot becomes available again.</li><li>A resident can repeat the same slot with one tap, or set it to repeat weekly, fortnightly or monthly until an end date.</li><li>A resident can see and book low-cost midday over-50s sessions like any other slot, and can also book them by phone.</li><li>Reception can book, amend and cancel phone and walk-in bookings in the same system, with payment logged against each booking.</li><li>An approved club can book a weekly slot for a whole season in one go.</li></ul><p class="muted">In the sandbox, payment, reminders, reception amendments and block bookings are described rather than built. That is normal for a prototype: the point was to test the journey, not the plumbing.</p><h2 id="s5"><span class="num">5</span>Evaluate: did it work, and for whom?</h2><p>Evaluation is a set of questions asked in order. Skip one and the numbers will answer a question you never asked.</p><ol class="questions"><li>What did we set out to do?</li><li>What do the numbers say?</li><li>What do the numbers not tell us?</li><li>So what next?</li></ol><h3>One question per link</h3><div class="scroll"><table><thead><tr><th>Link</th><th>Your claim</th><th>The evaluation question</th></tr></thead><tbody><tr><td><strong>If we</strong></td><td>Implement a booking platform online.</td><td>Did we actually build and run it? Did people find it?</td></tr><tr><td><strong>then</strong></td><td>More people book pitches and fewer people phone in. Some of these people will be children or older people.</td><td>Did the behaviour change? For whom? Compared with what?</td></tr><tr><td><strong>because</strong></td><td>It is more seamless and they don&#39;t need to phone up anymore.</td><td>Was the belief right? What did users say the barrier was?</td></tr><tr><td><strong>leading to</strong></td><td>Costs will decrease and revenues will increase.</td><td>Did the outcome move, or did activity just move channel?</td></tr></tbody></table></div><h3>The pilot results you were shown</h3><p>Fictional, generated from your measures. Notice that every result comes with a <em>but</em>: that is not pessimism, it is the part of the evaluation that stops a number being mistaken for an answer.</p><ul class="results"><li><strong>Reception satisfaction:</strong> 3.8 / 5 reception satisfaction after six weeks, from 3.3 in the before-survey.<br><span class="but">But: Only 6 of the 11 receptions answered the after-survey, and the two busiest sites are missing.</span></li><li><strong>Increase in over-50s bookings:</strong> 19% of bookings were by people over 50.<br><span class="but">But: Almost all of them still booked by phone. Online bookings by the over-50s were 4%.</span></li><li><strong>% of people using online booking vs walk-in vs phone calls:</strong> 54% of bookings were made online by week six; 31% by phone, 15% walk-in.<br><span class="but">But: Most of the online bookings are regulars who used to phone. Walk-ins barely moved, and the over-50s still phone 84% of the time.</span></li><li><strong>Decrease in time spent on bookings:</strong> -9 hrs a week spent on bookings across the borough, from about 40 to 31, as reported by reception.<br><span class="but">But: Self-reported. Reception says most of the time freed went on helping people with the website instead.</span></li><li><strong>Decrease in costs:</strong> -£700 total running cost over six weeks compared with last year, after £3,100 of reception time freed and £2,400 of floodlit hours lost to no-shows.<br><span class="but">But: The platform&#39;s licence and support cost of about £1,500 a quarter is not yet in the finance spreadsheet.</span></li><li><strong>Increase in revenue:</strong> +£6,200 income from casual bookings over six weeks compared with last year.<br><span class="but">But: Most of it is bookings that used to come in by phone. Net new income is closer to £900.</span></li><li><strong>Failure demand on the online booking:</strong> 27% of started bookings were abandoned before confirmation; one in six of those left at the payment step.<br><span class="but">But: Analytics cannot tell someone who gave up from someone who only came to check availability and left happy.</span></li></ul><h3>Four reasons a good number can mislead</h3><dl class="glossary"><dt>Substitution</dt><dd>Four in five online bookings replaced phone and walk-in bookings. Of the revenue rise, most is money that would have arrived by phone. The over-50s who came to the new sessions mostly booked by phone too, so the website&#39;s share of the inclusion result is small.</dd><dt>Counterfactual</dt><dd>The midday over-50s sessions and the £3 price started the same week as the platform. The data cannot separate the session, the price and the booking tool. A pilot with the sessions but no website would have told us more.</dd><dt>Novelty</dt><dd>Weeks 1 and 2 were the busiest for the midday sessions after a leaflet drop at two GP surgeries. Weeks 5 and 6 were flat. Whether the over-50s keep coming is unknown.</dd><dt>Self-report</dt><dd>Age group is self-declared at checkout and parents book for children, so the under-18 figure counts bookings, not children. First-time status is self-reported too.</dd></dl><h3>So what next?</h3><p>The last question is a decision, and it is only honest if you decided what success meant before the numbers arrived. Your first measure was <em>Reception satisfaction</em>, target <em>Up by 1 point on a 5-point scale by the end of the pilot</em>, guard-rail <em>No site loses staffed reception hours during the pilot</em>.</p><ul><li><strong>Invest:</strong> it worked well enough to put more money and sites behind it.</li><li><strong>Iterate:</strong> keep the direction, change specific things, run it again.</li><li><strong>Pause:</strong> stop spending until the missing evidence is in.</li><li><strong>Pivot:</strong> keep the goal, change the solution.</li><li><strong>Stop:</strong> switch it off and put the effort somewhere else.</li></ul><h2 id="s6"><span class="num">6</span>Ten things to take back to your desk</h2><ol class="takeaways"><li>Start with the problem, not the solution you were handed. Ask what outcome the sponsor wants to get at, and by when.</li><li>Write down every number a stakeholder mentions. It is usually important for a reason.</li><li>A problem statement is done when the CFO and the reception desk both recognise it as true.</li><li>Prioritising means someone loses. Name who, and say it out loud before the build, not after.</li><li>Every link in a theory of change is a claim you can test. If a link cannot be tested, it is a hope, not a theory.</li><li>The MVP is the least you can build to test the riskiest assumption. Features that do not test anything wait.</li><li>An acceptance criterion is a sentence someone can check. Given, when, then.</li><li>A target without a baseline is a guess. Find out what today&#39;s number is before you promise to move it.</li><li>Add a guard-rail to every measure. Hitting the target by doing harm elsewhere is not success.</li><li>Decide what failure looks like before the numbers arrive. Then, when they arrive, ask what they do not tell you: substitution, counterfactual, novelty, self-report.</li></ol><h2 id="s7"><span class="num">7</span>Glossary</h2><dl class="glossary"><dt>Problem statement</dt><dd>One paragraph: who, needs to, because, today they, which results in. Agreed before any solution is discussed.</dd><dt>Stakeholder map</dt><dd>A grid of power against interest. Tells you whom to manage closely, keep satisfied, keep informed or simply monitor.</dd><dt>Risky assumption</dt><dd>A belief the plan depends on, that would sink it if wrong. Rank by damage, then test the riskiest cheaply.</dd><dt>Theory of change</dt><dd>If we do X, then people will do Y, because Z, leading to outcome W. Four links, each testable.</dd><dt>Hypothesis</dt><dd>The theory of change in one sentence, written so a pilot can prove it wrong.</dd><dt>MVP</dt><dd>Minimum viable product: the smallest thing that lets you learn whether the hypothesis holds.</dd><dt>User story</dt><dd>As a (who), I need (what), so that (why). The unit of a story map.</dd><dt>Acceptance criteria</dt><dd>Given (a situation), when (an action), then (a checkable result). Says when a story is done.</dd><dt>Success measure</dt><dd>A number you will count, and where it comes from. Needs a target, a baseline and a guard-rail to be useful.</dd><dt>Baseline</dt><dd>Today&#39;s value of a measure, before the change. Without it you cannot say whether a number went up or down.</dd><dt>Guard-rail</dt><dd>A measure that must not get worse while you chase the target.</dd><dt>Failure demand</dt><dd>Demand caused by a service not working: calls about the website, abandoned journeys, repeat visits.</dd><dt>Substitution</dt><dd>Activity that moved channel rather than being new. A phone booking that became an online booking is not new demand.</dd><dt>Counterfactual</dt><dd>What would have happened anyway. Two changes launched in the same week cannot be told apart.</dd><dt>Novelty</dt><dd>An early lift that fades. Weeks one and two are not the same as weeks five and six.</dd><dt>Self-report</dt><dd>Data people give about themselves. Cheap to collect, easy to get wrong, and shaped by how the question is asked.</dd></dl>
+</main>
+<footer>The workshop pages are still online at <a href="https://malexander-11.github.io/BookingSystem/">https://malexander-11.github.io/BookingSystem/</a>. Handout generated 2026-09-04.</footer>
 </body>
 </html>
