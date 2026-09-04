@@ -86,8 +86,7 @@ window.DEFINE = {
     ifWe: "build an inclusive, helpful service",
     then: "people will be more likely to use sports pitches",
     because: "it is easier to do so",
-    leadingTo: "healthier older people and a more inclusive borough",
-    measuredBy: "active participants, and whether those who take part get healthier over time"
+    leadingTo: "healthier older people and a more inclusive borough"
   },
   hypothesis:
     "If we build an inclusive, helpful booking service, more residents, especially the over-50s and children, will use our sports pitches because it is easier to do so, leading to healthier older people and a more inclusive borough.",
@@ -95,8 +94,7 @@ window.DEFINE = {
     ifWe: "What will we build or change? Be concrete.",
     then: "What will people do differently? Who?",
     because: "Why do we believe that? This is the assumption evaluation will test.",
-    leadingTo: "What outcome does the council actually want from that behaviour?",
-    measuredBy: "Which number, from where, by when?"
+    leadingTo: "What outcome does the council actually want from that behaviour?"
   },
 
   toBeProcess: {

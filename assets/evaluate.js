@@ -26,7 +26,7 @@
   /* ---- the group's own theory of change and measures, if typed ---------- */
   function dv(k) { return (def.get(k, "") || "").trim(); }
   var ownToc = dv("toc.ifWe") || dv("toc.then");
-  var t = ownToc ? { ifWe: dv("toc.ifWe"), then: dv("toc.then"), because: dv("toc.because"), leadingTo: dv("toc.leadingTo"), measuredBy: dv("toc.measuredBy") } : (D.theoryOfChange || {});
+  var t = ownToc ? { ifWe: dv("toc.ifWe"), then: dv("toc.then"), because: dv("toc.because"), leadingTo: dv("toc.leadingTo") } : (D.theoryOfChange || {});
   var ownMeasures = (def.get("measures", []) || []).filter(function (m) { return m && (m.name || "").trim(); });
   var measures = ownMeasures.length ? ownMeasures : (D.successMeasures || []).map(function (m) { return { name: m.name, source: m.source }; });
 
@@ -63,8 +63,7 @@
       ["If we", t.ifWe, "Did we actually build and run it? Did people find it?"],
       ["then", t.then, "Did the behaviour change? For whom? Compared with what?"],
       ["because", t.because, "Was the belief right? What did users say the barrier was?"],
-      ["leading to", t.leadingTo, "Did the outcome move, or did activity just move channel?"],
-      ["measured by", t.measuredBy, "Is the number reliable enough to decide on?"]
+      ["leading to", t.leadingTo, "Did the outcome move, or did activity just move channel?"]
     ], "links-table");
 
   /* 3. Pilot results against the group's measures */

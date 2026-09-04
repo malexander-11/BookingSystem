@@ -51,7 +51,6 @@ If we:
 Then: 
 Because: 
 Leading to: 
-Measured by: 
 
 PROCESS FEEDBACK
 <what to change, add or remove in the UX colleague's to-be process>

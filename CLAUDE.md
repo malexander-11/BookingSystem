@@ -50,7 +50,7 @@ Update three files:
 - `userGroups`: reorder to match USER GROUP PRIORITY, set `primary: true` on the first only, and append each "Added need" to that group's `needs`.
 - `userNeeds`: add one entry per added need (as = the group name).
 - `businessNeeds`: reorder to match BUSINESS NEED PRIORITY (top three first), and put the "who disagrees" answer into the `why` of the need that loses.
-- `theoryOfChange`: the five THEORY OF CHANGE lines. `hypothesis`: one sentence combining If we / then.
+- `theoryOfChange`: the four THEORY OF CHANGE lines (If we / then / because / leading to). `hypothesis`: one sentence combining If we / then.
 - `toBeProcess`: apply PROCESS FEEDBACK (add, remove, rename or re-lane steps). Keep 5 to 8 steps.
 - `storyMap.activities`: apply STORY MAP FEEDBACK (move stories across the MVP line, add missing stories with at least one Given/When/Then each, drop stories they called wrong). Keep ids unique; new ones continue the S-numbering.
 - `successMeasures`: the group's SUCCESS MEASURES lines first, then the examples. They give only `name` and `source`; **you add** a plausible `target` (number and time window), `baseline` (today's number or "unknown, estimated …") and, for at least one measure, a `guardRail`.

@@ -234,8 +234,8 @@ if (!DEFINE) {
   if (bp.length !== 5) problems.push(`${w}: businessPriorities must have exactly 5 entries`);
   bp.forEach((b, i) => req(b, "need", "string", `${w} businessPriorities[${i}]`));
   req(DEFINE, "businessTension", "string", w);
-  ["ifWe", "then", "because", "leadingTo", "measuredBy"].forEach((k) => req(DEFINE, `theoryOfChangeHints.${k}`, "string", w));
-  ["ifWe", "then", "because", "leadingTo", "measuredBy"].forEach((k) => req(DEFINE, `theoryOfChange.${k}`, "string", w));
+  ["ifWe", "then", "because", "leadingTo"].forEach((k) => req(DEFINE, `theoryOfChangeHints.${k}`, "string", w));
+  ["ifWe", "then", "because", "leadingTo"].forEach((k) => req(DEFINE, `theoryOfChange.${k}`, "string", w));
   req(DEFINE, "hypothesis", "string", w);
   const tl = req(DEFINE, "toBeProcess.lanes", "array", w) || [];
   const ts = req(DEFINE, "toBeProcess.steps", "array", w) || [];

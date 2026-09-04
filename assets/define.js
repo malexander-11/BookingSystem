@@ -60,9 +60,9 @@
   function chainBox(key, label, hint) {
     return '<li><span class="chain__label">' + esc(label) + '</span><label class="visually-hidden" for="toc.' + key + '">' + esc(label) + '</label><textarea id="toc.' + key + '" data-key="toc.' + key + '" rows="4" placeholder="' + esc(hint || "") + '"></textarea></li>';
   }
-  html += h2(4, "Writing the theory of change", "s4") + "<p>The chain of beliefs between what we build and the outcome we want. Every link is something evaluation can test. Fill in all five.</p>" +
-    '<ol class="chain chain--editable">' + chainBox("ifWe", "If we", th.ifWe) + chainBox("then", "then", th.then) + chainBox("because", "because", th.because) + chainBox("leadingTo", "leading to", th.leadingTo) + chainBox("measuredBy", "measured by", th.measuredBy) + "</ol>" +
-    fac("example theory of change", '<ol class="chain"><li><span class="chain__label">If we</span>' + esc(t.ifWe) + '</li><li><span class="chain__label">then</span>' + esc(t.then) + '</li><li><span class="chain__label">because</span>' + esc(t.because) + '</li><li><span class="chain__label">leading to</span>' + esc(t.leadingTo) + '</li><li><span class="chain__label">measured by</span>' + esc(t.measuredBy) + "</li></ol><p><strong>In one line:</strong> " + esc(D.hypothesis) + "</p>");
+  html += h2(4, "Writing the theory of change", "s4") + "<p>The chain of beliefs between what we build and the outcome we want. Every link is something evaluation can test. Fill in all four.</p>" +
+    '<ol class="chain chain--editable">' + chainBox("ifWe", "If we", th.ifWe) + chainBox("then", "then", th.then) + chainBox("because", "because", th.because) + chainBox("leadingTo", "leading to", th.leadingTo) + "</ol>" +
+    fac("example theory of change", '<ol class="chain"><li><span class="chain__label">If we</span>' + esc(t.ifWe) + '</li><li><span class="chain__label">then</span>' + esc(t.then) + '</li><li><span class="chain__label">because</span>' + esc(t.because) + '</li><li><span class="chain__label">leading to</span>' + esc(t.leadingTo) + "</li></ol><p><strong>In one line:</strong> " + esc(D.hypothesis) + "</p>");
 
   /* ---- 5. To-be process (from UX) ------------------------------------------ */
   var p = D.toBeProcess || { lanes: [], steps: [] };
@@ -169,7 +169,7 @@
       var o = order(), go = gorder();
       var out = "USER GROUP PRIORITY\n" + go.map(function (idx, i) { return (i + 1) + ". " + groups[idx].name + " | Added need: " + (v("groupNeed." + idx) || "(none)"); }).join("\n") + "\n\n";
       out += "BUSINESS NEED PRIORITY\n" + o.map(function (idx, i) { return (i + 1) + ". " + items[idx].need; }).join("\n") + "\nWhy, and who disagrees: " + v("priority.why") + "\n\n";
-      out += "THEORY OF CHANGE\nIf we: " + v("toc.ifWe") + "\nThen: " + v("toc.then") + "\nBecause: " + v("toc.because") + "\nLeading to: " + v("toc.leadingTo") + "\nMeasured by: " + v("toc.measuredBy") + "\n\n";
+      out += "THEORY OF CHANGE\nIf we: " + v("toc.ifWe") + "\nThen: " + v("toc.then") + "\nBecause: " + v("toc.because") + "\nLeading to: " + v("toc.leadingTo") + "\n\n";
       out += "PROCESS FEEDBACK\n" + (v("feedback.process") || "(none)") + "\n\n";
       out += "STORY MAP FEEDBACK\n" + (v("feedback.stories") || "(none)") + "\n\n";
       var ms = measures.rows().filter(function (m) { return (m.name || "").trim(); });
